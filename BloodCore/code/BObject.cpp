@@ -13,49 +13,54 @@ namespace Bloodstone
 	os << "<div class=\"header\"><b>Hailstorm Engine - Work log</b></div>" << endl;
 	}*/
 
-	BObject::BObject(const char * name, WorkPriority wp)
+	BObject::BObject(const char * name, WorkPriority wp, bool fw)
 	{
 		mObjectName = name;
-		mWP = wp;
+		mWorkPriority = wp;
+		mFreeWork = fw;
+		mOutFileStream = nullptr;
 	}
 
 	BObject::~BObject()
 	{
-		/*os << "</body>" << endl;
-		os << "</html>" << endl;
-
-		os.close();*/
 	}
 
-	/*void BObject::setOS(ostream os)
+	void BObject::SetOutFileStream(ofstream* os)
 	{
-		mOS = os;
-	}*/
+		if (mOutFileStream != nullptr) {
+			char* ms = "Go to/n";
+			mOutFileStream->write(ms, sizeof(ms));
+		}
+		
+		mOutFileStream = os;
+	}
 
-	void BObject::DrawLine(ostream& os, const char* text, MessageTypes type)
+	void BObject::DrawLine(const char* text, MessageTypes mt)
 	{
-		if (os)
-		{
-			char* _warning;
+		if (mOutFileStream != nullptr) {
+			string ms;
 
-			switch (type)
+			switch (mt)
 			{
 			case MT_NORMAL:
-				_warning = "normal";
+				ms += "normal";
 				break;
 			case MT_WARNING:
-				_warning = "warning";
+				ms += "warning";
 				break;
 			case MT_ERROR:
-				_warning = "error";
-				break;
-			default:
-				_warning = "";
+				ms += "error";
 				break;
 			}
 
-			os << "<div class=" << _warning << ">" << mObjectName << "_" << text << "</div>" << endl;
-			os.flush();
+			ms += "--";
+			ms += mObjectName;
+			ms += "--";
+			ms += text;
+			ms += "\n";
+
+			mOutFileStream->write(ms.c_str(), ms.size());
+			mOutFileStream->flush();
 		}
 	}
 
@@ -66,6 +71,6 @@ namespace Bloodstone
 
 	WorkPriority BObject::GetWP()
 	{
-		return mWP;
+		return mWorkPriority;
 	}
 }

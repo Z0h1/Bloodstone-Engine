@@ -7,10 +7,10 @@ namespace Bloodstone
 	class BLOODCORE_API BSRender : public BSystem
 	{
 	public:
-		BSRender();
+		BSRender(ofstream* os);
 		~BSRender();
 
-		virtual void Load(istream& is);
-		virtual void Store(ostream& os);
+		virtual void Load(ifstream* is);
+		virtual void Store(ofstream* os);
 	};
 }

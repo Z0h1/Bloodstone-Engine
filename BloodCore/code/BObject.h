@@ -27,20 +27,22 @@ namespace Bloodstone
 	class BLOODCORE_API BObject
 	{
 	public:
-		BObject(const char* name, WorkPriority wp);
+		BObject(const char* name, WorkPriority wp, bool fw = false);
 		virtual ~BObject();
 
-		//void setOS(ostream os);
+		void SetOutFileStream(ofstream* os);
 
-		virtual void Load(istream& is) = 0;
-		virtual void Store(ostream& os) = 0;
+		virtual void Load(ifstream* is) = 0;
+		virtual void Store(ofstream* os) = 0;
 
-		void DrawLine(ostream& os, const char* text, MessageTypes type = MT_NORMAL);
+		void DrawLine(const char* text, MessageTypes mt = MT_NORMAL);
 		const char* GetName();
 		WorkPriority GetWP();
 
 	protected:
-		const char*	mObjectName;
-		WorkPriority	mWP;
+		const char*		mObjectName;
+		WorkPriority	mWorkPriority;
+		bool			mFreeWork;
+		ofstream*		mOutFileStream;
 	};
 }

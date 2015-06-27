@@ -1,6 +1,7 @@
 #pragma once
 
 #include <fstream>
+#include <ostream>
 
 using namespace std;
 

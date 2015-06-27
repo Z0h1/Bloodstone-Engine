@@ -139,30 +139,25 @@ namespace Bloodstone
 		return true;
 	}
 
-	void BCollection::storeItem(void * item, ostream & os)
+	void BCollection::StoreItem(void * item, ofstream* os)
 	{
 		((BObject*)item)->Store(os);
 	}
 
-	void BCollection::Load(istream & is)
+	void BCollection::Load(ifstream* is)
 	{
 
 	}
 
-	void BCollection::Store(ostream & os)
+	void BCollection::Store(ofstream* os)
 	{
-		os.write((char*)&mCount, sizeof(mCount));
-		os.write((char*)&mLimit, sizeof(mLimit));
-		os.write((char*)&mDelta, sizeof(mDelta));
+		os->write((char*)&mCount, sizeof(mCount));
+		os->write((char*)&mLimit, sizeof(mLimit));
+		os->write((char*)&mDelta, sizeof(mDelta));
 		for (UInt32 n = 0; n < mCount; n++) {
-			storeItem(mItens[n], os);
+			StoreItem(mItens[n], os);
 		}
 	}
-	/*
-	void BCollection::message(ostream & os, const char * mes)
-	{
-		os.write(mes, sizeof());
-	}*/
 
 	void BCollection::SetLimit(UInt32 limit)
 	{

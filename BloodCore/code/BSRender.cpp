@@ -2,22 +2,22 @@
 
 namespace Bloodstone
 {
-	BSRender::BSRender()
-		: BSystem("RENDER_SYSTEM")
+	BSRender::BSRender(ofstream* os)
+		: BSystem("RENDER_SYSTEM", os)
 	{
+		DrawLine("Test Message");
 	}
-
 
 	BSRender::~BSRender()
 	{
 	}
 
-	void BSRender::Load(istream & is)
+	void BSRender::Load(ifstream* is)
 	{
 	}
 
-	void BSRender::Store(ostream & os)
+	void BSRender::Store(ofstream* os)
 	{
-		os << "RENDER SYSTEM";
+		*os << "RENDER SYSTEM";
 	}
 }

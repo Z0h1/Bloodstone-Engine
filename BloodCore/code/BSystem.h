@@ -8,7 +8,7 @@ namespace Bloodstone
 	class BLOODCORE_API BSystem : public BObject
 	{
 	public:
-		BSystem(const char* name);
+		BSystem(const char* name, ofstream* os);
 		~BSystem();
 	};
 }

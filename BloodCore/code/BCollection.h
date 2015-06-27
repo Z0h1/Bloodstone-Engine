@@ -21,10 +21,8 @@ namespace Bloodstone
 		void Remove(void* item);
 		void Remove(UInt32 index);
 
-		virtual void Load(istream& is);
-		virtual void Store(ostream& os);
-
-		//virtual void message(ostream& os, const char* mes);
+		virtual void Load(ifstream* is);
+		virtual void Store(ofstream* os);
 
 	protected:
 		void SetLimit(UInt32 limit);
@@ -35,7 +33,7 @@ namespace Bloodstone
 		bool Increase();
 		bool Decrease();
 
-		void storeItem(void* item, ostream& os);
+		void StoreItem(void* item, ofstream* os);
 
 		UInt32 mCount;
 		UInt32 mDelta;

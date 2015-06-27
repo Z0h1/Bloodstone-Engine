@@ -6,24 +6,30 @@ namespace Bloodstone
 	BCore::BCore()
 		: BObject("BLOODCORE", WP_MAIN)
 	{
-		mObjects = new SystemColl("SYSTEM_COLLECTION");
-		mObjects->Insert(new BSRender());
+		mLogger = new ofstream("log.txt");
+		mStateDump = new ofstream("dump.bloodstoneenginedump");
+		SetOutFileStream(mLogger);
 
-		ofstream os("log.txt");
-		Store(os);
-		os.close();
+		mSystems = new SystemColl("SYSTEM_COLLECTION");
+		mSystems->SetOutFileStream(mOutFileStream);
+
+		mSystems->Insert(new BSRender(mOutFileStream));
+
+		Store(mStateDump);
 	}
 
 	BCore::~BCore()
 	{
+		mLogger->close();
+		mStateDump->close();
 	}
 
-	void BCore::Load(istream & is)
+	void BCore::Load(ifstream* is)
 	{
 	}
 
-	void BCore::Store(ostream & os)
+	void BCore::Store(ofstream* os)
 	{
-		mObjects->Store(os);
+		mSystems->Store(os);
 	}
 }

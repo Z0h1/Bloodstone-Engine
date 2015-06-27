@@ -3,9 +3,10 @@
 
 namespace Bloodstone
 {
-	BSystem::BSystem(const char* name)
+	BSystem::BSystem(const char* name, ofstream* os)
 		: BObject(name, WP_SYSTEM)
 	{
+		SetOutFileStream(os);
 	}
 
 
