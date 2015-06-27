@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source Files\Collection">
+      <UniqueIdentifier>{23eda5ba-1851-4249-ae5c-56bed887ff80}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ObjectController">
+      <UniqueIdentifier>{2930394b-db4a-492c-ab3f-db46d5ac4e1b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\System">
+      <UniqueIdentifier>{0ff975e2-8e08-44c1-a4a6-64fd14e48cbd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\System\Render">
+      <UniqueIdentifier>{4592e080-b488-4dbf-85aa-501e5fc81b78}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="code\BCore.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="code\BHead.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="code\BCollection.h">
+      <Filter>Source Files\Collection</Filter>
+    </ClInclude>
+    <ClInclude Include="code\BObject.h">
+      <Filter>Source Files\ObjectController</Filter>
+    </ClInclude>
+    <ClInclude Include="code\BSystem.h">
+      <Filter>Source Files\System</Filter>
+    </ClInclude>
+    <ClInclude Include="code\BSRender.h">
+      <Filter>Source Files\System\Render</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="code\BCore.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="code\BHead.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="code\BCollection.cpp">
+      <Filter>Source Files\Collection</Filter>
+    </ClCompile>
+    <ClCompile Include="code\BObject.cpp">
+      <Filter>Source Files\ObjectController</Filter>
+    </ClCompile>
+    <ClCompile Include="code\BSystem.cpp">
+      <Filter>Source Files\System</Filter>
+    </ClCompile>
+    <ClCompile Include="code\BSRender.cpp">
+      <Filter>Source Files\System\Render</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
