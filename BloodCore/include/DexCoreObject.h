@@ -7,7 +7,7 @@ namespace Dex
 	class D_EXPORT CoreObject
 	{
 	public:
-		CoreObject(const String& c_name, WorkPriority wp, bool fw = false);
+		CoreObject(const String& c_name, OFStream* logger, WorkPriority wp, bool fw = false);
 		virtual ~CoreObject();
 
 		void SetOutFileStream(OFStream* os);
@@ -20,7 +20,7 @@ namespace Dex
 		WorkPriority GetWP();
 
 	protected:
-		const String&	mObjectName;
+		String			mObjectName;
 		WorkPriority	mWorkPriority;
 		bool			mFreeWork;
 		OFStream*		mOutFileStream;

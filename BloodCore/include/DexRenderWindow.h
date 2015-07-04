@@ -2,19 +2,20 @@
 
 #include <DexPreCompletion.h>
 #include <DexCommon.h>
+#include "DexCoreObject.h"
 
 namespace Dex
 {
-	class D_EXPORT IRenderWindow
+	class D_EXPORT IRenderWindow : public CoreObject
 	{
 	public:
+		IRenderWindow(const String& c_name, OFStream* logger, bool fw = false);
+		virtual ~IRenderWindow();
+
 		bool IsFullScrean( void );
 		bool IsActive( void );
 
-		const String& GetName( void );
-
 	protected:
-		String				m_Name;
 		HWND				m_hWnd;
 
 		bool				m_FullScrean;

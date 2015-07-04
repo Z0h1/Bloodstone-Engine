@@ -75,8 +75,8 @@ namespace Dex
 	enum MessageTypes
 	{
 		NORMAL,
-		WARNING,
-		EZ_ERROR
+		MT_WARNING,
+		MT_ERROR
 	};
 
 	enum WorkPriority

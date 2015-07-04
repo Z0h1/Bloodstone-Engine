@@ -3,10 +3,10 @@
 
 namespace Dex
 {
-	ConfigFile::ConfigFile(const String& configfile)
-		: CoreObject("CONFIGFILE_" + configfile, WorkPriority::WP_MAIN)
+	ConfigFile::ConfigFile(const String& configfile, OFStream* logger)
+		: CoreObject("CONFIGFILE_" + configfile, logger, WorkPriority::WP_MAIN)
 	{
-		mFile.open(configfile.c_str(), std:: ios::in);
+		mFile.open(configfile, std:: ios::in);
 
 		if (mFile)
 		{
@@ -16,7 +16,7 @@ namespace Dex
 			while (!mFile.eof())
 			{
 				mFile.getline(lineBuffer, 256);
-				line += lineBuffer;
+				line = lineBuffer;
 
 				// Пропуск пустых и "#" закоментированых строк
 				if (line.length() > 0 && line.at(0) != '#')
@@ -41,7 +41,7 @@ namespace Dex
 		}
 		else
 		{
-			DrawLine("ConfigFile: Файл \"" + configfile + "\" не найден!", MessageTypes::EZ_ERROR);
+			DrawLine("ConfigFile: Файл \"" + configfile + "\" не найден!", MessageTypes::MT_ERROR);
 		}
 	}
 

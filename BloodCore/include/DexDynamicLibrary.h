@@ -8,11 +8,11 @@ namespace Dex
 	class D_EXPORT DynamicLibrary : public CoreObject
 	{
 	public:
-		DynamicLibrary( const String& filename );
-		~DynamicLibrary( void );
+		DynamicLibrary(const String& filename, OFStream* logger);
+		~DynamicLibrary(void);
 
-		void* GetAddress( const String& funcname );
-		bool CheckWork( void ) const { return m_Work; }
+		void* GetAddress(const String& funcname);
+		bool CheckWork(void) const { return m_Work; }
 
 	private:
 		HINSTANCE	m_hDll;

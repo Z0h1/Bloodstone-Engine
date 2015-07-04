@@ -9,7 +9,7 @@ namespace Dex
 	class D_EXPORT IRenderSystem : public ISystem
 	{
 	public:
-		IRenderSystem(const String& c_name, const SystemsType st, bool fw = false);
+		IRenderSystem(const String& c_name, OFStream* logger, const SystemsType st, bool fw = false);
 		virtual ~IRenderSystem(void);
 
 		void SetActiveAdapter(UInt32 adapter);

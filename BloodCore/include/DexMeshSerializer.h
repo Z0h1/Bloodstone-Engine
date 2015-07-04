@@ -9,7 +9,7 @@ namespace Dex
 	class D_EXPORT MeshSerializer : public Serializer
 	{
 	public:
-		MeshSerializer(const String& c_name, bool fw = true);
+		MeshSerializer(const String& c_name, OFStream* logger, bool fw = true);
 		virtual ~MeshSerializer();
 
 		void ImportMesh( void );

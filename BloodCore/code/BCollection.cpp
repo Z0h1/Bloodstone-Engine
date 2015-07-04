@@ -9,7 +9,7 @@ namespace Dex
 	const UInt32 MaxCollectionDelta = INT_MAX / 2;
 
 	BCollection::BCollection(const char* name, UInt32 limit, UInt32 delta)
-		: CoreObject(name, WP_COLLECTION)
+		: CoreObject(name, nullptr, WP_COLLECTION)
 	{
 		mDelta = delta;
 		if (mDelta > MaxCollectionDelta) {

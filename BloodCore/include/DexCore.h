@@ -23,14 +23,16 @@ namespace Dex
 		bool LoadModule(const String& cModule);
 		bool UnLoadModule(const String& cModule);
 
-		void AddSystem(const SystemsType st, void* s_ptr);
-		void RemoveSystem(void* s_ptr);
-		//const _lString& GetListAvailableSystem(const SystemsType st);
+		void AddSystem(ISystem* s_ptr);
+		void RemoveSystem(ISystem* s_ptr);
 		void ChangeSystem(const SystemsType eType);
 
 		// Scene System
 		Scene* CreateScene(const String& cName);
 		Scene* GetScene(const String& cName);
+
+		OFStream* GetLogger();
+		ISystem* GetSystem(const SystemsType st);
 
 	private:
 		IRenderSystem*				m_pRenderSystem;

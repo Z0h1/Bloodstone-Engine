@@ -2,10 +2,9 @@
 
 namespace Dex
 {
-	ISystem::ISystem(const String& c_name, const SystemsType st, bool fw)
-		: CoreObject(c_name, WorkPriority::WP_SYSTEM, fw), m_Type(st)
+	ISystem::ISystem(const String& c_name, OFStream* logger, const SystemsType st, bool fw)
+		: CoreObject(c_name, logger, WorkPriority::WP_SYSTEM, fw), m_Type(st)
 	{
-		SetOutFileStream(new OFStream(c_name + ".log"));
 	}
 
 	ISystem::~ISystem()

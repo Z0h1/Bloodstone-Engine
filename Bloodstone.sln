@@ -8,13 +8,13 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BloodApp", "BloodApp\BloodApp.vcxproj", "{B6D0244D-81B0-43F8-A6E6-9DE5032EB7C4}"
 	ProjectSection(ProjectDependencies) = postProject
 		{2214C536-AF90-499C-A5C5-0639C01DF83D} = {2214C536-AF90-499C-A5C5-0639C01DF83D}
+		{FF8DE7BB-AD50-47D5-A08F-AAE44C8C914A} = {FF8DE7BB-AD50-47D5-A08F-AAE44C8C914A}
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Systems", "Systems", "{FCD263C2-978D-482E-8330-E361DDAC9D23}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Render", "Render", "{5A0EC9CF-B35A-4424-930E-CF16744CD1F0}"
-EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BSystem_Render_D11", "BSystem_Render_D11\BSystem_Render_D11.vcxproj", "{2BCCBD38-09E5-41E1-9EC7-0DBDE5460690}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BloodRender_9", "BloodRender_9\BloodRender_9.vcxproj", "{FF8DE7BB-AD50-47D5-A08F-AAE44C8C914A}"
+	ProjectSection(ProjectDependencies) = postProject
+		{2214C536-AF90-499C-A5C5-0639C01DF83D} = {2214C536-AF90-499C-A5C5-0639C01DF83D}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -30,16 +30,12 @@ Global
 		{B6D0244D-81B0-43F8-A6E6-9DE5032EB7C4}.Debug|x86.Build.0 = Debug|Win32
 		{B6D0244D-81B0-43F8-A6E6-9DE5032EB7C4}.Release|x86.ActiveCfg = Release|Win32
 		{B6D0244D-81B0-43F8-A6E6-9DE5032EB7C4}.Release|x86.Build.0 = Release|Win32
-		{2BCCBD38-09E5-41E1-9EC7-0DBDE5460690}.Debug|x86.ActiveCfg = Debug|Win32
-		{2BCCBD38-09E5-41E1-9EC7-0DBDE5460690}.Debug|x86.Build.0 = Debug|Win32
-		{2BCCBD38-09E5-41E1-9EC7-0DBDE5460690}.Release|x86.ActiveCfg = Release|Win32
-		{2BCCBD38-09E5-41E1-9EC7-0DBDE5460690}.Release|x86.Build.0 = Release|Win32
+		{FF8DE7BB-AD50-47D5-A08F-AAE44C8C914A}.Debug|x86.ActiveCfg = Debug|Win32
+		{FF8DE7BB-AD50-47D5-A08F-AAE44C8C914A}.Debug|x86.Build.0 = Debug|Win32
+		{FF8DE7BB-AD50-47D5-A08F-AAE44C8C914A}.Release|x86.ActiveCfg = Release|Win32
+		{FF8DE7BB-AD50-47D5-A08F-AAE44C8C914A}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{5A0EC9CF-B35A-4424-930E-CF16744CD1F0} = {FCD263C2-978D-482E-8330-E361DDAC9D23}
-		{2BCCBD38-09E5-41E1-9EC7-0DBDE5460690} = {5A0EC9CF-B35A-4424-930E-CF16744CD1F0}
 	EndGlobalSection
 EndGlobal

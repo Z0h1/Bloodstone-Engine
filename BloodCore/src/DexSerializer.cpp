@@ -3,8 +3,8 @@
 
 namespace Dex
 {
-	Serializer::Serializer(const String& c_name, bool fw)
-		: CoreObject(c_name, WorkPriority::WP_STEP_1, fw)
+	Serializer::Serializer(const String& c_name, OFStream* logger, bool fw)
+		: CoreObject(c_name, logger, WorkPriority::WP_STEP_1, fw)
 	{
 	}
 

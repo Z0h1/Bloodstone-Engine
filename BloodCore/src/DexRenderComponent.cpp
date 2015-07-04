@@ -9,7 +9,7 @@
 namespace Dex
 {
 	RenderComponent::RenderComponent( const String& cName, SceneObject* pParent, const PrimitiveType& eType )
-		: ObjectComponent( cName, pParent, OCT_RENDER ), MeshSerializer(cName) // TODO tharde
+		: ObjectComponent( cName, pParent, OCT_RENDER ), MeshSerializer(cName, nullptr) // TODO tharde
 	{
 		m_pBufferData = new HardwareBufferData();
 

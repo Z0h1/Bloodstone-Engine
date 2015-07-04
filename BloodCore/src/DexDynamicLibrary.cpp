@@ -3,8 +3,8 @@
 
 namespace Dex
 {
-	DynamicLibrary::DynamicLibrary(const String& filename)
-		: CoreObject("DynamicLibrary_" + filename, WorkPriority::WP_MAIN)
+	DynamicLibrary::DynamicLibrary(const String& filename, OFStream* logger)
+		: CoreObject("DynamicLibrary_" + filename, logger, WorkPriority::WP_MAIN)
 	{
 		m_Work = true;
 		m_FileName = filename;
@@ -25,7 +25,7 @@ namespace Dex
 			String error = (char*)ErrorBuffer;
 			LocalFree( ErrorBuffer );
 
-			DrawLine("DynamicLibrary: " + error, EZ_ERROR );
+			DrawLine("DynamicLibrary: " + error, MT_ERROR );
 			m_Work = false;
 		}
 	}
@@ -34,7 +34,7 @@ namespace Dex
 	{
 		if ( !FreeLibrary( m_hDll ) )
 		{
-			DrawLine("DynamicLibrary: Невозможно выгрузить модуль", EZ_ERROR );
+			DrawLine("DynamicLibrary: Невозможно выгрузить модуль", MT_ERROR );
 		}
 	}
 

@@ -10,7 +10,7 @@ namespace Dex
 	class D_EXPORT ConfigFile : public CoreObject
 	{
 	public:
-		ConfigFile(const String& configfile);
+		ConfigFile(const String& configfile, OFStream* logger);
 		~ConfigFile();
 
 		const _Configs& Get(void) { return mConfigs; };

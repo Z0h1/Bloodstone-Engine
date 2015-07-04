@@ -8,7 +8,7 @@ namespace Dex
 	class D_EXPORT ISystem : public CoreObject
 	{
 	public:
-		ISystem(const String& c_name, const SystemsType st, bool fw = false);
+		ISystem(const String& c_name, OFStream* logger, const SystemsType st, bool fw = false);
 		virtual ~ISystem();
 
 		const SystemsType GetType();

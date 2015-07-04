@@ -5,8 +5,8 @@
 
 namespace Dex
 {
-	MeshSerializer::MeshSerializer(const String& c_name, bool fw)
-		: Serializer(c_name, fw)
+	MeshSerializer::MeshSerializer(const String& c_name, OFStream* logger, bool fw)
+		: Serializer(c_name, logger, fw)
 	{
 	}
 

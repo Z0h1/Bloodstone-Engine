@@ -9,7 +9,7 @@ namespace Dex
 	class D_EXPORT Serializer : public CoreObject
 	{
 	public:
-		Serializer(const String& c_name, bool fw = true);
+		Serializer(const String& c_name, OFStream* logger, bool fw = true);
 		virtual ~Serializer();
 
 		// Read

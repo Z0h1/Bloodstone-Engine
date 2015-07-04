@@ -8,7 +8,7 @@
 namespace Dex
 {
 	Core::Core(const String& cLog, const String& cConfig)
-		: CoreObject("CORE", WorkPriority::WP_MAIN)
+		: CoreObject("CORE", nullptr, WorkPriority::WP_MAIN)
 	{
 		m_pRenderSystem = nullptr;
 		m_pInputSystem = nullptr;
@@ -18,8 +18,8 @@ namespace Dex
 
 		//m_pResourceManager = new ResourceManager();
 
-		ConfigFile* config = new ConfigFile(cConfig);
-		for (auto& it : config->Get())
+		ConfigFile* config = new ConfigFile(cConfig, mLogger);
+		for (auto it : config->Get())
 		{
 			if (it.first == "load_module")
 			{
@@ -65,13 +65,6 @@ namespace Dex
 
 	Core::~Core(void)
 	{
-		_lSystemsByType::iterator it_Systems;
-		for (it_Systems = m_lSystems.begin(); it_Systems != m_lSystems.end(); ++it_Systems)
-		{
-			RemoveSystem(it_Systems->second);
-		}
-		m_lSystems.clear();
-
 		_lDynamicLibrary::iterator it_DynamicLibrary;
 		for (it_DynamicLibrary = m_lDynamicLibrary.begin(); it_DynamicLibrary != m_lDynamicLibrary.end(); ++it_DynamicLibrary)
 		{
@@ -79,14 +72,21 @@ namespace Dex
 		}
 		m_lDynamicLibrary.clear();
 
+		_lSystemsByType::iterator it_Systems;
+		for (it_Systems = m_lSystems.begin(); it_Systems != m_lSystems.end(); ++it_Systems)
+		{
+			RemoveSystem(it_Systems->second);
+		}
+		m_lSystems.clear();
+
 		DrawLine("Core: Завершение работы!");
 
 		delete mLogger;
 	}
 
 	// Dynamic Library
-	typedef void(*START_DLL_MODULE)(void);
-	typedef void(*STOP_DLL_MODULE)(void);
+	typedef void (*START_DLL_MODULE)(Core*);
+	typedef void (*STOP_DLL_MODULE)(Core*);
 
 	bool Core::LoadModule(const String& cModule)
 	{
@@ -94,12 +94,12 @@ namespace Dex
 
 		if (it_DynamicLibrary == m_lDynamicLibrary.end())
 		{
-			DynamicLibrary* pModule = new DynamicLibrary(cModule);
+			DynamicLibrary* pModule = new DynamicLibrary(cModule, mLogger);
 
 			if (pModule->CheckWork())
 			{
 				START_DLL_MODULE pFunc = (START_DLL_MODULE)pModule->GetAddress("Start_DexDynamicLibrary");
-				pFunc();
+				pFunc(this);
 
 				m_lDynamicLibrary[cModule] = pModule;
 
@@ -107,12 +107,12 @@ namespace Dex
 			}
 			else
 			{
-				DrawLine("Core: Модуль " + cModule + " не работает!", MessageTypes::EZ_ERROR);
+				DrawLine("Core: Модуль " + cModule + " не работает!", MessageTypes::MT_ERROR);
 			}
 		}
 		else
 		{
-			DrawLine("Core: Модуль " + cModule + " уже загружен", WARNING);
+			DrawLine("Core: Модуль " + cModule + " уже загружен", MT_WARNING);
 		}
 
 		return false;
@@ -125,45 +125,42 @@ namespace Dex
 		if (it_DynamicLibrary != m_lDynamicLibrary.end())
 		{
 			STOP_DLL_MODULE pFunc = (STOP_DLL_MODULE)m_lDynamicLibrary[cModule]->GetAddress("Stop_DexDynamicLibrary");
-			pFunc();
+			pFunc(this);
 
 			return true;
 		}
 		else
 		{
-			DrawLine("Core: Модуль " + cModule + " не загружен", MessageTypes::WARNING);
+			DrawLine("Core: Модуль " + cModule + " не загружен", MessageTypes::MT_WARNING);
 		}
 
 		return false;
 	}
 
-	void Core::AddSystem(const SystemsType st, void* s_ptr)
+	void Core::AddSystem(ISystem* s_ptr)
 	{
-		ISystem* sys = (ISystem*)s_ptr;	
+		DrawLine("Core: AddSystem(" + s_ptr->GetName() + ")");
 
-		DrawLine("Core: AddSystem(" + sys->GetName() + ")");
-
-		_lSystemsByType::iterator it = m_lSystems.find(st);
+		_lSystemsByType::iterator it = m_lSystems.find(s_ptr->GetType());
 		if (it == m_lSystems.end()) {
-			sys->SetOutFileStream(mLogger);
-			m_lSystems.insert(_lSystemsByType::value_type(st, sys));
+			s_ptr->SetOutFileStream(mLogger);
+			m_lSystems.insert(_lSystemsByType::value_type(s_ptr->GetType(), s_ptr));
 
-			DrawLine("Core: System " + sys->GetName() + " loading");
+			DrawLine("Core: System " + s_ptr->GetName() + " loading");
 		}
 		else {
-			DrawLine("Core: System " + sys->GetName() + " is loaded", MessageTypes::WARNING);
+			DrawLine("Core: System " + s_ptr->GetName() + " is loaded", MessageTypes::MT_WARNING);
 		}
 	}
 
-	void Core::RemoveSystem(void* s_ptr)
+	void Core::RemoveSystem(ISystem* s_ptr)
 	{
-		ISystem* sys = (ISystem*)s_ptr;
-		DrawLine("Core: RemoveSystem(" + sys->GetName() + ")");
+		DrawLine("Core: RemoveSystem(" + s_ptr->GetName() + ")");
 
-		_lSystemsByType::iterator it = m_lSystems.find(sys->GetType());
+		_lSystemsByType::iterator it = m_lSystems.find(s_ptr->GetType());
 		if (it != m_lSystems.end())
 		{
-			if (m_pRenderSystem == sys)
+			if (m_pRenderSystem == s_ptr)
 			{
 				m_pRenderSystem = nullptr;
 			}
@@ -172,25 +169,10 @@ namespace Dex
 		}
 	}
 
-	// Render System
-	/*const _lString& Core::GetListAvailableSystem(const SystemsType st)
-	{
-		m_lAvailableRender.Clear();
-
-		_lSystems::iterator it;
-
-		for (it = m_lSystems[st].begin(); it != m_lSystems[st].end(); ++it)
-		{
-			m_lAvailableRender.Add(((ISystem*)*it)->GetName());
-		}
-
-		return m_lAvailableRender;
-	}*/
-
 	void Core::ChangeSystem(const SystemsType eType)
 	{
 		if (m_lSystems.find(eType) == m_lSystems.end()) {
-			DrawLine("Core: Данная система не инициализирована!", MessageTypes::EZ_ERROR);
+			DrawLine("Core: Данная система не инициализирована!", MessageTypes::MT_ERROR);
 		}
 		else {
 			switch (eType)
@@ -219,7 +201,7 @@ namespace Dex
 				}
 				break;
 			default:
-				DrawLine("Core: ChangeRenderSystem не верный пораметор!", MessageTypes::WARNING);
+				DrawLine("Core: ChangeRenderSystem не верный пораметор!", MessageTypes::MT_WARNING);
 				break;
 			}
 		}
@@ -236,7 +218,7 @@ namespace Dex
 		}
 		else
 		{
-			DrawLine("Core:CreateScene: " + cName + " Уже сцществует", MessageTypes::WARNING);
+			DrawLine("Core:CreateScene: " + cName + " Уже сцществует", MessageTypes::MT_WARNING);
 		}
 
 		return m_lScene[cName];
@@ -245,5 +227,19 @@ namespace Dex
 	Scene* Core::GetScene(const String& cName)
 	{
 		return m_lScene[cName];
+	}
+
+	OFStream* Core::GetLogger()
+	{
+		return mLogger;
+	}
+
+	ISystem* Core::GetSystem(const SystemsType st)
+	{
+		if (m_lSystems.find(st) == m_lSystems.end()) {
+			return nullptr;
+		}
+
+		return m_lSystems[st];
 	}
 }

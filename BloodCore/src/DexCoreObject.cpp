@@ -2,12 +2,13 @@
 
 namespace Dex
 {
-	CoreObject::CoreObject(const String& c_name, WorkPriority wp, bool fw)
-		: mObjectName(c_name)
+	CoreObject::CoreObject(const String& c_name, OFStream* logger, WorkPriority wp, bool fw)
 	{
+		mObjectName = c_name;
 		mWorkPriority = wp;
 		mFreeWork = fw;
 		mOutFileStream = nullptr;
+		SetOutFileStream(logger);
 	}
 
 	CoreObject::~CoreObject()
@@ -17,8 +18,7 @@ namespace Dex
 	void CoreObject::SetOutFileStream(OFStream* os)
 	{
 		if (mOutFileStream != nullptr) {
-			char* ms = "Go to/n";
-			mOutFileStream->write(ms, sizeof(ms));
+			*mOutFileStream << "Go to/n";
 		}
 		
 		mOutFileStream = os;
@@ -33,15 +33,15 @@ namespace Dex
 			case MessageTypes::NORMAL:
 				mt_c = "normal";
 				break;
-			case MessageTypes::WARNING:
+			case MessageTypes::MT_WARNING:
 				mt_c = "warning";
 				break;
-			case MessageTypes::EZ_ERROR:
+			case MessageTypes::MT_ERROR:
 				mt_c = "error";
 				break;
 			}
 
-			*mOutFileStream << mt_c << "--" << mObjectName << "--" << text.c_str() << std::endl;
+			*mOutFileStream << mt_c << " [ " << mObjectName << " ] " << text.c_str() << std::endl;
 			mOutFileStream->flush();
 		}
 	}
