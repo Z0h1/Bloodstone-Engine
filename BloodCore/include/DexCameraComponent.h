@@ -1,13 +1,13 @@
 #pragma once
 
-#include <DexObjectComponent.h>
+#include "DexObjectComponent.h"
 
 namespace Dex
 {
 	class D_EXPORT CameraComponent : public ObjectComponent
 	{
 	public:
-		CameraComponent( const String& cName, SceneObject* pParent,
+		CameraComponent( const string& cName, SceneObject* pParent,
 			const Point& nRange );
 		~CameraComponent( void );
 

@@ -1,8 +1,8 @@
-#include <DexRenderConnect.h>
-#include <DexScene.h>
-#include <DexSceneObject.h>
-#include <DexRenderComponent.h>
-#include <DexCameraComponent.h>
+#include "DexRenderConnect.h"
+#include "DexScene.h"
+#include "DexSceneObject.h"
+#include "DexRenderComponent.h"
+#include "DexCameraComponent.h"
 
 namespace Dex
 {

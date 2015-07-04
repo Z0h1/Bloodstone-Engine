@@ -1,9 +1,9 @@
-#include <DexDynamicLibrary.h>
-#include <DexCore.h>
+#include "DexDynamicLibrary.h"
+#include "DexCore.h"
 
 namespace Dex
 {
-	DynamicLibrary::DynamicLibrary(const String& filename, OFStream* logger)
+	DynamicLibrary::DynamicLibrary(const string& filename, ofstream* logger)
 		: CoreObject("DynamicLibrary_" + filename, logger, WorkPriority::WP_MAIN)
 	{
 		m_Work = true;
@@ -22,7 +22,7 @@ namespace Dex
 			FormatMessage( FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS, 
 				NULL, GetLastError(), MAKELANGID( LANG_NEUTRAL, SUBLANG_DEFAULT ), (LPTSTR) &ErrorBuffer, 0, NULL );
 
-			String error = (char*)ErrorBuffer;
+			string error = (char*)ErrorBuffer;
 			LocalFree( ErrorBuffer );
 
 			DrawLine("DynamicLibrary: " + error, MT_ERROR );
@@ -38,7 +38,7 @@ namespace Dex
 		}
 	}
 
-	void* DynamicLibrary::GetAddress( const String& funcname )
+	void* DynamicLibrary::GetAddress( const string& funcname )
 	{
 		return GetProcAddress( m_hDll, funcname.c_str() );
 	}

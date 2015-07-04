@@ -1,14 +1,14 @@
-#include <DexRenderComponent.h>
-#include <DexHardwareBufferData.h>
-#include <DexHardwareIndexBuffer.h>
-#include <DexHardwareVertexBuffer.h>
-#include <DexCore.h>
-#include <DexScene.h>
-#include <DexSceneObject.h>
+#include "DexRenderComponent.h"
+#include "DexHardwareBufferData.h"
+#include "DexHardwareIndexBuffer.h"
+#include "DexHardwareVertexBuffer.h"
+#include "DexCore.h"
+#include "DexScene.h"
+#include "DexSceneObject.h"
 
 namespace Dex
 {
-	RenderComponent::RenderComponent( const String& cName, SceneObject* pParent, const PrimitiveType& eType )
+	RenderComponent::RenderComponent( const string& cName, SceneObject* pParent, const PrimitiveType& eType )
 		: ObjectComponent( cName, pParent, OCT_RENDER ), MeshSerializer(cName, nullptr) // TODO tharde
 	{
 		m_pBufferData = new HardwareBufferData();
@@ -22,7 +22,7 @@ namespace Dex
 		delete m_pBufferData;
 	}
 
-	void RenderComponent::Load( const String& cResource )
+	void RenderComponent::Load( const string& cResource )
 	{
 		SetResource( cResource );
 

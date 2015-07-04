@@ -1,5 +1,5 @@
-#include <DexResourceManager.h>
-#include <DexFileArchive.h>
+#include "DexResourceManager.h"
+#include "DexFileArchive.h"
 
 namespace Dex
 {
@@ -11,17 +11,17 @@ namespace Dex
 	{
 	}
 
-	FileStream* ResourceManager::LoadResource( const String& name )
+	FileStream* ResourceManager::LoadResource( const string& name )
 	{
 		return m_lResource[name]->Open( name );
 	}
 
-	bool ResourceManager::CreateDexFile( const String& cName )
+	bool ResourceManager::CreateDexFile( const string& cName )
 	{
 		return true;
 	}
 
-	void ResourceManager::AddResourceLocation( const String& cLactation, const String& eType )
+	void ResourceManager::AddResourceLocation( const string& cLactation, const string& eType )
 	{
 		ArchiveFactory* pArchive = 0;
 
@@ -34,7 +34,6 @@ namespace Dex
 			//pArchive = new ZipArchive( cLactation );
 		}
 
-		assert( pArchive );
 		m_lArchive.push_back( pArchive );
 
 		const _lString& lFile = pArchive->GetFileList();
@@ -44,7 +43,7 @@ namespace Dex
 		}
 	}
 
-	void ResourceManager::RemoveResourceLocation( const String& cLactation )
+	void ResourceManager::RemoveResourceLocation( const string& cLactation )
 	{
 		ArchiveFactory* pArchive = 0;
 

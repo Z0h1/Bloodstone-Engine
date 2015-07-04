@@ -1,33 +1,33 @@
-#include <DexStringConverter.h>
+#include "DexStringConverter.h"
 
 namespace Dex
 {
-	void StringConverter::trim( String& string, bool left, bool right )
+	void StringConverter::trim(string& s, bool left, bool right)
 	{
-		const String delims = " \t\r";
+		const string delims = " \t\r";
 
-        if ( right )
+		if (right)
 		{
-            string.erase( string.find_last_not_of( delims ) + 1 ); // trim right
+			s.erase(s.find_last_not_of(delims) + 1); // trim right
 		}
 
-        if ( left )
+		if (left)
 		{
-            string.erase( 0, string.find_first_not_of( delims ) ); // trim left
+			s.erase(0, s.find_first_not_of(delims)); // trim left
 		}
 	}
 
-	String StringConverter::toString( const char* value )
+	string StringConverter::toString(const char* value)
 	{
-		StringStream String;
+		stringstream String;
 		String << value;
 		return String.str();
 	}
 
-	String StringConverter::toString_on_off( bool value )
+	string StringConverter::toString_on_off(bool value)
 	{
-		String result;
-		if ( value )
+		string result;
+		if (value)
 		{
 			result = "on";
 		}
@@ -38,10 +38,10 @@ namespace Dex
 		return result;
 	}
 
-	String StringConverter::toString_true_false( bool value )
+	string StringConverter::toString_true_false(bool value)
 	{
-		String result;
-		if ( value )
+		string result;
+		if (value)
 		{
 			result = "true";
 		}
@@ -52,10 +52,10 @@ namespace Dex
 		return result;
 	}
 
-	String StringConverter::toString_1_0( bool value )
+	string StringConverter::toString_1_0(bool value)
 	{
-		String result;
-		if ( value )
+		string result;
+		if (value)
 		{
 			result = "0";
 		}
@@ -66,47 +66,47 @@ namespace Dex
 		return result;
 	}
 
-	String StringConverter::toString( int value )
+	string StringConverter::toString(int value)
 	{
-		StringStream String;
+		stringstream String;
 		String << value;
 		return String.str();
 	}
 
-	String StringConverter::toString( unsigned long value )
+	string StringConverter::toString(unsigned long value)
 	{
-		StringStream String;
+		stringstream String;
 		String << value;
 		return String.str();
 	}
 
-	String StringConverter::toString( size_t value )
+	string StringConverter::toString(size_t value)
 	{
-		StringStream String;
+		stringstream String;
 		String << value;
 		return String.str();
 	}
 
-	String StringConverter::toString( Point X, Point Y, Point Z )
+	string StringConverter::toString(Point X, Point Y, Point Z)
 	{
-		StringStream String;
+		stringstream String;
 		String << X << " " << Y << " " << Z;
 		return String.str();
 	}
 
-	String StringConverter::toString( const PrimitiveType& type )
+	string StringConverter::toString(const PrimitiveType& type)
 	{
-		String str = "";
+		string str = "";
 
-		if ( type == PT_POINT )
+		if (type == PT_POINT)
 		{
 			str == "point";
 		}
-		else if ( type == PT_LINE )
+		else if (type == PT_LINE)
 		{
 			str == "line";
 		}
-		else if ( type == PT_POLYGON )
+		else if (type == PT_POLYGON)
 		{
 			str == "polygon";
 		}
@@ -114,23 +114,23 @@ namespace Dex
 		return str;
 	}
 
-	String StringConverter::toString( int nWidth, int nHeight, int nBit )
+	string StringConverter::toString(int nWidth, int nHeight, int nBit)
 	{
-		StringStream cString;
+		stringstream cString;
 
 		cString << nWidth << "x" << nHeight << "-" << nBit;
 
 		return cString.str();
 	}
 
-	bool StringConverter::Parse_bool( String value, bool default_value )
+	bool StringConverter::Parse_bool(string value, bool default_value)
 	{
 		bool result = default_value;
-		if ( value == "on" || value == "true" || value == "1" )
+		if (value == "on" || value == "true" || value == "1")
 		{
 			result = true;
 		}
-		else if ( value == "off" || value == "false" || value == "0" )
+		else if (value == "off" || value == "false" || value == "0")
 		{
 			result = false;
 		}
@@ -138,73 +138,73 @@ namespace Dex
 		return result;
 	}
 
-	int StringConverter::Parse_int( String value, int default_value )
+	int StringConverter::Parse_int(string value, int default_value)
 	{
-		StringStream String( value );
+		stringstream String(value);
 		int result = default_value;
-        if( !( String >> result ) )
-            return default_value;
+		if (!(String >> result))
+			return default_value;
 
 		return result;
 	}
 
-	unsigned int StringConverter::Parse_unsigned_int( String value, unsigned int default_value )
+	unsigned int StringConverter::Parse_unsigned_int(string value, unsigned int default_value)
 	{
-		StringStream String( value );
+		stringstream String(value);
 		unsigned int result = default_value;
-        if( !( String >> result ) )
-            return default_value;
+		if (!(String >> result))
+			return default_value;
 
 		return result;
 	}
 
-	size_t StringConverter::Parse_size_t( String value, size_t default_value )
+	size_t StringConverter::Parse_size_t(string value, size_t default_value)
 	{
-		StringStream String( value );
+		stringstream String(value);
 		size_t result = default_value;
-        if( !( String >> result ) )
-            return default_value;
+		if (!(String >> result))
+			return default_value;
 
 		return result;
 	}
 
-	void StringConverter::ParseDisplyaMode( const String& mode, int& Width, int& Height, int& bit )
+	void StringConverter::ParseDisplyaMode(const string& mode, int& Width, int& Height, int& bit)
 	{
-		String buffer;
+		string buffer;
 
-		String::size_type x_pos = mode.find_first_of( "x", 0 );
-		String::size_type space_pos = mode.find_first_of( "-", 0 );
+		string::size_type x_pos = mode.find_first_of("x", 0);
+		string::size_type space_pos = mode.find_first_of("-", 0);
 
-		buffer = mode.substr( 0, x_pos );
-		Width = atoi( buffer.c_str() );
+		buffer = mode.substr(0, x_pos);
+		Width = atoi(buffer.c_str());
 
-		buffer = mode.substr( x_pos + 1, space_pos );
-		Height = atoi( buffer.c_str() );
+		buffer = mode.substr(x_pos + 1, space_pos);
+		Height = atoi(buffer.c_str());
 
-		buffer = mode.substr( space_pos + 1, mode.length() );
-		bit = atoi( buffer.c_str() );
+		buffer = mode.substr(space_pos + 1, mode.length());
+		bit = atoi(buffer.c_str());
 	}
 
-	void StringConverter::ParseXYZ( const String& str, float& X, float& Y, float& Z )
+	void StringConverter::ParseXYZ(const string& str, float& X, float& Y, float& Z)
 	{
-		StringStream stream;
+		stringstream stream;
 
 		stream << str;
 
 		stream >> X >> Y >> Z;
 	}
 
-	void StringConverter::ParsePrimitiveType( const String& str, PrimitiveType& type )
+	void StringConverter::ParsePrimitiveType(const string& str, PrimitiveType& type)
 	{
-		if ( str == "point" )
+		if (str == "point")
 		{
 			type = PT_POINT;
 		}
-		else if ( str == "line" )
+		else if (str == "line")
 		{
 			type = PT_LINE;
 		}
-		else if ( str == "polygon" )
+		else if (str == "polygon")
 		{
 			type = PT_POLYGON;
 		}

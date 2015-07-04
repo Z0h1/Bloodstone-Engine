@@ -1,12 +1,12 @@
-#include <DexSceneObject.h>
-#include <DexObjectComponent.h>
-#include <DexRenderComponent.h>
-#include <DexCameraComponent.h>
-#include <DexScene.h>
+#include "DexSceneObject.h"
+#include "DexObjectComponent.h"
+#include "DexRenderComponent.h"
+#include "DexCameraComponent.h"
+#include "DexScene.h"
 
 namespace Dex
 {
-	SceneObject::SceneObject( const String& name, Scene* scene )
+	SceneObject::SceneObject( const string& name, Scene* scene )
 		: ObjectLocation()
 	{
 		m_Name = name;
@@ -23,7 +23,7 @@ namespace Dex
 	{
 		return m_nId;
 	}
-	const String& SceneObject::GetName( void )
+	const string& SceneObject::GetName( void )
 	{
 		return m_Name;
 	}

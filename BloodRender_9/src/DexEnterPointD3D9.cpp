@@ -12,10 +12,13 @@ namespace Dex
 
 		void D_EXPORT_D3D9 Stop_DexDynamicLibrary(Core* pCore)
 		{
-			ISystem* sysD3D9 = pCore->GetSystem(SystemsType::RENDER_SYSTEM_DIRECTX_9);
-			pCore->RemoveSystem(sysD3D9);
+			ISystem* sysD3D9 = pCore->GetSystem(SystemsType::SYSTEM_RENDER_DIRECTX_9);
 
-			delete (RenderSystemD3D9*)sysD3D9;
+			if (sysD3D9 != nullptr) {
+				pCore->RemoveSystem(sysD3D9);
+
+				delete sysD3D9;
+			}		
 		}
 	}
 }

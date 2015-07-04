@@ -1,17 +1,17 @@
-#include <DexRenderWindowD3D9.h>
-#include <DexStringConverter.h>
-#include <DexHardwareBufferData.h>
-#include <DexHardwareVertexBuffer.h>
-#include <DexHardwareIndexBuffer.h>
-#include <DexRenderComponent.h>
-#include <DexRenderComponentD3D9.h>
-#include <DexLightComponent.h>
-#include <DexCameraComponent.h>
-#include <DexCore.h>
+#include "DexRenderWindowD3D9.h"
+#include "DexStringConverter.h"
+#include "DexHardwareBufferData.h"
+#include "DexHardwareVertexBuffer.h"
+#include "DexHardwareIndexBuffer.h"
+#include "DexRenderComponent.h"
+#include "DexRenderComponentD3D9.h"
+#include "DexLightComponent.h"
+#include "DexCameraComponent.h"
+#include "DexCore.h"
 
 namespace Dex
 {
-	RenderWindowD3D9::RenderWindowD3D9(OFStream* logger, UINT adapter, D3DDEVTYPE type, IDirect3D9* d3d9)
+	RenderWindowD3D9::RenderWindowD3D9(ofstream* logger, UINT adapter, D3DDEVTYPE type, IDirect3D9* d3d9)
 		: IRenderWindow("", logger)
 	{
 		m_nAdapter = adapter;

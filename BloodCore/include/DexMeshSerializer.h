@@ -1,6 +1,6 @@
 #pragma once
 
-#include <DexSerializer.h>
+#include "DexSerializer.h"
 
 namespace Dex
 {
@@ -9,7 +9,7 @@ namespace Dex
 	class D_EXPORT MeshSerializer : public Serializer
 	{
 	public:
-		MeshSerializer(const String& c_name, OFStream* logger, bool fw = true);
+		MeshSerializer(const string& c_name, ofstream* logger, bool fw = true);
 		virtual ~MeshSerializer();
 
 		void ImportMesh( void );

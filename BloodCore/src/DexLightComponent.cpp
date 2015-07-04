@@ -1,8 +1,8 @@
-#include <DexLightComponent.h>
+#include "DexLightComponent.h"
 
 namespace Dex
 {
-	LightComponent::LightComponent( const String& cName, SceneObject* pParent,
+	LightComponent::LightComponent( const string& cName, SceneObject* pParent,
 		const Point4& nColor, const Point& nRange )
 		: ObjectComponent( cName, pParent, OCT_LIGHT )
 	{

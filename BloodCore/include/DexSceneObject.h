@@ -1,8 +1,8 @@
 #pragma once
 
-#include <DexPreCompletion.h>
-#include <DexCommon.h>
-#include <DexObjectLocation.h>
+#include "DexPreCompletion.h"
+#include "DexCommon.h"
+#include "DexObjectLocation.h"
 
 namespace Dex
 {
@@ -11,12 +11,12 @@ namespace Dex
 	class D_EXPORT SceneObject : public ObjectLocation
 	{
 	public:
-		SceneObject( const String& name, Scene* pParent );
+		SceneObject( const string& name, Scene* pParent );
 		~SceneObject( void );
 
 		// Name and Id
 		int GetId( void );
-		const String& GetName( void );
+		const string& GetName( void );
 		Scene* GetScene( void );
 
 		void AddComponent( ObjectComponent* pComponent );
@@ -26,7 +26,7 @@ namespace Dex
 
 	protected:
 		int					m_nId;
-		String				m_Name;
+		string				m_Name;
 		Scene*				m_pScene;
 
 		g_lObjectComponent	m_lObjectComponent;

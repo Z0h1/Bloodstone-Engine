@@ -5,18 +5,18 @@
 
 namespace Dex
 {
-	typedef std::vector< std::pair<String, String> >	_Configs;
+	typedef vector< pair<string, string> >	_Configs;
 
 	class D_EXPORT ConfigFile : public CoreObject
 	{
 	public:
-		ConfigFile(const String& configfile, OFStream* logger);
+		ConfigFile(const string& configfile, ofstream* logger);
 		~ConfigFile();
 
 		const _Configs& Get(void) { return mConfigs; };
 
 	private:
-		IFStream	mFile;
+		ifstream	mFile;
 		_Configs	mConfigs;
 	};
 }

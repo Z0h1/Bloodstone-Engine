@@ -1,4 +1,4 @@
-#include <DexInputDevice.h>
+#include "DexInputDevice.h"
 
 namespace Dex
 {
@@ -6,7 +6,7 @@ namespace Dex
 	{
 	}
 
-	const String& IInputDevice::GetName( void )
+	const string& IInputDevice::GetName( void )
 	{
 		return m_cName;
 	}

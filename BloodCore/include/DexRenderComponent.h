@@ -1,17 +1,17 @@
 #pragma once
 
-#include <DexObjectComponent.h>
-#include <DexMeshSerializer.h>
+#include "DexObjectComponent.h"
+#include "DexMeshSerializer.h"
 
 namespace Dex
 {
 	class D_EXPORT RenderComponent : public ObjectComponent, public MeshSerializer
 	{
 	public:
-		RenderComponent( const String& cName, SceneObject* pParent, const PrimitiveType& eType );
+		RenderComponent( const string& cName, SceneObject* pParent, const PrimitiveType& eType );
 		~RenderComponent( void );
 
-		void Load( const String& cResource );
+		void Load( const string& cResource );
 
 		const PrimitiveType& GetPrimitiveType( void );
 

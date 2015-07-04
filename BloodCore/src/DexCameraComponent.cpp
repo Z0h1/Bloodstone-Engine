@@ -1,8 +1,8 @@
-#include <DexCameraComponent.h>
+#include "DexCameraComponent.h"
 
 namespace Dex
 {
-	CameraComponent::CameraComponent( const String& cName, SceneObject* pParent,
+	CameraComponent::CameraComponent( const string& cName, SceneObject* pParent,
 		const Point& nRange )
 		: ObjectComponent( cName, pParent, OCT_CAMERA )
 	{

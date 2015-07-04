@@ -89,7 +89,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="code\BCollection.h" />
     <ClInclude Include="include\Dex.h" />
     <ClInclude Include="include\DexArchiveFactory.h" />
     <ClInclude Include="include\DexCameraComponent.h" />
@@ -98,6 +97,7 @@
     <ClInclude Include="include\DexCore.h" />
     <ClInclude Include="include\DexDynamicLibrary.h" />
     <ClInclude Include="include\DexFileArchive.h" />
+    <ClInclude Include="include\DexFileSystem.h" />
     <ClInclude Include="include\DexHardwareBuffer.h" />
     <ClInclude Include="include\DexHardwareBufferData.h" />
     <ClInclude Include="include\DexHardwareIndexBuffer.h" />
@@ -128,13 +128,13 @@
     <ClInclude Include="include\DexSystem.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="code\BCollection.cpp" />
     <ClCompile Include="src\DexArchiveFactory.cpp" />
     <ClCompile Include="src\DexCameraComponent.cpp" />
     <ClCompile Include="src\DexConfigFile.cpp" />
     <ClCompile Include="src\DexCore.cpp" />
     <ClCompile Include="src\DexDynamicLibrary.cpp" />
     <ClCompile Include="src\DexFileArchive.cpp" />
+    <ClCompile Include="src\DexFileSystem.cpp" />
     <ClCompile Include="src\DexHardwareBuffer.cpp" />
     <ClCompile Include="src\DexHardwareBufferData.cpp" />
     <ClCompile Include="src\DexHardwareIndexBuffer.cpp" />

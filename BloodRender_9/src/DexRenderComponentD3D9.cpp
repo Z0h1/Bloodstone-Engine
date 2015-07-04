@@ -1,4 +1,4 @@
-#include <DexRenderComponentD3D9.h>
+#include "DexRenderComponentD3D9.h"
 
 namespace Dex
 {

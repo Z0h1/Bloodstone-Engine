@@ -1,6 +1,6 @@
 #pragma once
 
-#include <DexPreCompletionD3D9.h>
+#include "DexPreCompletionD3D9.h"
 #include "DexCommon.h"
 #include "DexCoreObject.h"
 
@@ -9,7 +9,7 @@ namespace Dex
 	class D_EXPORT_D3D9 RenderAdapterD3D9 : public CoreObject
 	{
 	public:
-		RenderAdapterD3D9(OFStream* logger, UINT id, IDirect3D9* d3d9 );
+		RenderAdapterD3D9(ofstream* logger, UINT id, IDirect3D9* d3d9 );
 
 		const _lString& GetDisplayMode( void );
 

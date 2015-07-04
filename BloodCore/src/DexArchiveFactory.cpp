@@ -1,4 +1,4 @@
-#include <DexArchiveFactory.h>
+#include "DexArchiveFactory.h"
 
 namespace Dex
 {
@@ -12,7 +12,7 @@ namespace Dex
 		return m_eType;
 	}
 
-	const String& ArchiveFactory::GetLactation( void )
+	const string& ArchiveFactory::GetLactation( void )
 	{
 		return m_cLactation;
 	}

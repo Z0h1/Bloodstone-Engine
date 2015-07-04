@@ -1,7 +1,7 @@
 #pragma once
 
-#include <DexPreCompletion.h>
-#include <DexCommon.h>
+#include "DexPreCompletion.h"
+#include "DexCommon.h"
 
 namespace Dex
 {
@@ -19,13 +19,13 @@ namespace Dex
 	public:
 		virtual ~IInputDevice( void );
 
-		const String& GetName( void );
+		const string& GetName( void );
 
 	public:
 		virtual bool GetState( void* pBuf, int nSize ) = 0;
 
 	protected:
 		HWND					m_hWnd;
-		String					m_cName;
+		string					m_cName;
 	};
 }

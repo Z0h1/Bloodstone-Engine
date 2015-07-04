@@ -1,8 +1,8 @@
-#include <DexRenderWindow.h>
+#include "DexRenderWindow.h"
 
 namespace Dex
 {
-	IRenderWindow::IRenderWindow(const String& c_name, OFStream* logger, bool fw)
+	IRenderWindow::IRenderWindow(const string& c_name, ofstream* logger, bool fw)
 		: CoreObject(c_name, logger, WorkPriority::WP_STEP_1, fw)
 	{
 	}

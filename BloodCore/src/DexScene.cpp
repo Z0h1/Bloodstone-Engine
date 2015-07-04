@@ -1,9 +1,9 @@
-#include <DexScene.h>
-#include <DexSceneObject.h>
+#include "DexScene.h"
+#include "DexSceneObject.h"
 
 namespace Dex
 {
-	Scene::Scene( const String& cName )
+	Scene::Scene( const string& cName )
 	{
 		m_cName = cName;
 	}
@@ -17,7 +17,7 @@ namespace Dex
 		return m_lSceneObject.Size();
 	}
 
-	SceneObject* Scene::CreateObject( const String& cName )
+	SceneObject* Scene::CreateObject( const string& cName )
 	{
 		SceneObject* pObject = 0;
 
@@ -37,7 +37,7 @@ namespace Dex
 		return m_lSceneObject;
 	}
 
-	const String& Scene::GetName( void )
+	const string& Scene::GetName( void )
 	{
 		return m_cName;
 	}

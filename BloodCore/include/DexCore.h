@@ -3,46 +3,47 @@
 #include "DexPreCompletion.h"
 #include "DexCoreObject.h"
 
-#include <DexResourceManager.h>
-#include <DexRenderSystem.h>
-#include <DexInputSystem.h>
+#include "DexResourceManager.h"
+#include "DexRenderSystem.h"
+#include "DexInputSystem.h"
 
 namespace Dex
 {
-	typedef std::map< String, Scene* >					_lScene;
-	typedef std::map< String, DynamicLibrary* >			_lDynamicLibrary;
-	typedef std::map< const SystemsType, ISystem* >		_lSystemsByType;
+	typedef map< string, Scene* >					_lScene;
+	typedef map< string, DynamicLibrary* >			_lDynamicLibrary;
+	typedef map< const SystemsType, ISystem* >		_lSystemsByType;
 
 	class D_EXPORT Core : public CoreObject
 	{
 	public:
-		Core(const String& cLog = "DexLog.html", const String& cConfig = "DexConfig.cfg");
+		Core(const string& cLog = "DexLog.log", const string& cConfig = "DexConfig.cfg");
 		~Core(void);
 
 		// Dynamic Library
-		bool LoadModule(const String& cModule);
-		bool UnLoadModule(const String& cModule);
+		bool LoadModule(const string& cModule);
+		bool UnLoadModule(const string& cModule);
 
-		void AddSystem(ISystem* s_ptr);
+		void AddSystem(ISystem* s_ptr, bool set_def = false);
 		void RemoveSystem(ISystem* s_ptr);
 		void ChangeSystem(const SystemsType eType);
 
 		// Scene System
-		Scene* CreateScene(const String& cName);
-		Scene* GetScene(const String& cName);
+		Scene* CreateScene(const string& cName);
+		Scene* GetScene(const string& cName);
 
-		OFStream* GetLogger();
+		ofstream* GetLogger();
 		ISystem* GetSystem(const SystemsType st);
 
 	private:
-		IRenderSystem*				m_pRenderSystem;
-		IInputSystem*				m_pInputSystem;
+		IRenderSystem*			m_pRenderSystem;
+		IInputSystem*			m_pInputSystem;
+		FileSystem*				m_pFileSystem;
 
-		_lDynamicLibrary			m_lDynamicLibrary;
-		_lSystemsByType				m_lSystems;
-		_lScene						m_lScene;
+		_lDynamicLibrary		m_lDynamicLibrary;
+		_lSystemsByType			m_lSystems;
+		_lScene					m_lScene;
 
-		OFStream*					mLogger;
-		OFStream*					mStateDump;
+		ofstream*				mLogger;
+		ofstream*				mStateDump;
 	};
 }

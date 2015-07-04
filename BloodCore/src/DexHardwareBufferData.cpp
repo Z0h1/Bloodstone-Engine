@@ -1,6 +1,6 @@
-#include <DexHardwareBufferData.h>
-#include <DexHardwareVertexBuffer.h>
-#include <DexHardwareIndexBuffer.h>
+#include "DexHardwareBufferData.h"
+#include "DexHardwareVertexBuffer.h"
+#include "DexHardwareIndexBuffer.h"
 
 namespace Dex
 {

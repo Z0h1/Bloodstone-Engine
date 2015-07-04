@@ -9,7 +9,7 @@ namespace Dex
 	class D_EXPORT Serializer : public CoreObject
 	{
 	public:
-		Serializer(const String& c_name, OFStream* logger, bool fw = true);
+		Serializer(const string& c_name, ofstream* logger, bool fw = true);
 		virtual ~Serializer();
 
 		// Read
@@ -26,7 +26,7 @@ namespace Dex
 		void WriteBool( bool pData );
 		void WritePtr( const void* pData, unsigned int nSize );
 
-		void SetResource( const String& cResource );
+		void SetResource( const string& cResource );
 		void SetStream( DataStream* pStream );
 
 	private:

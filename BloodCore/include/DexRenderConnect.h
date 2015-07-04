@@ -1,7 +1,7 @@
 #pragma once
 
-#include <DexPreCompletion.h>
-#include <DexCommon.h>
+#include "DexPreCompletion.h"
+#include "DexCommon.h"
 
 namespace Dex
 {

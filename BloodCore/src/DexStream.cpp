@@ -1,8 +1,8 @@
-#include <DexStream.h>
+#include "DexStream.h"
 
 namespace Dex
 {
-	DataStream::DataStream( String cName )
+	DataStream::DataStream( string cName )
 	{
 		m_cName = cName;
 	}
@@ -11,19 +11,19 @@ namespace Dex
 	{
 	}
 
-	FileStream::FileStream( String cName, String cFile, const OpenMode& eOpenMode )
+	FileStream::FileStream( string cName, string cFile, const OpenMode& eOpenMode )
 		: DataStream( cName )
 	{
 
-		std::ios::openmode mode = std::ios::binary;
+		ios::openmode mode = ios::binary;
 
 		if ( eOpenMode == OM_READ )
 		{
-			mode |= std::ios::in;
+			mode |= ios::in;
 		}
 		else
 		{
-			mode |= std::ios::out;
+			mode |= ios::out;
 		}
 
 		m_pFileStream.open( cFile.c_str(), mode );
@@ -41,14 +41,14 @@ namespace Dex
 
 	void FileStream::Read( void* pBuf, size_t nCount )
 	{
-		m_pFileStream.read( static_cast< char* >( pBuf ), static_cast< std::streamsize >( nCount ));
+		m_pFileStream.read( static_cast< char* >( pBuf ), static_cast< streamsize >( nCount ));
 	}
 
 	void FileStream::Write( const void* pBuf, size_t nCount )
 	{
 		if ( m_pFileStream )
 		{
-			m_pFileStream.write( static_cast< const char* >( pBuf ), static_cast< std::streamsize >( nCount ) );
+			m_pFileStream.write( static_cast< const char* >( pBuf ), static_cast< streamsize >( nCount ) );
 		}
 	}
 

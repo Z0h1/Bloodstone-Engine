@@ -1,15 +1,15 @@
-#include <DexRenderAdapterD3D9.h>
-#include <DexCore.h>
+#include "DexRenderAdapterD3D9.h"
+#include "DexCore.h"
 
 namespace Dex
 {
-	RenderAdapterD3D9::RenderAdapterD3D9(OFStream* logger, UINT id, IDirect3D9* d3d9)
+	RenderAdapterD3D9::RenderAdapterD3D9(ofstream* logger, UINT id, IDirect3D9* d3d9)
 		: CoreObject("", logger, WorkPriority::WP_STEP_2)
 	{
 		m_nId = id;
 		m_pD3D9 = d3d9;
 
-		StringStream Description;
+		stringstream Description;
 
 		m_pD3D9->GetAdapterIdentifier(m_nId, 0, &m_AdapterIdentifier);
 
@@ -32,7 +32,7 @@ namespace Dex
 			for (int nMode = 0; nMode < nAdapterModeCount; nMode++)
 			{
 				D3DDISPLAYMODE DisplayMode;
-				StringStream mode;
+				stringstream mode;
 
 				m_pD3D9->EnumAdapterModes(m_nId, AdapterFormatArray[nAdapterFormat], nMode, &DisplayMode);
 

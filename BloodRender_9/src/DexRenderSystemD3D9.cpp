@@ -1,18 +1,18 @@
 #include "DexRenderSystemD3D9.h"
-#include <DexRenderWindowD3D9.h>
-#include <DexRenderAdapterD3D9.h>
-#include <DexScene.h>
-#include <DexSceneObject.h>
-#include <DexRenderConnect.h>
-#include <DexRenderComponent.h>
-#include <DexLightComponent.h>
-#include <DexCameraComponent.h>
-#include <DexCore.h>
+#include "DexRenderWindowD3D9.h"
+#include "DexRenderAdapterD3D9.h"
+#include "DexScene.h"
+#include "DexSceneObject.h"
+#include "DexRenderConnect.h"
+#include "DexRenderComponent.h"
+#include "DexLightComponent.h"
+#include "DexCameraComponent.h"
+#include "DexCore.h"
 
 namespace Dex
 {
-	RenderSystemD3D9::RenderSystemD3D9(OFStream* logger)
-		: IRenderSystem("RENDER_SYSTEM_D9", logger, SystemsType::RENDER_SYSTEM_DIRECTX_9)
+	RenderSystemD3D9::RenderSystemD3D9(ofstream* logger)
+		: IRenderSystem("RENDER_SYSTEM_D9", logger, SystemsType::SYSTEM_RENDER_DIRECTX_9)
 	{
 		m_pD3D9 = Direct3DCreate9(D3D_SDK_VERSION);
 		m_Adapter = D3DADAPTER_DEFAULT;
@@ -98,7 +98,7 @@ namespace Dex
 		return NULL;
 	}
 
-	void RenderSystemD3D9::RenderWindow(const String& cName)
+	void RenderSystemD3D9::RenderWindow(const string& cName)
 	{
 		IRenderConnect* pConnect = GetConnect(cName);
 
@@ -151,12 +151,12 @@ namespace Dex
 		}
 	}
 
-	IRenderWindow* RenderSystemD3D9::GetWindow(const String& cNameWindow)
+	IRenderWindow* RenderSystemD3D9::GetWindow(const string& cNameWindow)
 	{
 		return static_cast<IRenderWindow*>(m_lWindow[cNameWindow]);
 	}
 
-	IRenderConnect* RenderSystemD3D9::GetConnect(const String& cNameWindow)
+	IRenderConnect* RenderSystemD3D9::GetConnect(const string& cNameWindow)
 	{
 		return static_cast<IRenderConnect*>(m_lWindow[cNameWindow]);
 	}

@@ -1,13 +1,14 @@
 #include "DexFileArchive.h"
+#include "io.h"
 
 namespace Dex
 {
-	FileArchive::FileArchive( const String& cLocation )
+	FileArchive::FileArchive( const string& cLocation )
 	{
 		m_eType = AT_FILE;
 		m_cLactation = cLocation;
 
-		String full_path = m_cLactation + "/*";
+		string full_path = m_cLactation + "/*";
 
 		_finddata_t data;
 		intptr_t nHandleFile = _findfirst( full_path.c_str(), &data );
@@ -34,9 +35,9 @@ namespace Dex
 	{
 	}
 
-	FileStream* FileArchive::Open( const String& cResource )
+	FileStream* FileArchive::Open( const string& cResource )
 	{
-		String cPath = m_cLactation + "/" + cResource;
+		string cPath = m_cLactation + "/" + cResource;
 
 		return new FileStream( cResource, cPath, OM_READ );
 	}

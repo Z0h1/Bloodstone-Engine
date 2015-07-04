@@ -1,9 +1,9 @@
-#include <DexSerializer.h>
-#include <DexCore.h>
+#include "DexSerializer.h"
+#include "DexCore.h"
 
 namespace Dex
 {
-	Serializer::Serializer(const String& c_name, OFStream* logger, bool fw)
+	Serializer::Serializer(const string& c_name, ofstream* logger, bool fw)
 		: CoreObject(c_name, logger, WorkPriority::WP_STEP_1, fw)
 	{
 	}
@@ -62,7 +62,7 @@ namespace Dex
 		m_pStream->Write( pData, nSize );
 	}
 
-	void Serializer::SetResource( const String& cResource )
+	void Serializer::SetResource( const string& cResource )
 	{
 		//m_pStream = Core::GetResourceManager()->LoadResource( cResource );
 	}

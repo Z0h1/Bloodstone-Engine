@@ -2,7 +2,7 @@
 
 namespace Dex
 {
-	ISystem::ISystem(const String& c_name, OFStream* logger, const SystemsType st, bool fw)
+	ISystem::ISystem(const string& c_name, ofstream* logger, const SystemsType st, bool fw)
 		: CoreObject(c_name, logger, WorkPriority::WP_SYSTEM, fw), m_Type(st)
 	{
 	}

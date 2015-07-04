@@ -1,7 +1,7 @@
 #pragma once
 
-#include <DexPreCompletion.h>
-#include <DexCommon.h>
+#include "DexPreCompletion.h"
+#include "DexCommon.h"
 #include "DexCoreObject.h"
 
 namespace Dex
@@ -9,7 +9,7 @@ namespace Dex
 	class D_EXPORT IRenderWindow : public CoreObject
 	{
 	public:
-		IRenderWindow(const String& c_name, OFStream* logger, bool fw = false);
+		IRenderWindow(const string& c_name, ofstream* logger, bool fw = false);
 		virtual ~IRenderWindow();
 
 		bool IsFullScrean( void );

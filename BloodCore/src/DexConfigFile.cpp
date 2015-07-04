@@ -3,15 +3,15 @@
 
 namespace Dex
 {
-	ConfigFile::ConfigFile(const String& configfile, OFStream* logger)
+	ConfigFile::ConfigFile(const string& configfile, ofstream* logger)
 		: CoreObject("CONFIGFILE_" + configfile, logger, WorkPriority::WP_MAIN)
 	{
-		mFile.open(configfile, std:: ios::in);
+		mFile.open(configfile,  ios::in);
 
 		if (mFile)
 		{
 			char lineBuffer[256];
-			String line, parametor, value;
+			string line, parametor, value;
 
 			while (!mFile.eof())
 			{
@@ -21,8 +21,8 @@ namespace Dex
 				// ѕропуск пустых и "#" закоментированых строк
 				if (line.length() > 0 && line.at(0) != '#')
 				{
-					String::size_type separator_pos = line.find_first_of("=", 0);
-					if (separator_pos != String::npos)
+					string::size_type separator_pos = line.find_first_of("=", 0);
+					if (separator_pos != string::npos)
 					{
 						// parametor
 						parametor = line.substr(0, separator_pos);
@@ -34,7 +34,7 @@ namespace Dex
 						StringConverter::trim(parametor);
 						StringConverter::trim(value);
 
-						mConfigs.push_back(std::make_pair(parametor, value));
+						mConfigs.push_back(make_pair(parametor, value));
 					}
 				}
 			}

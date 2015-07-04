@@ -8,7 +8,7 @@ namespace Dex
 	class D_EXPORT_D3D9 RenderSystemD3D9 : public IRenderSystem
 	{
 	public:
-		RenderSystemD3D9(OFStream* logger);
+		RenderSystemD3D9(ofstream* logger);
 		~RenderSystemD3D9();
 
 		const _lString& GetAvailableDisplayMode(void);
@@ -16,18 +16,18 @@ namespace Dex
 
 		IRenderWindow * CreateRenderWindow(const _lParametor & config, HWND h);
 
-		void RenderWindow(const String& cName);
+		void RenderWindow(const string& cName);
 		void RenderAllWindow(void);
 
-		IRenderWindow* GetWindow(const String& cNameWindow);
-		IRenderConnect* GetConnect(const String& cNameWindow);
+		IRenderWindow* GetWindow(const string& cNameWindow);
+		IRenderConnect* GetConnect(const string& cNameWindow);
 
 	private:
 		void InitSystem(void);
 		void EnumerationAdapter(void);
 
-		typedef std::map< String, RenderWindowD3D9* >	_lWindow;
-		typedef std::vector< RenderAdapterD3D9* >		_lDriver;
+		typedef map< string, RenderWindowD3D9* >	_lWindow;
+		typedef vector< RenderAdapterD3D9* >		_lDriver;
 
 		_lWindow			m_lWindow;
 		_lDriver			m_lDriver;

@@ -1,8 +1,8 @@
-#include <DexRenderSystem.h>
+#include "DexRenderSystem.h"
 
 namespace Dex
 {
-	IRenderSystem::IRenderSystem(const String& c_name, OFStream* logger, const SystemsType st, bool fw)
+	IRenderSystem::IRenderSystem(const string& c_name, ofstream* logger, const SystemsType st, bool fw)
 		: ISystem(c_name, logger, st, fw)
 	{
 	}

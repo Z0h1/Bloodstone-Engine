@@ -1,7 +1,7 @@
 #pragma once
 
-#include <DexPreCompletion.h>
-#include <DexCommon.h>
+#include "DexPreCompletion.h"
+#include "DexCommon.h"
 
 namespace Dex
 {
@@ -11,16 +11,16 @@ namespace Dex
 		ResourceManager( void );
 		~ResourceManager( void );
 
-		FileStream* LoadResource( const String& cName );
+		FileStream* LoadResource( const string& cName );
 
-		bool CreateDexFile( const String& cName );
+		bool CreateDexFile( const string& cName );
 
-		void AddResourceLocation( const String& cLactation, const String& eType );
-		void RemoveResourceLocation( const String& cLactation );
+		void AddResourceLocation( const string& cLactation, const string& eType );
+		void RemoveResourceLocation( const string& cLactation );
 
 	private:
-		typedef std::map< String, ArchiveFactory* >		_lPathResource;
-		typedef std::vector< ArchiveFactory* >			_lArchive;
+		typedef map< string, ArchiveFactory* >		_lPathResource;
+		typedef vector< ArchiveFactory* >			_lArchive;
 
 		_lArchive					m_lArchive;
 		_lPathResource				m_lResource;

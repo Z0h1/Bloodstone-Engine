@@ -1,11 +1,11 @@
-#include <DexMeshSerializer.h>
-#include <DexHardwareBufferData.h>
-#include <DexHardwareIndexBuffer.h>
-#include <DexHardwareVertexBuffer.h>
+#include "DexMeshSerializer.h"
+#include "DexHardwareBufferData.h"
+#include "DexHardwareIndexBuffer.h"
+#include "DexHardwareVertexBuffer.h"
 
 namespace Dex
 {
-	MeshSerializer::MeshSerializer(const String& c_name, OFStream* logger, bool fw)
+	MeshSerializer::MeshSerializer(const string& c_name, ofstream* logger, bool fw)
 		: Serializer(c_name, logger, fw)
 	{
 	}

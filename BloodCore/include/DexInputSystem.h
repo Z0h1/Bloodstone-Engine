@@ -11,7 +11,7 @@ namespace Dex
 	class D_EXPORT IInputSystem : public ISystem
 	{
 	public:
-		IInputSystem(const String& c_name, OFStream* logger, const SystemsType st, bool fw = false);
+		IInputSystem(const string& c_name, ofstream* logger, const SystemsType st, bool fw = false);
 		virtual ~IInputSystem(void);
 		virtual IInputDevice* CreateDevice(const _lParametor& lConfig) = 0;
 	};

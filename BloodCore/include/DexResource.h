@@ -1,12 +1,12 @@
 #pragma once
 
-#include <DexPreCompletion.h>
+#include "DexPreCompletion.h"
 
 namespace Dex
 {
 	class D_EXPORT IResource
 	{
 	public:
-		virtual void Load( const String& resource ) = 0;
+		virtual void Load( const string& resource ) = 0;
 	};
 }

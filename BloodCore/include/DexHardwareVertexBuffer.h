@@ -1,8 +1,8 @@
 #pragma once
 
-#include <DexPreCompletion.h>
-#include <DexCommon.h>
-#include <DexHardwareBuffer.h>
+#include "DexPreCompletion.h"
+#include "DexCommon.h"
+#include "DexHardwareBuffer.h"
 
 namespace Dex
 {

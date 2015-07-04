@@ -2,22 +2,18 @@
 
 #include <string>
 #include <fstream>
-#include <iostream>
-#include <io.h>
-#include <iomanip>
 #include <sstream>
-
-#include <algorithm>
-
-#include <assert.h>
+#include <memory>
 
 #include <vector>
 #include <list>
 #include <map>
 
-#include <Windows.h>
+#include "Windows.h"
 
 #pragma warning ( disable : 4251 )
+
+using namespace std;
 
 namespace Dex
 {
@@ -31,12 +27,6 @@ namespace Dex
 	typedef float Point;
 	typedef unsigned int UInt32;
 	typedef unsigned short UInt16;
-
-	// String
-	typedef std::string String;
-	typedef std::stringstream StringStream;
-	typedef std::ofstream OFStream;
-	typedef std::ifstream IFStream;
 
 	// Classes
 	class IInputSystem;
@@ -64,12 +54,14 @@ namespace Dex
 	class IRenderWindow;
 	class IRenderConnect;
 	class ISystem;
+	class FileSystem;
 
 	enum SystemsType
 	{
-		RENDER_SYSTEM_DIRECTX_9,
-		RENDER_SYSTEM_DIRECTX_11,
-		INPUT_SYSTEM_DX
+		SYSTEM_RENDER_DIRECTX_9,
+		SYSTEM_RENDER_DIRECTX_11,
+		SYSTEM_INPUT_DX,
+		SYSTEM_FILE_DEX
 	};
 
 	enum MessageTypes

@@ -1,9 +1,9 @@
-#include <DexObjectComponent.h>
-#include <DexSceneObject.h>
+#include "DexObjectComponent.h"
+#include "DexSceneObject.h"
 
 namespace Dex
 {
-	ObjectComponent::ObjectComponent( const String& cName, SceneObject* pParent, const ObjectComponentType& type )
+	ObjectComponent::ObjectComponent( const string& cName, SceneObject* pParent, const ObjectComponentType& type )
 		: ObjectLocation( pParent )
 	{
 		m_cName = cName;
@@ -20,7 +20,7 @@ namespace Dex
 		return m_eType;
 	}
 
-	const String& ObjectComponent::GetName( void ) const
+	const string& ObjectComponent::GetName( void ) const
 	{
 		return m_cName;
 	}

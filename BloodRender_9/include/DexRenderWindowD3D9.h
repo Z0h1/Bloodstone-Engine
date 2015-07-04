@@ -1,15 +1,15 @@
 #pragma once
 
-#include <DexPreCompletionD3D9.h>
-#include <DexRenderWindow.h>
-#include <DexRenderConnect.h>
+#include "DexPreCompletionD3D9.h"
+#include "DexRenderWindow.h"
+#include "DexRenderConnect.h"
 
 namespace Dex
 {
 	class D_EXPORT_D3D9 RenderWindowD3D9 : public IRenderWindow, public IRenderConnect
 	{
 	public:
-		RenderWindowD3D9(OFStream* logger, UINT adapter, D3DDEVTYPE type, IDirect3D9* d3d9);
+		RenderWindowD3D9(ofstream* logger, UINT adapter, D3DDEVTYPE type, IDirect3D9* d3d9);
 		~RenderWindowD3D9(void);
 
 		bool Create(const _lParametor & config, HWND h);
@@ -33,8 +33,8 @@ namespace Dex
 		void RemoveBind(RenderComponent* pRenderComponent);
 
 	private:
-		typedef std::pair< RenderComponentD3D9*, HardwareBufferData* > _sBufferBindPair;
-		typedef std::map< RenderComponent*, _sBufferBindPair* >	_lBufferBind;
+		typedef pair< RenderComponentD3D9*, HardwareBufferData* > _sBufferBindPair;
+		typedef map< RenderComponent*, _sBufferBindPair* >	_lBufferBind;
 		_lBufferBind				m_lBufferBind;
 
 		int							m_LightCount;

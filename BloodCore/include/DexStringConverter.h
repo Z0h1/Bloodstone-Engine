@@ -1,34 +1,34 @@
 #pragma once
 
-#include <DexPreCompletion.h>
+#include "DexPreCompletion.h"
 
 namespace Dex
 {
 	class D_EXPORT StringConverter
 	{
 	public:
-		static void trim( String& string, bool left = true, bool right = true );
+		static void trim(string& s, bool left = true, bool right = true);
 
 		// toString
-		static String toString( const char* value );
-		static String toString_on_off( bool value );
-		static String toString_true_false( bool value );
-		static String toString_1_0( bool value );
-		static String toString( int value );
-		static String toString( unsigned long value );
-		static String toString( size_t value );
-		static String toString( Point X, Point Y, Point Z );
-		static String toString( const PrimitiveType& type );
-		static String toString( int nWidth, int nHeight, int nBit );
+		static string toString(const char* value);
+		static string toString_on_off(bool value);
+		static string toString_true_false(bool value);
+		static string toString_1_0(bool value);
+		static string toString(int value);
+		static string toString(unsigned long value);
+		static string toString(size_t value);
+		static string toString(Point X, Point Y, Point Z);
+		static string toString(const PrimitiveType& type);
+		static string toString(int nWidth, int nHeight, int nBit);
 
 		// Parse
-		static bool Parse_bool( String value, bool default_value = false );
-		static int Parse_int( String value, int default_value = 0 );
-		static unsigned int Parse_unsigned_int( String value, unsigned int default_value = 0 );
-		static size_t Parse_size_t( String value, size_t default_value = 0 );
+		static bool Parse_bool(string value, bool default_value = false);
+		static int Parse_int(string value, int default_value = 0);
+		static unsigned int Parse_unsigned_int(string value, unsigned int default_value = 0);
+		static size_t Parse_size_t(string value, size_t default_value = 0);
 
-		static void ParseDisplyaMode( const String& mode, int& Width, int& Height, int& bit );
-		static void ParseXYZ( const String& str, Point& X, Point& Y, Point& Z );
-		static void ParsePrimitiveType( const String& str, PrimitiveType& type );
+		static void ParseDisplyaMode(const string& mode, int& Width, int& Height, int& bit);
+		static void ParseXYZ(const string& str, Point& X, Point& Y, Point& Z);
+		static void ParsePrimitiveType(const string& str, PrimitiveType& type);
 	};
 }

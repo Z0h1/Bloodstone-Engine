@@ -2,7 +2,7 @@
 
 namespace Dex
 {
-	CoreObject::CoreObject(const String& c_name, OFStream* logger, WorkPriority wp, bool fw)
+	CoreObject::CoreObject(const string& c_name, ofstream* logger, WorkPriority wp, bool fw)
 	{
 		mObjectName = c_name;
 		mWorkPriority = wp;
@@ -15,7 +15,7 @@ namespace Dex
 	{
 	}
 
-	void CoreObject::SetOutFileStream(OFStream* os)
+	void CoreObject::SetOutFileStream(ofstream* os)
 	{
 		if (mOutFileStream != nullptr) {
 			*mOutFileStream << "Go to/n";
@@ -24,7 +24,7 @@ namespace Dex
 		mOutFileStream = os;
 	}
 
-	void CoreObject::DrawLine(const String& text, const MessageTypes& mt)
+	void CoreObject::DrawLine(const string& text, const MessageTypes& mt)
 	{
 		if (mOutFileStream != nullptr) {
 			char* mt_c = "";
@@ -41,12 +41,12 @@ namespace Dex
 				break;
 			}
 
-			*mOutFileStream << mt_c << " [ " << mObjectName << " ] " << text.c_str() << std::endl;
+			*mOutFileStream << mt_c << " [ " << mObjectName << " ] " << text.c_str() << endl;
 			mOutFileStream->flush();
 		}
 	}
 
-	const String& CoreObject::GetName()
+	const string& CoreObject::GetName()
 	{
 		return mObjectName;
 	}

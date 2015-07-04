@@ -2,7 +2,7 @@
 
 namespace Dex
 {
-	IInputSystem::IInputSystem(const String& c_name, OFStream* logger, const SystemsType st, bool fw)
+	IInputSystem::IInputSystem(const string& c_name, ofstream* logger, const SystemsType st, bool fw)
 		: ISystem(c_name, logger, st, fw)
 	{
 	}

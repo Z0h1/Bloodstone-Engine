@@ -1,8 +1,8 @@
 #pragma once
 
-#include <DexPreCompletion.h>
-#include <DexCommon.h>
-#include <DexRenderConnect.h>
+#include "DexPreCompletion.h"
+#include "DexCommon.h"
+#include "DexRenderConnect.h"
 
 namespace Dex
 {
@@ -12,16 +12,16 @@ namespace Dex
 	class D_EXPORT Scene
 	{
 	public:
-		Scene( const String& cName );
+		Scene( const string& cName );
 		~Scene( void );
 
 		int GetNewId( void );
 
-		SceneObject* CreateObject( const String& name );
+		SceneObject* CreateObject( const string& name );
 		SceneObject* GetObject( int nIndex );
 
 		const g_lSceneObject& GetListSceneObject( void );
-		const String& GetName( void );
+		const string& GetName( void );
 
 		void AddRenderConnect( IRenderConnect* pConnect );
 		void RemoveRenderConnect( IRenderConnect* pConnect );
@@ -31,6 +31,6 @@ namespace Dex
 		g_lSceneObject		m_lSceneObject;
 		g_lRenderConnect	m_lRenderConnect;
 
-		String				m_cName;
+		string				m_cName;
 	};
 }
