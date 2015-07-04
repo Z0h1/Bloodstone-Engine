@@ -1,12 +1,12 @@
 #pragma once
 #define _BLOODSTONE_COLLECTION
 
-#include "BHead.h"
-#include "BObject.h"
+#include "DexPreCompletion.h"
+#include "DexCoreObject.h"
 
-namespace Bloodstone
+namespace Dex
 {
-	class BLOODCORE_API BCollection : public BObject
+	class D_EXPORT BCollection : public CoreObject
 	{
 	public:
 		BCollection(const char* name, UInt32 limit, UInt32 delta);
@@ -21,19 +21,20 @@ namespace Bloodstone
 		void Remove(void* item);
 		void Remove(UInt32 index);
 
-		virtual void Load(ifstream* is);
-		virtual void Store(ofstream* os);
+		virtual void Load(IFStream* is);
+		virtual void Store(OFStream* os);
+
+		bool IndexOf(void* item, UInt32& find);
 
 	protected:
 		void SetLimit(UInt32 limit);
 		UInt32 IndexInsert(UInt32 index, void* element);
 		void IndexRemove(UInt32 index);
-		bool IndexOf(void* item, UInt32& find);
 
 		bool Increase();
 		bool Decrease();
 
-		void StoreItem(void* item, ofstream* os);
+		void StoreItem(void* item, OFStream* os);
 
 		UInt32 mCount;
 		UInt32 mDelta;
@@ -41,7 +42,7 @@ namespace Bloodstone
 		void** mItens;
 	};
 
-	class BLOODCORE_API BSortedCollection : public BCollection
+	class D_EXPORT BSortedCollection : public BCollection
 	{
 	public:
 		BSortedCollection(const char* name, UInt32 limit = 0, UInt32 delta = 1, bool duplication = true);
@@ -51,9 +52,9 @@ namespace Bloodstone
 		virtual void* KeyOf(void* item);
 		virtual bool Compare(void* availableElement, void* newElement) = 0;
 
-	protected:
 		bool Search(void* item, UInt32& index);
 
+	protected:
 		bool mDuplication;
 	};
 }

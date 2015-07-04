@@ -5,61 +5,243 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    <Filter Include="Source Files\Core">
+      <UniqueIdentifier>{41d279d3-49ec-468b-ac7b-cdbdb0e600f3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Collection">
-      <UniqueIdentifier>{23eda5ba-1851-4249-ae5c-56bed887ff80}</UniqueIdentifier>
+    <Filter Include="Source Files\Resource">
+      <UniqueIdentifier>{7e83dd06-d1e1-48b4-9a3c-54797f463131}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\ObjectController">
-      <UniqueIdentifier>{2930394b-db4a-492c-ab3f-db46d5ac4e1b}</UniqueIdentifier>
+    <Filter Include="Source Files\Resource\Serializer">
+      <UniqueIdentifier>{5d26bb79-81cf-4ff5-96ff-0165c8f04e6a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\System">
-      <UniqueIdentifier>{0ff975e2-8e08-44c1-a4a6-64fd14e48cbd}</UniqueIdentifier>
+    <Filter Include="Source Files\Resource\File system">
+      <UniqueIdentifier>{321e7fc5-7c47-4eba-a715-7876eb40a544}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\System\Render">
-      <UniqueIdentifier>{4592e080-b488-4dbf-85aa-501e5fc81b78}</UniqueIdentifier>
+    <Filter Include="Source Files\Scene">
+      <UniqueIdentifier>{fdd77a7c-b02f-4a37-b773-818350d2582e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Scene\Object">
+      <UniqueIdentifier>{3e0980c1-abc6-4400-97d1-025eb5c07772}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Scene\Object\Component">
+      <UniqueIdentifier>{50c410cb-05cb-42bf-97d3-207e064a5fc6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Systems">
+      <UniqueIdentifier>{5fc365a4-e977-477d-92df-f6951a60ab80}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Systems\Input">
+      <UniqueIdentifier>{bce23ad0-c8d9-4313-8acd-3852ee627861}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Systems\Graphic">
+      <UniqueIdentifier>{29386e55-f554-4047-a4da-df9a967798aa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Systems\Graphic\Hardware Buffer">
+      <UniqueIdentifier>{deb0ceb2-5218-419a-810d-0aae6a8750b4}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="code\BCore.h">
+    <ClInclude Include="include\Dex.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="code\BHead.h">
+    <ClInclude Include="include\DexCommon.h">
       <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\DexMath.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\DexPreCompletion.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\DexConfigFile.h">
+      <Filter>Source Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\DexCore.h">
+      <Filter>Source Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\DexDynamicLibrary.h">
+      <Filter>Source Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\DexIndexedArray.h">
+      <Filter>Source Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\DexStream.h">
+      <Filter>Source Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\DexStringConverter.h">
+      <Filter>Source Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\DexRenderConnect.h">
+      <Filter>Source Files\Systems\Graphic</Filter>
+    </ClInclude>
+    <ClInclude Include="include\DexHardwareBuffer.h">
+      <Filter>Source Files\Systems\Graphic\Hardware Buffer</Filter>
+    </ClInclude>
+    <ClInclude Include="include\DexHardwareBufferData.h">
+      <Filter>Source Files\Systems\Graphic\Hardware Buffer</Filter>
+    </ClInclude>
+    <ClInclude Include="include\DexHardwareIndexBuffer.h">
+      <Filter>Source Files\Systems\Graphic\Hardware Buffer</Filter>
+    </ClInclude>
+    <ClInclude Include="include\DexRenderSystem.h">
+      <Filter>Source Files\Systems\Graphic</Filter>
+    </ClInclude>
+    <ClInclude Include="include\DexRenderWindow.h">
+      <Filter>Source Files\Systems\Graphic</Filter>
+    </ClInclude>
+    <ClInclude Include="include\DexInputSystem.h">
+      <Filter>Source Files\Systems\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="include\DexInputDevice.h">
+      <Filter>Source Files\Systems\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="include\DexInputStruct.h">
+      <Filter>Source Files\Systems\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="include\DexHardwareVertexBuffer.h">
+      <Filter>Source Files\Systems\Graphic\Hardware Buffer</Filter>
+    </ClInclude>
+    <ClInclude Include="include\DexArchiveFactory.h">
+      <Filter>Source Files\Resource\File system</Filter>
+    </ClInclude>
+    <ClInclude Include="include\DexFileArchive.h">
+      <Filter>Source Files\Resource\File system</Filter>
+    </ClInclude>
+    <ClInclude Include="include\DexResource.h">
+      <Filter>Source Files\Resource\File system</Filter>
+    </ClInclude>
+    <ClInclude Include="include\DexResourceManager.h">
+      <Filter>Source Files\Resource\File system</Filter>
+    </ClInclude>
+    <ClInclude Include="include\DexMeshSerializer.h">
+      <Filter>Source Files\Resource\Serializer</Filter>
+    </ClInclude>
+    <ClInclude Include="include\DexMeshStruct.h">
+      <Filter>Source Files\Resource\Serializer</Filter>
+    </ClInclude>
+    <ClInclude Include="include\DexSerializer.h">
+      <Filter>Source Files\Resource\Serializer</Filter>
+    </ClInclude>
+    <ClInclude Include="include\DexCameraComponent.h">
+      <Filter>Source Files\Scene\Object\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="include\DexLightComponent.h">
+      <Filter>Source Files\Scene\Object\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="include\DexObjectComponent.h">
+      <Filter>Source Files\Scene\Object\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="include\DexRenderComponent.h">
+      <Filter>Source Files\Scene\Object\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="include\DexObjectLocation.h">
+      <Filter>Source Files\Scene\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="include\DexSceneObject.h">
+      <Filter>Source Files\Scene\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="include\DexScene.h">
+      <Filter>Source Files\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="include\DexCoreObject.h">
+      <Filter>Source Files\Core</Filter>
     </ClInclude>
     <ClInclude Include="code\BCollection.h">
-      <Filter>Source Files\Collection</Filter>
+      <Filter>Source Files\Core</Filter>
     </ClInclude>
-    <ClInclude Include="code\BObject.h">
-      <Filter>Source Files\ObjectController</Filter>
-    </ClInclude>
-    <ClInclude Include="code\BSystem.h">
-      <Filter>Source Files\System</Filter>
-    </ClInclude>
-    <ClInclude Include="code\BSRender.h">
-      <Filter>Source Files\System\Render</Filter>
+    <ClInclude Include="include\DexSystem.h">
+      <Filter>Source Files\Systems</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="code\BCore.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="src\DexConfigFile.cpp">
+      <Filter>Source Files\Core</Filter>
     </ClCompile>
-    <ClCompile Include="code\BHead.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="src\DexCore.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DexDynamicLibrary.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DexStream.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DexStringConverter.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DexRenderConnect.cpp">
+      <Filter>Source Files\Systems\Graphic</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DexHardwareBuffer.cpp">
+      <Filter>Source Files\Systems\Graphic\Hardware Buffer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DexHardwareBufferData.cpp">
+      <Filter>Source Files\Systems\Graphic\Hardware Buffer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DexHardwareIndexBuffer.cpp">
+      <Filter>Source Files\Systems\Graphic\Hardware Buffer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DexHardwareVertexBuffer.cpp">
+      <Filter>Source Files\Systems\Graphic\Hardware Buffer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DexRenderSystem.cpp">
+      <Filter>Source Files\Systems\Graphic</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DexRenderWindow.cpp">
+      <Filter>Source Files\Systems\Graphic</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DexInputDevice.cpp">
+      <Filter>Source Files\Systems\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DexInputSystem.cpp">
+      <Filter>Source Files\Systems\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DexArchiveFactory.cpp">
+      <Filter>Source Files\Resource\File system</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DexFileArchive.cpp">
+      <Filter>Source Files\Resource\File system</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DexResourceManager.cpp">
+      <Filter>Source Files\Resource\File system</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DexMeshSerializer.cpp">
+      <Filter>Source Files\Resource\Serializer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DexSerializer.cpp">
+      <Filter>Source Files\Resource\Serializer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DexCameraComponent.cpp">
+      <Filter>Source Files\Scene\Object\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DexLightComponent.cpp">
+      <Filter>Source Files\Scene\Object\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DexObjectComponent.cpp">
+      <Filter>Source Files\Scene\Object\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DexRenderComponent.cpp">
+      <Filter>Source Files\Scene\Object\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DexObjectLocation.cpp">
+      <Filter>Source Files\Scene\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DexSceneObject.cpp">
+      <Filter>Source Files\Scene\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DexScene.cpp">
+      <Filter>Source Files\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DexCoreObject.cpp">
+      <Filter>Source Files\Core</Filter>
     </ClCompile>
     <ClCompile Include="code\BCollection.cpp">
-      <Filter>Source Files\Collection</Filter>
+      <Filter>Source Files\Core</Filter>
     </ClCompile>
-    <ClCompile Include="code\BObject.cpp">
-      <Filter>Source Files\ObjectController</Filter>
+    <ClCompile Include="src\DexSystem.cpp">
+      <Filter>Source Files\Systems</Filter>
     </ClCompile>
-    <ClCompile Include="code\BSystem.cpp">
-      <Filter>Source Files\System</Filter>
-    </ClCompile>
-    <ClCompile Include="code\BSRender.cpp">
-      <Filter>Source Files\System\Render</Filter>
+    <ClCompile Include="src\DexPreCompletion.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

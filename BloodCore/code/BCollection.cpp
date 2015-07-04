@@ -3,13 +3,13 @@
 #include <memory.h>
 #include <climits>
 
-namespace Bloodstone
+namespace Dex
 {
 	const UInt32 MaxCollectionSize = INT_MAX;
 	const UInt32 MaxCollectionDelta = INT_MAX / 2;
 
 	BCollection::BCollection(const char* name, UInt32 limit, UInt32 delta)
-		: BObject(name, WP_COLLECTION)
+		: CoreObject(name, WP_COLLECTION)
 	{
 		mDelta = delta;
 		if (mDelta > MaxCollectionDelta) {
@@ -139,17 +139,17 @@ namespace Bloodstone
 		return true;
 	}
 
-	void BCollection::StoreItem(void * item, ofstream* os)
+	void BCollection::StoreItem(void * item, OFStream* os)
 	{
-		((BObject*)item)->Store(os);
+//		((CoreObject*)item)->Store(os);
 	}
 
-	void BCollection::Load(ifstream* is)
+	void BCollection::Load(IFStream* is)
 	{
 
 	}
 
-	void BCollection::Store(ofstream* os)
+	void BCollection::Store(OFStream* os)
 	{
 		os->write((char*)&mCount, sizeof(mCount));
 		os->write((char*)&mLimit, sizeof(mLimit));

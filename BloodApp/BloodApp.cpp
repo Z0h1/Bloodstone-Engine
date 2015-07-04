@@ -3,13 +3,14 @@
 
 #include "stdafx.h"
 
-#include "BCore.h"
+#include "DexCore.h"
 
-using namespace Bloodstone;
+using namespace Dex;
 
 int _tmain(int argc, _TCHAR* argv[])
 {
-	BCore* bc = new BCore();
+	Core* bc = new Core();
+	//BSRender* rs = bc->LoadSystem(BS_RENDER, SV_D11);
 
 	return 0;
 }
