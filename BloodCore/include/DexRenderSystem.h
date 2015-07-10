@@ -6,25 +6,26 @@
 
 namespace Dex
 {
+	typedef map< string, IRenderWindow* >	_lWindow;
+
 	class D_EXPORT IRenderSystem : public ISystem
 	{
 	public:
 		IRenderSystem(const string& c_name, ofstream* logger, const SystemsType st, bool fw = false);
 		virtual ~IRenderSystem(void);
 
+		virtual RenderComponent* CreateRenderComponent(const string& c_name, SceneObject* parent, const PrimitiveType& eType) = 0;
+
 		void SetActiveAdapter(UInt32 adapter);
 
-		virtual const _lString& GetAvailableDisplayMode(void) = 0;
-		virtual const _lString& GetAvailableAdpter(void) = 0;
+		virtual void GetAvailableDisplayMode(_lString& ls) = 0;
+		virtual void GetAvailableAdpter(_lString& ls) = 0;
 
-		virtual IRenderWindow* CreateRenderWindow(const _lParametor& config, HWND h) = 0;
+		virtual IRenderWindow* CreateRenderWindow(const _lParametor& config) = 0;
 		virtual void RenderAllWindow(void) = 0;
 
-		virtual IRenderWindow* GetWindow(const string& cNameWindow) = 0;
-		virtual IRenderConnect* GetConnect(const string& cNameWindow) = 0;
-
 	protected:
-		UInt32					m_Adapter;
-		_lString				m_lAdapter;
+		string					m_nAdapter;
+		_lWindow				m_lWindow;
 	};
 }

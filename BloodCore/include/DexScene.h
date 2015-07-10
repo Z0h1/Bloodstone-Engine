@@ -1,36 +1,35 @@
 #pragma once
 
 #include "DexPreCompletion.h"
-#include "DexCommon.h"
+#include "DexCoreObject.h"
 #include "DexRenderConnect.h"
 
 namespace Dex
 {
-	typedef IndexedArray< SceneObject* >	g_lSceneObject;
-	typedef	IndexedArray< IRenderConnect* >	g_lRenderConnect;
+	typedef vector< SceneObject* >		_lSceneObject;
+	typedef	vector< IRenderConnect* >	_lRenderConnect;
 
-	class D_EXPORT Scene
+	class D_EXPORT Scene : public CoreObject
 	{
 	public:
-		Scene( const string& cName );
-		~Scene( void );
+		Scene(const string& cName, ofstream* logger);
+		~Scene(void);
 
-		int GetNewId( void );
+		SceneObject* CreateObject(const string& c_name, SceneObject* parent = nullptr);
+		SceneObject* GetSceneObject(UInt32 id);
+		void GetSceneObject(const string& c_name, _lSceneObject& so);
+		void RemoveObject(const string& c_name);
+		void RemoveObject(SceneObject* obj);
+		void RemoveObject(UInt32 id);
 
-		SceneObject* CreateObject( const string& name );
-		SceneObject* GetObject( int nIndex );
+		void GetSceneObjects(_lSceneObject& so);
 
-		const g_lSceneObject& GetListSceneObject( void );
-		const string& GetName( void );
-
-		void AddRenderConnect( IRenderConnect* pConnect );
-		void RemoveRenderConnect( IRenderConnect* pConnect );
-		const g_lRenderConnect& GetListRenderConnect( void );
+		void AddRenderConnect(IRenderConnect* pConnect);
+		void RemoveRenderConnect(IRenderConnect* pConnect);
+		void GetRenderConnects(_lRenderConnect& rc);
 
 	private:
-		g_lSceneObject		m_lSceneObject;
-		g_lRenderConnect	m_lRenderConnect;
-
-		string				m_cName;
+		_lSceneObject		m_lSceneObject;
+		_lRenderConnect		m_lRenderConnect;
 	};
 }

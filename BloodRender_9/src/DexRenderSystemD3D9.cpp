@@ -40,21 +40,25 @@ namespace Dex
 		{
 			m_lDriver.push_back(new RenderAdapterD3D9(mOutFileStream, i, m_pD3D9));
 
-			m_lAdapter.Add(m_lDriver[i]->GetName());
+			m_lAdapter.push_back(m_lDriver[i]->GetName());
 		}
 	}
 
-	const _lString& RenderSystemD3D9::GetAvailableDisplayMode(void)
+	void RenderSystemD3D9::GetAvailableDisplayMode(_lString& ls)
 	{
-		return m_lDriver[m_Adapter]->GetDisplayMode();
+		for (auto n : m_lDriver[m_Adapter]->GetDisplayMode()) {
+			ls.push_back(n);
+		}
 	}
 
-	const _lString& RenderSystemD3D9::GetAvailableAdpter(void)
+	void RenderSystemD3D9::GetAvailableAdpter(_lString& ls)
 	{
-		return m_lAdapter;
+		for (auto n : m_lAdapter) {
+			ls.push_back(n);
+		}
 	}
 
-	IRenderWindow* RenderSystemD3D9::CreateRenderWindow(const _lParametor& config, HWND h)
+	IRenderWindow* RenderSystemD3D9::CreateRenderWindow(const _lParametor& config)
 	{
 		_lParametor::const_iterator it;
 
@@ -78,7 +82,7 @@ namespace Dex
 			{
 				RenderWindowD3D9* window = new RenderWindowD3D9(mOutFileStream, m_Adapter, type, m_pD3D9);
 
-				if (window->Create(config, h))
+				if (window->Create(config))
 				{
 					m_lWindow[it->second] = window;
 
@@ -95,7 +99,7 @@ namespace Dex
 			DrawLine("RenderSystemD3D9: Не указано имя создаваемого окна!", MT_WARNING);
 		}
 
-		return NULL;
+		return nullptr;
 	}
 
 	void RenderSystemD3D9::RenderWindow(const string& cName)
@@ -114,24 +118,26 @@ namespace Dex
 
 		pConnect->SetViewMatrix(pFocus->m_pFocusCameraComponent);
 
-		const g_lSceneObject& lSceneObject = pFocus->m_pFocusScene->GetListSceneObject();
-		for (int i = 0; i < lSceneObject.Size(); ++i)
+		_lSceneObject lSceneObject;
+		pFocus->m_pFocusScene->GetSceneObjects(lSceneObject);
+		for (auto i : lSceneObject)
 		{
-			const g_lObjectComponent& lObjectComponent = lSceneObject[i]->GetListObjectComponent();
-			for (int n = 0; n < lObjectComponent.Size(); ++n)
+			_lObjectComponent lObjectComponent;
+			i->GetObjectComponents(lObjectComponent);
+			for (auto n : lObjectComponent)
 			{
-				switch (lObjectComponent[n]->GetType())
+				switch (n->GetType())
 				{
 				case OCT_RENDER:
 				{
-					RenderComponent* pRenderComponent = static_cast<RenderComponent*>(lObjectComponent[n]);
+					RenderComponent* pRenderComponent = (RenderComponent*)n;
 
 					pConnect->RenderObject(pRenderComponent);
 				}
 				break;
 				case OCT_LIGHT:
 				{
-					pConnect->SetLight(static_cast<LightComponent*>(lObjectComponent[n]));
+					pConnect->SetLight(static_cast<LightComponent*>(n));
 				}
 				break;
 				}

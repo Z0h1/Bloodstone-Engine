@@ -24,6 +24,11 @@ namespace Dex
 		mOutFileStream = os;
 	}
 
+	ofstream* CoreObject::GetOutFileStream()
+	{
+		return mOutFileStream;
+	}
+
 	void CoreObject::DrawLine(const string& text, const MessageTypes& mt)
 	{
 		if (mOutFileStream != nullptr) {
@@ -31,17 +36,17 @@ namespace Dex
 			switch (mt)
 			{
 			case MessageTypes::NORMAL:
-				mt_c = "normal";
+				mt_c = "normal ";
 				break;
 			case MessageTypes::MT_WARNING:
 				mt_c = "warning";
 				break;
 			case MessageTypes::MT_ERROR:
-				mt_c = "error";
+				mt_c = "error  ";
 				break;
 			}
 
-			*mOutFileStream << mt_c << " [ " << mObjectName << " ] " << text.c_str() << endl;
+			*mOutFileStream << mt_c << " [" << mObjectName << "] " << text.c_str() << endl;
 			mOutFileStream->flush();
 		}
 	}

@@ -8,6 +8,7 @@
 #include "DexLightComponent.h"
 #include "DexCameraComponent.h"
 #include "DexCore.h"
+#include "DexSceneObject.h"
 
 namespace Dex
 {
@@ -28,7 +29,7 @@ namespace Dex
 		D_RELEASE(m_pDevice9);
 	}
 
-	bool RenderWindowD3D9::Create(const _lParametor& config, HWND h)
+	bool RenderWindowD3D9::Create(const _lParametor& config)
 	{
 		_lParametor::const_iterator it;
 
@@ -41,7 +42,7 @@ namespace Dex
 		it = config.find("window_handle");
 		if (it != config.end())
 		{
-			m_d3d_pp.hDeviceWindow = h;
+			m_d3d_pp.hDeviceWindow = (HWND)StringConverter::Parse_int(it->second);
 		}
 		else
 		{
@@ -191,8 +192,11 @@ namespace Dex
 
 	void RenderWindowD3D9::CalculateMatrix(RenderComponent* pRenderComponent)
 	{
-		m_lBufferBind[pRenderComponent]->first->CalculateMatrix(pRenderComponent->GetFullPosition(),
-			pRenderComponent->GetFullRotation(), pRenderComponent->GetFullScale());
+		SceneObject* obj = pRenderComponent->GetSceneObject();
+		m_lBufferBind[pRenderComponent]->first->CalculateMatrix(
+			obj->GetFullPosition(), obj->GetFullRotation(), obj->GetFullScale());
+
+		// TODO
 	}
 
 	void RenderWindowD3D9::SetMatrixIdentity(void)
@@ -204,6 +208,8 @@ namespace Dex
 
 	void RenderWindowD3D9::SetViewMatrix(CameraComponent* pCamera)
 	{
+		SceneObject* obj = pCamera->GetSceneObject();
+
 		D3DXMATRIX nMatrixD3D9;
 		D3DXMATRIX nEndMatrixD3D9;
 
@@ -223,7 +229,7 @@ namespace Dex
 		D3DXVECTOR3 nVectorUp(nUp.x, nUp.y, nUp.z);
 		D3DXMatrixRotationAxis(&nMatrixRotateUpD3D9, &nVectorUp, pCamera->GetRotateUp());
 
-		Point3 nPosition = pCamera->GetFullPosition();
+		Point3 nPosition = obj->GetFullPosition();
 		D3DXVECTOR3 nVectorPosition(nPosition.x, nPosition.y, nPosition.z);
 
 		// Multiply
@@ -331,7 +337,7 @@ namespace Dex
 
 		m_pDevice9->SetRenderState(D3DRS_LIGHTING, TRUE);
 
-		if (pRenderComponent->IsCalculateMatrix())
+		if (pRenderComponent->GetSceneObject()->IsCalculateMatrix())
 		{
 			CalculateMatrix(pRenderComponent);
 		}
@@ -401,7 +407,7 @@ namespace Dex
 
 		light.Type = D3DLIGHT_DIRECTIONAL;
 
-		Point3 nPosition = pLightComponent->GetFullPosition();
+		Point3 nPosition = pLightComponent->GetSceneObject()->GetFullPosition();
 		light.Position.x = nPosition.x;
 		light.Position.z = nPosition.z;
 		light.Position.y = nPosition.y;

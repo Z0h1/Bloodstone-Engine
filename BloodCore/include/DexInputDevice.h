@@ -25,7 +25,7 @@ namespace Dex
 		virtual bool GetState( void* pBuf, int nSize ) = 0;
 
 	protected:
-		HWND					m_hWnd;
+		int						m_hWnd;
 		string					m_cName;
 	};
 }

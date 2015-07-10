@@ -9,8 +9,6 @@
 #include <list>
 #include <map>
 
-#include "Windows.h"
-
 #pragma warning ( disable : 4251 )
 
 using namespace std;
@@ -28,6 +26,9 @@ namespace Dex
 	typedef unsigned int UInt32;
 	typedef unsigned short UInt16;
 
+	typedef map<string, string>	_lParametor;
+	typedef vector<string>		_lString;
+
 	// Classes
 	class IInputSystem;
 	class IInputDevice;
@@ -35,7 +36,7 @@ namespace Dex
 	class HardwareVertexBuffer;
 	class HardwareIndexBuffer;
 	class ObjectLocation;
-	class ObjectComponent;
+	class CoreComponent;
 	class RenderComponent;
 	class CameraComponent;
 	class LightComponent;
@@ -55,11 +56,13 @@ namespace Dex
 	class IRenderConnect;
 	class ISystem;
 	class FileSystem;
+	class CoreObject;
 
 	enum SystemsType
 	{
 		SYSTEM_RENDER_DIRECTX_9,
 		SYSTEM_RENDER_DIRECTX_11,
+		SYSTEM_RENDER_DIRECTX_11_1,
 		SYSTEM_INPUT_DX,
 		SYSTEM_FILE_DEX
 	};
@@ -81,6 +84,7 @@ namespace Dex
 		WP_STEP_2,
 		WP_STEP_3,
 		WP_STEP_4,
+		WP_COMPONENT,
 		WP_END
 	};
 

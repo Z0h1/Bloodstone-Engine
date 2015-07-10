@@ -11,6 +11,7 @@ namespace Dex
 		virtual ~CoreObject();
 
 		void SetOutFileStream(ofstream* os);
+		ofstream* GetOutFileStream();
 
 		/*virtual void Load(IFStream* is) = 0;
 		virtual void Store(OFStream* os) = 0;*/

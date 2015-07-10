@@ -8,12 +8,6 @@
     <Filter Include="Source Files\Core">
       <UniqueIdentifier>{41d279d3-49ec-468b-ac7b-cdbdb0e600f3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Resource">
-      <UniqueIdentifier>{7e83dd06-d1e1-48b4-9a3c-54797f463131}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Resource\File system">
-      <UniqueIdentifier>{321e7fc5-7c47-4eba-a715-7876eb40a544}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Scene">
       <UniqueIdentifier>{fdd77a7c-b02f-4a37-b773-818350d2582e}</UniqueIdentifier>
     </Filter>
@@ -35,7 +29,10 @@
     <Filter Include="Source Files\Systems\Graphic\Hardware Buffer">
       <UniqueIdentifier>{deb0ceb2-5218-419a-810d-0aae6a8750b4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Resource\File system\Serializer">
+    <Filter Include="Source Files\Systems\File system">
+      <UniqueIdentifier>{321e7fc5-7c47-4eba-a715-7876eb40a544}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Systems\File system\Serializer">
       <UniqueIdentifier>{5d26bb79-81cf-4ff5-96ff-0165c8f04e6a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -101,25 +98,25 @@
       <Filter>Source Files\Systems\Graphic\Hardware Buffer</Filter>
     </ClInclude>
     <ClInclude Include="include\DexArchiveFactory.h">
-      <Filter>Source Files\Resource\File system</Filter>
+      <Filter>Source Files\Systems\File system</Filter>
     </ClInclude>
     <ClInclude Include="include\DexFileArchive.h">
-      <Filter>Source Files\Resource\File system</Filter>
+      <Filter>Source Files\Systems\File system</Filter>
     </ClInclude>
     <ClInclude Include="include\DexResource.h">
-      <Filter>Source Files\Resource\File system</Filter>
+      <Filter>Source Files\Systems\File system</Filter>
     </ClInclude>
     <ClInclude Include="include\DexResourceManager.h">
-      <Filter>Source Files\Resource\File system</Filter>
+      <Filter>Source Files\Systems\File system</Filter>
     </ClInclude>
     <ClInclude Include="include\DexMeshSerializer.h">
-      <Filter>Source Files\Resource\File system\Serializer</Filter>
+      <Filter>Source Files\Systems\File system\Serializer</Filter>
     </ClInclude>
     <ClInclude Include="include\DexMeshStruct.h">
-      <Filter>Source Files\Resource\File system\Serializer</Filter>
+      <Filter>Source Files\Systems\File system\Serializer</Filter>
     </ClInclude>
     <ClInclude Include="include\DexSerializer.h">
-      <Filter>Source Files\Resource\File system\Serializer</Filter>
+      <Filter>Source Files\Systems\File system\Serializer</Filter>
     </ClInclude>
     <ClInclude Include="include\DexCameraComponent.h">
       <Filter>Source Files\Scene\Object\Component</Filter>
@@ -127,14 +124,8 @@
     <ClInclude Include="include\DexLightComponent.h">
       <Filter>Source Files\Scene\Object\Component</Filter>
     </ClInclude>
-    <ClInclude Include="include\DexObjectComponent.h">
-      <Filter>Source Files\Scene\Object\Component</Filter>
-    </ClInclude>
     <ClInclude Include="include\DexRenderComponent.h">
       <Filter>Source Files\Scene\Object\Component</Filter>
-    </ClInclude>
-    <ClInclude Include="include\DexObjectLocation.h">
-      <Filter>Source Files\Scene\Object</Filter>
     </ClInclude>
     <ClInclude Include="include\DexSceneObject.h">
       <Filter>Source Files\Scene\Object</Filter>
@@ -149,7 +140,10 @@
       <Filter>Source Files\Systems</Filter>
     </ClInclude>
     <ClInclude Include="include\DexFileSystem.h">
-      <Filter>Source Files\Resource\File system</Filter>
+      <Filter>Source Files\Systems\File system</Filter>
+    </ClInclude>
+    <ClInclude Include="include\DexCoreComponent.h">
+      <Filter>Source Files\Scene\Object\Component</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -196,19 +190,19 @@
       <Filter>Source Files\Systems\Input</Filter>
     </ClCompile>
     <ClCompile Include="src\DexArchiveFactory.cpp">
-      <Filter>Source Files\Resource\File system</Filter>
+      <Filter>Source Files\Systems\File system</Filter>
     </ClCompile>
     <ClCompile Include="src\DexFileArchive.cpp">
-      <Filter>Source Files\Resource\File system</Filter>
+      <Filter>Source Files\Systems\File system</Filter>
     </ClCompile>
     <ClCompile Include="src\DexResourceManager.cpp">
-      <Filter>Source Files\Resource\File system</Filter>
+      <Filter>Source Files\Systems\File system</Filter>
     </ClCompile>
     <ClCompile Include="src\DexMeshSerializer.cpp">
-      <Filter>Source Files\Resource\File system\Serializer</Filter>
+      <Filter>Source Files\Systems\File system\Serializer</Filter>
     </ClCompile>
     <ClCompile Include="src\DexSerializer.cpp">
-      <Filter>Source Files\Resource\File system\Serializer</Filter>
+      <Filter>Source Files\Systems\File system\Serializer</Filter>
     </ClCompile>
     <ClCompile Include="src\DexCameraComponent.cpp">
       <Filter>Source Files\Scene\Object\Component</Filter>
@@ -216,14 +210,8 @@
     <ClCompile Include="src\DexLightComponent.cpp">
       <Filter>Source Files\Scene\Object\Component</Filter>
     </ClCompile>
-    <ClCompile Include="src\DexObjectComponent.cpp">
-      <Filter>Source Files\Scene\Object\Component</Filter>
-    </ClCompile>
     <ClCompile Include="src\DexRenderComponent.cpp">
       <Filter>Source Files\Scene\Object\Component</Filter>
-    </ClCompile>
-    <ClCompile Include="src\DexObjectLocation.cpp">
-      <Filter>Source Files\Scene\Object</Filter>
     </ClCompile>
     <ClCompile Include="src\DexSceneObject.cpp">
       <Filter>Source Files\Scene\Object</Filter>
@@ -241,7 +229,10 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\DexFileSystem.cpp">
-      <Filter>Source Files\Resource\File system</Filter>
+      <Filter>Source Files\Systems\File system</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DexCoreComponent.cpp">
+      <Filter>Source Files\Scene\Object\Component</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

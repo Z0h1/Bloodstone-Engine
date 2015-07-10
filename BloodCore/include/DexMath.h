@@ -7,21 +7,21 @@ namespace Dex
 	class D_EXPORT Point2
 	{
 	public:
-		inline Point2( void )
+		inline Point2(void)
 		{
 			x = 0;
 			y = 0;
 		}
 
-		inline Point2( Point _x, Point _y )
+		inline Point2(Point _x, Point _y)
 		{
 			x = _x;
 			y = _y;
 		}
 
-		inline Point2 operator + ( const Point2& p ) const
+		inline Point2 operator + (const Point2& p) const
 		{
-			return Point2( x + p.x, y + p.y );
+			return Point2(x + p.x, y + p.y);
 		}
 
 	public:
@@ -31,28 +31,28 @@ namespace Dex
 	class D_EXPORT Point3
 	{
 	public:
-		inline Point3( void )
+		inline Point3(void)
 		{
 			x = 0;
 			y = 0;
 			z = 0;
 		}
 
-		inline Point3( Point _x, Point _y, Point _z )
+		inline Point3(Point _x, Point _y, Point _z)
 		{
 			x = _x;
 			y = _y;
 			z = _z;
 		}
 
-		inline Point3 operator + ( const Point3& p ) const
+		inline Point3 operator + (const Point3& p) const
 		{
-			return Point3( x + p.x, y + p.y, z + p.z );
+			return Point3(x + p.x, y + p.y, z + p.z);
 		}
 
-		inline Point3 operator - ( const Point3& p ) const
+		inline Point3 operator - (const Point3& p) const
 		{
-			return Point3( x - p.x, y - p.y, z - p.z );
+			return Point3(x - p.x, y - p.y, z - p.z);
 		}
 
 	public:
@@ -62,7 +62,7 @@ namespace Dex
 	class D_EXPORT Point4
 	{
 	public:
-		inline Point4( void )
+		inline Point4(void)
 		{
 			x = 0;
 			y = 0;
@@ -70,7 +70,7 @@ namespace Dex
 			w = 0;
 		}
 
-		inline Point4( Point _x, Point _y, Point _z, Point _w )
+		inline Point4(Point _x, Point _y, Point _z, Point _w)
 		{
 			x = _x;
 			y = _y;
@@ -78,9 +78,9 @@ namespace Dex
 			w = _w;
 		}
 
-		inline Point4 operator + ( const Point4& p ) const
+		inline Point4 operator + (const Point4& p) const
 		{
-			return Point4( x + p.x, y + p.y, z + p.z, w + p.w );
+			return Point4(x + p.x, y + p.y, z + p.z, w + p.w);
 		}
 
 	public:
@@ -90,23 +90,23 @@ namespace Dex
 	class D_EXPORT Vector3
 	{
 	public:
-		inline Vector3( void )
+		inline Vector3(void)
 		{
 			x = 0;
 			y = 0;
 			z = 0;
 		}
 
-		inline Vector3( Point _x, Point _y, Point _z )
+		inline Vector3(Point _x, Point _y, Point _z)
 		{
 			x = _x;
 			y = _y;
 			z = _z;
 		}
 
-		inline Vector3 operator + ( const Vector3& v ) const
+		inline Vector3 operator + (const Vector3& v) const
 		{
-			return Vector3( x + v.x, y + v.y, z + v.z );
+			return Vector3(x + v.x, y + v.y, z + v.z);
 		}
 
 	public:
@@ -116,20 +116,20 @@ namespace Dex
 	class D_EXPORT Matrix4
 	{
 	public:
-		inline static Matrix4 Zero( void )
+		inline static Matrix4 Zero(void)
 		{
 			return Matrix4(
 				1, 0, 0, 0,
 				0, 1, 0, 0,
 				0, 0, 1, 0,
-				0, 0, 0, 1 );
+				0, 0, 0, 1);
 		}
 
 		inline Matrix4(
 			Point m00, Point m01, Point m02, Point m03,
 			Point m10, Point m11, Point m12, Point m13,
 			Point m20, Point m21, Point m22, Point m23,
-			Point m30, Point m31, Point m32, Point m33 )
+			Point m30, Point m31, Point m32, Point m33)
 		{
 			m[0][0] = m00;
 			m[0][1] = m01;
@@ -152,7 +152,7 @@ namespace Dex
 			m[3][3] = m33;
 		}
 
-		inline Matrix4( void )
+		inline Matrix4(void)
 		{
 			m[0][0] = 1;
 			m[0][1] = 0;
@@ -175,7 +175,7 @@ namespace Dex
 			m[3][3] = 1;
 		}
 
-		inline Point GetPoint( void )
+		inline Point GetPoint(void)
 		{
 			return m[4][4];
 		}

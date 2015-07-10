@@ -34,6 +34,10 @@ namespace Dex
 		ofstream* GetLogger();
 		ISystem* GetSystem(const SystemsType st);
 
+		IRenderSystem* GetRenderSystem();
+		IInputSystem* GetInputSystem();
+		FileSystem* GetFileSystem();
+
 	private:
 		IRenderSystem*			m_pRenderSystem;
 		IInputSystem*			m_pInputSystem;

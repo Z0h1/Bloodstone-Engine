@@ -37,7 +37,7 @@ namespace Dex
 		m_lArchive.push_back( pArchive );
 
 		const _lString& lFile = pArchive->GetFileList();
-		for ( int i = 0; i < lFile.Size(); ++i )
+		for ( UInt32 i = 0; i < lFile.size(); ++i )
 		{
 			m_lResource[lFile[i]] = pArchive;
 		}
@@ -57,7 +57,7 @@ namespace Dex
 		}
 
 		const _lString& lFile = pArchive->GetFileList();
-		for ( int i = 0; i < lFile.Size(); ++i )
+		for (UInt32 i = 0; i < lFile.size(); ++i )
 		{
 			m_lResource.erase( lFile[i] );
 		}

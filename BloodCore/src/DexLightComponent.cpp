@@ -4,7 +4,7 @@ namespace Dex
 {
 	LightComponent::LightComponent( const string& cName, SceneObject* pParent,
 		const Point4& nColor, const Point& nRange )
-		: ObjectComponent( cName, pParent, OCT_LIGHT )
+		: CoreComponent( cName, pParent, OCT_LIGHT )
 	{
 		m_nColor = nColor;
 		m_nRange = nRange;

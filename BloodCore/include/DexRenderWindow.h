@@ -12,19 +12,30 @@ namespace Dex
 		IRenderWindow(const string& c_name, ofstream* logger, bool fw = false);
 		virtual ~IRenderWindow();
 
-		bool IsFullScrean( void );
-		bool IsActive( void );
+		bool IsFullScrean(void);
+		bool IsActive(void);
+
+		virtual bool Create(const _lParametor & config) = 0;
+		
+		void SetCamera(CameraComponent* camera);
+		CameraComponent* GetCamera();
+
+		void Render();
+		virtual void IRender() = 0;
 
 	protected:
-		HWND				m_hWnd;
+		int					m_hWnd;
 
-		bool				m_FullScrean;
-		bool				m_VSync;
-		bool				m_Active;
+		bool				m_bFullScrean;
+		bool				m_bVSync;
+		bool				m_bActive;
+		bool				m_bInit;
 
 		// Display Mode
-		int					m_nWidth;
-		int					m_nHeight;
-		int					m_nBit;
+		UInt32				m_nWidth;
+		UInt32				m_nHeight;
+		UInt32				m_nBit;
+
+		CameraComponent*	m_pCamera;
 	};
 }

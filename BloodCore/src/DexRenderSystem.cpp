@@ -13,6 +13,6 @@ namespace Dex
 
 	void IRenderSystem::SetActiveAdapter(UInt32 adapter)
 	{
-		m_Adapter = adapter;
+		m_nAdapter = adapter;
 	}
 }

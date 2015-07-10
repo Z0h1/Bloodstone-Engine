@@ -1,24 +1,24 @@
 #pragma once
 
-#include "DexObjectComponent.h"
+#include "DexCoreComponent.h"
 #include "DexMeshSerializer.h"
 
 namespace Dex
 {
-	class D_EXPORT RenderComponent : public ObjectComponent, public MeshSerializer
+	class D_EXPORT RenderComponent : public CoreComponent, public MeshSerializer
 	{
 	public:
-		RenderComponent( const string& cName, SceneObject* pParent, const PrimitiveType& eType );
-		~RenderComponent( void );
+		RenderComponent(const string& cName, SceneObject* pParent, const PrimitiveType& eType);
+		virtual ~RenderComponent(void);
 
-		void Load( const string& cResource );
+		void Load(const string& cResource);
 
-		const PrimitiveType& GetPrimitiveType( void );
+		const PrimitiveType GetPrimitiveType(void);
 
-		HardwareBufferData* GetBufferData( void );
+		HardwareBufferData* GetBufferData(void);
 
-		bool IsActive( void );
-		void SetActive( bool bActive );
+		bool IsActive(void);
+		void SetActive(bool bActive);
 
 	private:
 		bool						m_bActive;

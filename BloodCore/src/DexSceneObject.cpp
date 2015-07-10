@@ -1,96 +1,239 @@
 #include "DexSceneObject.h"
-#include "DexObjectComponent.h"
 #include "DexRenderComponent.h"
 #include "DexCameraComponent.h"
 #include "DexScene.h"
+#include "DexMath.h"
 
 namespace Dex
 {
-	SceneObject::SceneObject( const string& name, Scene* scene )
-		: ObjectLocation()
+	SceneObject::SceneObject(const string& c_name, Scene* scene, UInt32 id, ofstream* logger, SceneObject* parent)
+		: CoreObject(c_name, logger, WorkPriority::WP_STEP_2)
 	{
-		m_Name = name;
 		m_pScene = scene;
+		m_pParent = parent;
+		m_nId = id;
 
-		m_nId = m_pScene->GetNewId();
+		m_Position = Point3(0.0f, 0.0f, 0.0f);
+		m_Rotation = Point3(0.0f, 0.0f, 0.0f);
+		m_Scale = Point3(1.0f, 1.0f, 1.0f);
+
+		if (parent != nullptr) {
+			m_Position = m_Position + parent->GetPosition();
+		}
+
+		m_bIsCalculateMatrix = true;
 	}
-	SceneObject::~SceneObject( void )
+	SceneObject::~SceneObject(void)
 	{
 	}
 
-	// Name and Id
-	int SceneObject::GetId( void )
+	UInt32 SceneObject::GetId(void)
 	{
 		return m_nId;
 	}
-	const string& SceneObject::GetName( void )
-	{
-		return m_Name;
-	}
-	Scene* SceneObject::GetScene( void )
+
+	Scene* SceneObject::GetScene(void)
 	{
 		return m_pScene;
 	}
 
-	void SceneObject::AddComponent( ObjectComponent* pComponent )
+	void SceneObject::AddComponent(CoreComponent* pComponent)
 	{
-		if ( !m_lObjectComponent.Search( pComponent ) )
+		
+		if (find(m_lObjectComponent.begin(), m_lObjectComponent.end(), pComponent) == m_lObjectComponent.end())
 		{
-			switch ( pComponent->GetType() )
+			switch (pComponent->GetType())
 			{
 			case OCT_RENDER:
-				{
-					RenderComponent* pRenderComponent = static_cast< RenderComponent* >( pComponent );
+			{
+				RenderComponent* pRenderComponent = (RenderComponent*)pComponent;
 
-					const g_lRenderConnect& lRenderConnect = m_pScene->GetListRenderConnect();
-					for ( int i = 0; i < lRenderConnect.Size(); ++i )
-					{
-						lRenderConnect[i]->BindBufferData( pRenderComponent, pRenderComponent->GetBufferData() );
-					}
+				_lRenderConnect lRenderConnect;
+				m_pScene->GetRenderConnects(lRenderConnect);
+				for (auto n : lRenderConnect)
+				{
+					n->BindBufferData(pRenderComponent, pRenderComponent->GetBufferData());
 				}
-				break;
+			}
+			break;
 			}
 
-			m_lObjectComponent.Add( pComponent );
+			m_lObjectComponent.push_back(pComponent);
 		}
 	}
 
-	void SceneObject::RemoveComponent( ObjectComponent* pComponent )
+	void SceneObject::RemoveComponent(CoreComponent* pComponent)
 	{
-		if ( m_lObjectComponent.Search( pComponent ) )
+		_lCoreComponent::iterator it = find(m_lObjectComponent.begin(), m_lObjectComponent.end(), pComponent);
+		if (it != m_lObjectComponent.end())
 		{
-			switch ( pComponent->GetType() )
+			switch (pComponent->GetType())
 			{
 			case OCT_RENDER:
-				{
-					RenderComponent* pRenderComponent = static_cast< RenderComponent* >( pComponent );
+			{
+				RenderComponent* pRenderComponent = (RenderComponent*)pComponent;
 
-					const g_lRenderConnect& lRenderConnect = m_pScene->GetListRenderConnect();
-					for ( int i = 0; i < lRenderConnect.Size(); ++i )
-					{
-						lRenderConnect[i]->RemoveBind( pRenderComponent );
-					}
+				_lRenderConnect lRenderConnect;
+				m_pScene->GetRenderConnects(lRenderConnect);
+				for (auto n : lRenderConnect)
+				{
+					n->RemoveBind(pRenderComponent);
 				}
-				break;
+			}
+			break;
 			case OCT_CAMERA:
-				{
-					CameraComponent* pCameraComponent = static_cast< CameraComponent* >( pComponent );
+			{
+				CameraComponent* pCameraComponent = (CameraComponent*)pComponent;
 
-					const g_lRenderConnect& lRenderConnect = m_pScene->GetListRenderConnect();
-					for ( int i = 0; i < lRenderConnect.Size(); ++i )
-					{
-						lRenderConnect[i]->RemoveFocus( pCameraComponent );
-					}
+				_lRenderConnect lRenderConnect;
+				m_pScene->GetRenderConnects(lRenderConnect);
+				for (auto n : lRenderConnect)
+				{
+					n->RemoveFocus(pCameraComponent);
 				}
-				break;
+			}
+			break;
 			}
 
-			m_lObjectComponent.Remove( pComponent );
+			m_lObjectComponent.erase(it);
 		}
 	}
 
-	const g_lObjectComponent& SceneObject::GetListObjectComponent( void )
+	void SceneObject::GetObjectComponents(_lCoreComponent& ocs)
 	{
-		return m_lObjectComponent;
+		for (auto n : m_lObjectComponent)
+		{
+			ocs.push_back(n);
+		}
+	}
+
+	void SceneObject::CalculatePosition(const Point3& position)
+	{
+		m_Position = position;
+
+		m_bIsCalculateMatrix = false;
+	}
+
+	void SceneObject::CalculateRotation(const Point3& rotation)
+	{
+		m_Rotation = rotation;
+
+		m_bIsCalculateMatrix = false;
+	}
+
+	void SceneObject::CalculateScale(const Point3& scale)
+	{
+		m_Scale = scale;
+
+		m_bIsCalculateMatrix = false;
+	}
+
+	// Position
+	void SceneObject::Move(const Point3& position)
+	{
+		CalculatePosition(m_Position + position);
+	}
+	void SceneObject::MoveX(const Point& move)
+	{
+		CalculatePosition(m_Position + Point3(move, 0.0f, 0.0f));
+	}
+	void SceneObject::MoveY(const Point& move)
+	{
+		CalculatePosition(m_Position + Point3(0.0f, move, 0.0f));
+	}
+	void SceneObject::MoveZ(const Point& move)
+	{
+		CalculatePosition(m_Position + Point3(0.0f, 0.0f, move));
+	}
+	void SceneObject::MoveTo(const Point3& position)
+	{
+		CalculatePosition(position);
+	}
+	Point3& SceneObject::GetPosition(void)
+	{
+		return m_Position;
+	}
+	Point3 SceneObject::GetFullPosition(void)
+	{
+		if (m_pParent)
+		{
+			return m_Position + m_pParent->GetFullPosition();
+		}
+		else
+		{
+			return m_Position;
+		}
+	}
+
+	// Rotation
+	void SceneObject::Rotation(const Point3& rotation)
+	{
+		CalculateRotation(m_Rotation + rotation);
+	}
+	void SceneObject::RotationX(const Point& angle)
+	{
+		CalculateRotation(m_Rotation + Point3(angle, 0.0f, 0.0f));
+	}
+	void SceneObject::RotationY(const Point& angle)
+	{
+		CalculateRotation(m_Rotation + Point3(0.0f, angle, 0.0f));
+	}
+	void SceneObject::RotationZ(const Point& angle)
+	{
+		CalculateRotation(m_Rotation + Point3(0.0f, 0.0f, angle));
+	}
+	void SceneObject::RotationTo(const Point3& rotation)
+	{
+		CalculateRotation(rotation);
+	}
+	Point3& SceneObject::GetRotation(void)
+	{
+		return m_Rotation;
+	}
+	Point3 SceneObject::GetFullRotation(void)
+	{
+		if (m_pParent)
+		{
+			return m_Rotation + m_pParent->GetFullRotation();
+		}
+		else
+		{
+			return m_Rotation;
+		}
+	}
+
+	// Scale
+	void SceneObject::Scale(const Point3& scale)
+	{
+		CalculateScale(m_Scale + scale);
+	}
+	void SceneObject::ScaleX(const Point& size)
+	{
+		CalculateScale(m_Scale + Point3(size, 0.0f, 0.0f));
+	}
+	void SceneObject::ScaleY(const Point& size)
+	{
+		CalculateScale(m_Scale + Point3(0.0f, size, 0.0f));
+	}
+	void SceneObject::ScaleZ(const Point& size)
+	{
+		CalculateScale(m_Scale + Point3(0.0f, 0.0f, size));
+	}
+	void SceneObject::ScaleTo(const Point3& scale)
+	{
+		CalculateScale(scale);
+	}
+	Point3& SceneObject::GetScale(void)
+	{
+		return m_Scale;
+	}
+	Point3 SceneObject::GetFullScale(void)
+	{
+		return m_Scale;
+	}
+
+	bool SceneObject::IsCalculateMatrix(void)
+	{
+		return m_bIsCalculateMatrix;
 	}
 }

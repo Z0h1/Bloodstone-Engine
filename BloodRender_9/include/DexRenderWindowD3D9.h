@@ -12,7 +12,7 @@ namespace Dex
 		RenderWindowD3D9(ofstream* logger, UINT adapter, D3DDEVTYPE type, IDirect3D9* d3d9);
 		~RenderWindowD3D9(void);
 
-		bool Create(const _lParametor & config, HWND h);
+		bool Create(const _lParametor & config);
 
 	public:
 		// connect

@@ -1,15 +1,12 @@
 #include "DexRenderComponent.h"
 #include "DexHardwareBufferData.h"
-#include "DexHardwareIndexBuffer.h"
-#include "DexHardwareVertexBuffer.h"
-#include "DexCore.h"
 #include "DexScene.h"
 #include "DexSceneObject.h"
 
 namespace Dex
 {
-	RenderComponent::RenderComponent( const string& cName, SceneObject* pParent, const PrimitiveType& eType )
-		: ObjectComponent( cName, pParent, OCT_RENDER ), MeshSerializer(cName, nullptr) // TODO tharde
+	RenderComponent::RenderComponent(const string& cName, SceneObject* pParent, const PrimitiveType& eType)
+		: CoreComponent(cName, pParent, OCT_RENDER), MeshSerializer(cName, pParent->GetOutFileStream()) // TODO tharde
 	{
 		m_pBufferData = new HardwareBufferData();
 
@@ -17,42 +14,43 @@ namespace Dex
 		m_bActive = true;
 	}
 
-	RenderComponent::~RenderComponent( void )
+	RenderComponent::~RenderComponent(void)
 	{
 		delete m_pBufferData;
 	}
 
-	void RenderComponent::Load( const string& cResource )
+	void RenderComponent::Load(const string& cResource)
 	{
-		SetResource( cResource );
+		SetResource(cResource);
 
 		ImportMesh();
 
-		Scene* pScene = m_pParentObject->GetScene();
+		Scene* pScene = m_pObject->GetScene();
 
-		const g_lRenderConnect& lRenderConnect = pScene->GetListRenderConnect();
-		for ( int i = 0; i < lRenderConnect.Size(); ++i )
+		_lRenderConnect lRenderConnect;
+		pScene->GetRenderConnects(lRenderConnect);
+		for (auto n : lRenderConnect)
 		{
-			lRenderConnect[i]->BindBufferData( this, m_pBufferData );
+			n->BindBufferData(this, m_pBufferData);
 		}
 	}
 
-	const PrimitiveType& RenderComponent::GetPrimitiveType( void )
+	const PrimitiveType RenderComponent::GetPrimitiveType(void)
 	{
 		return m_ePrimitiveType;
 	}
 
-	HardwareBufferData* RenderComponent::GetBufferData( void )
+	HardwareBufferData* RenderComponent::GetBufferData(void)
 	{
 		return m_pBufferData;
 	}
 
-	bool RenderComponent::IsActive( void )
+	bool RenderComponent::IsActive(void)
 	{
 		return m_bActive;
 	}
 
-	void RenderComponent::SetActive( bool bActive )
+	void RenderComponent::SetActive(bool bActive)
 	{
 		m_bActive = bActive;
 	}

@@ -168,7 +168,7 @@ namespace Dex
 		return result;
 	}
 
-	void StringConverter::ParseDisplyaMode(const string& mode, int& Width, int& Height, int& bit)
+	void StringConverter::ParseDisplyaMode(const string& mode, UInt32& Width, UInt32& Height, UInt32& bit)
 	{
 		string buffer;
 

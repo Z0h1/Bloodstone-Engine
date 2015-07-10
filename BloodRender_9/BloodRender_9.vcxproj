@@ -57,12 +57,12 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>DexPreCompletionD3D9.h</PrecompiledHeaderFile>
       <ForcedIncludeFiles>DexPreCompletionD3D9.h</ForcedIncludeFiles>
-      <AdditionalIncludeDirectories>$(ProjectDir)include;$(SolutionDir)BloodCore/include;$(DXSDK_DIR)\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(IncludePath);$(DXSDK_DIR)Include;$(ProjectDir)include;$(SolutionDir)BloodCore/include</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BLOODRENDER_9_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(DXSDK_DIR)\Lib\x86;$(SolutionDir)bin\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(LibraryPath);$(DXSDK_DIR)Lib\x86;$(SolutionDir)bin\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>BloodCore.lib;d3d9.lib;d3dx9.lib;dxerr.lib;dxguid.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -76,14 +76,14 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>DexPreCompletionD3D9.h</PrecompiledHeaderFile>
       <ForcedIncludeFiles>DexPreCompletionD3D9.h</ForcedIncludeFiles>
-      <AdditionalIncludeDirectories>$(ProjectDir)include;$(SolutionDir)BloodCore/include;$(DXSDK_DIR)\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(IncludePath);$(DXSDK_DIR)Include;$(ProjectDir)include;$(SolutionDir)BloodCore/include</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>BLOODRENDER_9_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>$(DXSDK_DIR)\Lib\x86;$(SolutionDir)bin\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(LibraryPath);$(DXSDK_DIR)Lib\x86;$(SolutionDir)bin\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>BloodCore.lib;d3d9.lib;d3dx9.lib;dxerr.lib;dxguid.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>

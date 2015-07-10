@@ -11,12 +11,11 @@ namespace Dex
 		DynamicLibrary(const string& filename, ofstream* logger);
 		~DynamicLibrary(void);
 
-		void* GetAddress(const string& funcname);
+		void* GetAddress(const char* funcname);
 		bool CheckWork(void) const { return m_Work; }
 
 	private:
-		HINSTANCE	m_hDll;
+		int			m_hDll;
 		bool		m_Work;
-		string		m_FileName;
 	};
 }

@@ -95,6 +95,7 @@
     <ClInclude Include="include\DexCommon.h" />
     <ClInclude Include="include\DexConfigFile.h" />
     <ClInclude Include="include\DexCore.h" />
+    <ClInclude Include="include\DexCoreComponent.h" />
     <ClInclude Include="include\DexDynamicLibrary.h" />
     <ClInclude Include="include\DexFileArchive.h" />
     <ClInclude Include="include\DexFileSystem.h" />
@@ -111,8 +112,6 @@
     <ClInclude Include="include\DexMeshSerializer.h" />
     <ClInclude Include="include\DexMeshStruct.h" />
     <ClInclude Include="include\DexCoreObject.h" />
-    <ClInclude Include="include\DexObjectComponent.h" />
-    <ClInclude Include="include\DexObjectLocation.h" />
     <ClInclude Include="include\DexPreCompletion.h" />
     <ClInclude Include="include\DexRenderComponent.h" />
     <ClInclude Include="include\DexRenderConnect.h" />
@@ -132,6 +131,7 @@
     <ClCompile Include="src\DexCameraComponent.cpp" />
     <ClCompile Include="src\DexConfigFile.cpp" />
     <ClCompile Include="src\DexCore.cpp" />
+    <ClCompile Include="src\DexCoreComponent.cpp" />
     <ClCompile Include="src\DexDynamicLibrary.cpp" />
     <ClCompile Include="src\DexFileArchive.cpp" />
     <ClCompile Include="src\DexFileSystem.cpp" />
@@ -144,8 +144,6 @@
     <ClCompile Include="src\DexLightComponent.cpp" />
     <ClCompile Include="src\DexMeshSerializer.cpp" />
     <ClCompile Include="src\DexCoreObject.cpp" />
-    <ClCompile Include="src\DexObjectComponent.cpp" />
-    <ClCompile Include="src\DexObjectLocation.cpp" />
     <ClCompile Include="src\DexPreCompletion.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>

@@ -11,25 +11,23 @@ namespace Dex
 		RenderSystemD3D9(ofstream* logger);
 		~RenderSystemD3D9();
 
-		const _lString& GetAvailableDisplayMode(void);
-		const _lString& GetAvailableAdpter(void);
+		virtual void GetAvailableDisplayMode(_lString& ls);
+		virtual void GetAvailableAdpter(_lString& ls);
 
-		IRenderWindow * CreateRenderWindow(const _lParametor & config, HWND h);
+		virtual IRenderWindow * CreateRenderWindow(const _lParametor & config);
 
 		void RenderWindow(const string& cName);
-		void RenderAllWindow(void);
+		virtual void RenderAllWindow(void);
 
-		IRenderWindow* GetWindow(const string& cNameWindow);
-		IRenderConnect* GetConnect(const string& cNameWindow);
+		virtual IRenderWindow* GetWindow(const string& cNameWindow);
+		virtual IRenderConnect* GetConnect(const string& cNameWindow);
 
 	private:
 		void InitSystem(void);
 		void EnumerationAdapter(void);
 
-		typedef map< string, RenderWindowD3D9* >	_lWindow;
 		typedef vector< RenderAdapterD3D9* >		_lDriver;
 
-		_lWindow			m_lWindow;
 		_lDriver			m_lDriver;
 
 		// DirectX Setting

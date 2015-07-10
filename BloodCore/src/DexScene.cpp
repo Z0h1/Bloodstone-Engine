@@ -1,57 +1,118 @@
 #include "DexScene.h"
 #include "DexSceneObject.h"
+#include "DexStringConverter.h"
 
 namespace Dex
 {
-	Scene::Scene( const string& cName )
+	Scene::Scene(const string& cName, ofstream* logger)
+		: CoreObject(cName, logger, WorkPriority::WP_SYSTEM)
 	{
-		m_cName = cName;
+		DrawLine("Scene " + cName + " инициализирована");
 	}
 
-	Scene::~Scene( void )
+	Scene::~Scene(void)
 	{
+		_lSceneObject::iterator it = m_lSceneObject.begin();
+		while (it != m_lSceneObject.end()) {
+			SceneObject* obj = *it;
+
+			it = m_lSceneObject.erase(it);
+			delete obj;
+		}
 	}
 
-	int Scene::GetNewId( void )
+	SceneObject* Scene::CreateObject(const string& c_name, SceneObject* parent)
 	{
-		return m_lSceneObject.Size();
-	}
-
-	SceneObject* Scene::CreateObject( const string& cName )
-	{
-		SceneObject* pObject = 0;
-
-		pObject = new SceneObject( cName, this );
-
-		m_lSceneObject.Add( pObject );
+		SceneObject* pObject = new SceneObject(c_name, this, m_lSceneObject.size(), GetOutFileStream(), parent);
+		m_lSceneObject.push_back(pObject);
 
 		return pObject;
 	}
-	SceneObject* Scene::GetObject( int nIndex )
+	SceneObject* Scene::GetSceneObject(UInt32 id)
 	{
-		return m_lSceneObject[nIndex];
+		for (auto n : m_lSceneObject)
+		{
+			if (n->GetId() == id) {
+				return n;
+			}
+		}
+
+		DrawLine("GetObjectById(" + StringConverter::toString(id) + ") обьект не найден", MessageTypes::MT_ERROR);
+		return nullptr;
 	}
 
-	const g_lSceneObject& Scene::GetListSceneObject( void )
+	void Scene::GetSceneObject(const string& c_name, _lSceneObject& so)
 	{
-		return m_lSceneObject;
+		for (auto n : m_lSceneObject)
+		{
+			if (n->GetName() == c_name) {
+				so.push_back(n);
+			}
+		}
 	}
 
-	const string& Scene::GetName( void )
+	void Scene::GetSceneObjects(_lSceneObject& so)
 	{
-		return m_cName;
+		for (auto n : m_lSceneObject)
+		{
+			so.push_back(n);
+		}
 	}
 
-	void Scene::AddRenderConnect( IRenderConnect* pConnect )
+	void Scene::RemoveObject(const string& c_name)
 	{
-		m_lRenderConnect.Add( pConnect );
+		_lSceneObject::iterator it = m_lSceneObject.begin();
+		while (it != m_lSceneObject.end()) {
+			SceneObject* obj = *it;
+
+			if (obj->GetName() == c_name) {
+				it = m_lSceneObject.erase(it);
+				delete obj;
+			}
+		}
 	}
-	void Scene::RemoveRenderConnect( IRenderConnect* pConnect )
+
+	void Scene::RemoveObject(SceneObject* obj)
 	{
-		m_lRenderConnect.Remove( pConnect );
+		for (_lSceneObject::iterator i = m_lSceneObject.begin(); i != m_lSceneObject.end(); i++)
+		{
+			if (*i == obj) {
+				m_lSceneObject.erase(i);
+				break;
+			}
+		}
 	}
-	const g_lRenderConnect& Scene::GetListRenderConnect( void )
+
+	void Scene::RemoveObject(UInt32 id)
 	{
-		return m_lRenderConnect;
+		for (_lSceneObject::iterator i = m_lSceneObject.begin(); i != m_lSceneObject.end(); i++)
+		{
+			if ((*i)->GetId() == id) {
+				m_lSceneObject.erase(i);
+				break;
+			}
+		}
+	}
+
+	void Scene::AddRenderConnect(IRenderConnect* pConnect)
+	{
+		m_lRenderConnect.push_back(pConnect);
+	}
+	void Scene::RemoveRenderConnect(IRenderConnect* pConnect)
+	{
+		for (_lRenderConnect::iterator i = m_lRenderConnect.begin(); i != m_lRenderConnect.end(); i++)
+		{
+			if (*i == pConnect) {
+				m_lRenderConnect.erase(i);
+				break;
+			}
+		}
+	}
+	void Scene::GetRenderConnects(_lRenderConnect& rc)
+	{
+		for (auto n : m_lRenderConnect)
+		{
+			rc.push_back(n);
+		}
 	}
 }

@@ -4,7 +4,7 @@ namespace Dex
 {
 	CameraComponent::CameraComponent( const string& cName, SceneObject* pParent,
 		const Point& nRange )
-		: ObjectComponent( cName, pParent, OCT_CAMERA )
+		: CoreComponent( cName, pParent, OCT_CAMERA )
 	{
 		m_nRange = nRange;
 

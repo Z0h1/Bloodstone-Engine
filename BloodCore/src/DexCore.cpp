@@ -27,12 +27,12 @@ namespace Dex
 			}
 			else if (it.first == "set_render_system")
 			{
-				if (it.second == "DirectX_11" || it.second == "directX_11" || it.second == "Directx_11" || it.second == "directx_11"
-					|| it.second == "DirectX 11" || it.second == "directX 11" || it.second == "Directx 11" || it.second == "directx 11"
-					|| it.second == "DirectX11" || it.second == "directX11" || it.second == "Directx11" || it.second == "directx11"
-					|| it.second == "11")
+				if (it.second == "DirectX_11_1" || it.second == "directX_11_1" || it.second == "Directx_11_1" || it.second == "directx_11_1"
+					|| it.second == "DirectX 11.1" || it.second == "directX 11.1" || it.second == "Directx 11.1" || it.second == "directx 11.1"
+					|| it.second == "DirectX11.1" || it.second == "directX11.1" || it.second == "Directx11.1" || it.second == "directx11.1"
+					|| it.second == "11.1")
 				{
-					ChangeSystem(SystemsType::SYSTEM_RENDER_DIRECTX_11);
+					ChangeSystem(SystemsType::SYSTEM_RENDER_DIRECTX_11_1);
 				}
 				else if (it.second == "DirectX_9" || it.second == "directX_9" || it.second == "Directx_9" || it.second == "directx_9"
 					|| it.second == "DirectX 9" || it.second == "directX 9" || it.second == "Directx 9" || it.second == "directx 9"
@@ -40,6 +40,13 @@ namespace Dex
 					|| it.second == "9")
 				{
 					ChangeSystem(SystemsType::SYSTEM_RENDER_DIRECTX_9);
+				}
+				else if (it.second == "DirectX_11" || it.second == "directX_11" || it.second == "Directx_11" || it.second == "directx_11"
+					|| it.second == "DirectX 11" || it.second == "directX 11" || it.second == "Directx 11" || it.second == "directx 11"
+					|| it.second == "DirectX11" || it.second == "directX11" || it.second == "Directx11" || it.second == "directx11"
+					|| it.second == "11")
+				{
+					ChangeSystem(SystemsType::SYSTEM_RENDER_DIRECTX_11);
 				}
 				else
 				{
@@ -81,14 +88,14 @@ namespace Dex
 			it_Systems = m_lSystems.begin();
 		}
 
-		DrawLine("Core: Завершение работы!");
+		DrawLine("~Core: Завершение работы!");
 
 		mLogger->close();
 	}
 
 	// Dynamic Library
-	typedef void (*START_DLL_MODULE)(Core*);
-	typedef void (*STOP_DLL_MODULE)(Core*);
+	typedef void(*START_DLL_MODULE)(Core*);
+	typedef void(*STOP_DLL_MODULE)(Core*);
 
 	bool Core::LoadModule(const string& cModule)
 	{
@@ -109,12 +116,12 @@ namespace Dex
 			}
 			else
 			{
-				DrawLine("Core: Модуль " + cModule + " не работает!", MessageTypes::MT_ERROR);
+				DrawLine("LoadModule: Модуль " + cModule + " не работает!", MessageTypes::MT_ERROR);
 			}
 		}
 		else
 		{
-			DrawLine("Core: Модуль " + cModule + " уже загружен", MT_WARNING);
+			DrawLine("LoadModule: Модуль " + cModule + " уже загружен", MT_WARNING);
 		}
 
 		return false;
@@ -133,7 +140,7 @@ namespace Dex
 		}
 		else
 		{
-			DrawLine("Core: Модуль " + cModule + " не загружен", MessageTypes::MT_WARNING);
+			DrawLine("UnLoadModule: Модуль " + cModule + " не загружен", MessageTypes::MT_WARNING);
 		}
 
 		return false;
@@ -141,16 +148,16 @@ namespace Dex
 
 	void Core::AddSystem(ISystem* s_ptr, bool set_def)
 	{
-		DrawLine("Core: AddSystem(" + s_ptr->GetName() + ")");
+		DrawLine("AddSystem(" + s_ptr->GetName() + ")");
 
 		_lSystemsByType::iterator it = m_lSystems.find(s_ptr->GetType());
 		if (it == m_lSystems.end()) {
 			m_lSystems.insert(_lSystemsByType::value_type(s_ptr->GetType(), s_ptr));
 
-			DrawLine("Core: System " + s_ptr->GetName() + " loading");
+			DrawLine("AddSystem: System " + s_ptr->GetName() + " loading");
 		}
 		else {
-			DrawLine("Core: System " + s_ptr->GetName() + " is loaded", MessageTypes::MT_WARNING);
+			DrawLine("AddSystem: System " + s_ptr->GetName() + " is loaded", MessageTypes::MT_WARNING);
 		}
 
 		if (set_def) {
@@ -160,7 +167,7 @@ namespace Dex
 
 	void Core::RemoveSystem(ISystem* s_ptr)
 	{
-		DrawLine("Core: RemoveSystem(" + s_ptr->GetName() + ")");
+		DrawLine("RemoveSystem(" + s_ptr->GetName() + ")");
 
 		_lSystemsByType::iterator it = m_lSystems.find(s_ptr->GetType());
 		if (it != m_lSystems.end())
@@ -187,47 +194,48 @@ namespace Dex
 	void Core::ChangeSystem(const SystemsType eType)
 	{
 		if (m_lSystems.find(eType) == m_lSystems.end()) {
-			DrawLine("Core: Данная система не инициализирована!", MessageTypes::MT_ERROR);
+			DrawLine("ChangeSystem: Данная система не инициализирована!", MessageTypes::MT_ERROR);
 		}
 		else {
 			switch (eType)
 			{
 			case Dex::SYSTEM_RENDER_DIRECTX_9:
 			case Dex::SYSTEM_RENDER_DIRECTX_11:
+			case Dex::SYSTEM_RENDER_DIRECTX_11_1:
 				if (m_pRenderSystem && m_pRenderSystem->GetType() == eType)
 				{
-					DrawLine("Core: Данная система визуализации уже инициализирована!");
+					DrawLine("ChangeSystem: Данная система визуализации уже инициализирована!");
 				}
 				else
 				{
 					m_pRenderSystem = (IRenderSystem*)m_lSystems[eType];
-					DrawLine("Core: Установлена системы визуализации " + m_pRenderSystem->GetName());
+					DrawLine("ChangeSystem: Установлена системы визуализации " + m_pRenderSystem->GetName());
 				}
 				break;
 			case Dex::SYSTEM_INPUT_DX:
 				if (m_pInputSystem && m_pInputSystem->GetType() == eType)
 				{
-					DrawLine("Core: Данная система ввода уже инициализирована!");
+					DrawLine("ChangeSystem: Данная система ввода уже инициализирована!");
 				}
 				else
 				{
 					m_pInputSystem = (IInputSystem*)m_lSystems[eType];
-					DrawLine("Core: Установлена системы ввода " + m_pInputSystem->GetName());
+					DrawLine("ChangeSystem: Установлена системы ввода " + m_pInputSystem->GetName());
 				}
 				break;
 			case Dex::SYSTEM_FILE_DEX:
 				if (m_pFileSystem && m_pFileSystem->GetType() == eType)
 				{
-					DrawLine("Core: Данная файловая система уже инициализирована!");
+					DrawLine("ChangeSystem: Данная файловая система уже инициализирована!");
 				}
 				else
 				{
 					m_pFileSystem = (FileSystem*)m_lSystems[eType];
-					DrawLine("Core: Установлена файловая система " + m_pFileSystem->GetName());
+					DrawLine("ChangeSystem: Установлена файловая система " + m_pFileSystem->GetName());
 				}
 				break;
 			default:
-				DrawLine("Core: ChangeSystem не верный пораметор!", MessageTypes::MT_WARNING);
+				DrawLine("ChangeSystem: не верный пораметор!", MessageTypes::MT_WARNING);
 				break;
 			}
 		}
@@ -240,11 +248,11 @@ namespace Dex
 
 		if (it_Scene == m_lScene.end())
 		{
-			m_lScene[cName] = new Scene(cName);
+			m_lScene[cName] = new Scene(cName, mOutFileStream);
 		}
 		else
 		{
-			DrawLine("Core:CreateScene: " + cName + " Уже сцществует", MessageTypes::MT_WARNING);
+			DrawLine("CreateScene: " + cName + " Уже сцществует", MessageTypes::MT_WARNING);
 		}
 
 		return m_lScene[cName];
@@ -267,5 +275,20 @@ namespace Dex
 		}
 
 		return m_lSystems[st];
+	}
+
+	IRenderSystem* Core::GetRenderSystem()
+	{
+		return m_pRenderSystem;
+	}
+
+	IInputSystem* Core::GetInputSystem()
+	{
+		return m_pInputSystem;
+	}
+
+	FileSystem* Core::GetFileSystem()
+	{
+		return m_pFileSystem;
 	}
 }

@@ -1,20 +1,20 @@
 #pragma once
 
-#include "DexObjectComponent.h"
+#include "DexCoreComponent.h"
+#include "DexMath.h"
 
 namespace Dex
 {
-	class D_EXPORT LightComponent : public ObjectComponent
+	class D_EXPORT LightComponent : public CoreComponent
 	{
 	public:
-		LightComponent( const string& cName, SceneObject* pParent,
-			const Point4& nColor, const Point& nRange );
-		~LightComponent( void );
+		LightComponent(const string& cName, SceneObject* pParent, const Point4& nColor, const Point& nRange);
+		~LightComponent(void);
 
-		void SetColor( const Point4& nColor );
+		void SetColor(const Point4& nColor);
 
-		const Point4& GetColor( void );
-		const Point& GetRange( void );
+		const Point4& GetColor(void);
+		const Point& GetRange(void);
 
 	private:
 		Point4				m_nColor;

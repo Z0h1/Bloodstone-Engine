@@ -47,17 +47,17 @@ namespace Dex
 				if (DisplayMode.Format == D3DFMT_X8R8G8B8)
 				{
 					mode << DisplayMode.Width << "x" << DisplayMode.Height << "-32 bit";
-					m_lDisplayMode.Add(mode.str());
+					m_lDisplayMode.push_back(mode.str());
 				}
 				else if (DisplayMode.Format == D3DFMT_R5G6B5)
 				{
 					mode << DisplayMode.Width << "x" << DisplayMode.Height << "-16 bit";
-					m_lDisplayMode.Add(mode.str());
+					m_lDisplayMode.push_back(mode.str());
 				}
 			}
 		}
 
-		DrawLine("RenderAdapterD3D9: Обноружено устройство " + mObjectName);
+		DrawLine("RenderAdapterD3D9: Обнаружено устройство " + mObjectName);
 	}
 
 	const _lString& RenderAdapterD3D9::GetDisplayMode(void)
