@@ -100,17 +100,16 @@
     <ClInclude Include="include\DexFileSystem.h" />
     <ClInclude Include="include\DexFolder.h" />
     <ClInclude Include="include\DexGeometryFile.h" />
-    <ClInclude Include="include\DexHardwareBuffer.h" />
+    <ClInclude Include="include\DexBuffer.h" />
     <ClInclude Include="include\DexHardwareBufferData.h" />
-    <ClInclude Include="include\DexHardwareIndexBuffer.h" />
-    <ClInclude Include="include\DexHardwareVertexBuffer.h" />
+    <ClInclude Include="include\DexIndexBuffer.h" />
+    <ClInclude Include="include\DexVertexBuffer.h" />
     <ClInclude Include="include\DexIndexedArray.h" />
     <ClInclude Include="include\DexInputDevice.h" />
     <ClInclude Include="include\DexInputStruct.h" />
     <ClInclude Include="include\DexInputSystem.h" />
     <ClInclude Include="include\DexLightComponent.h" />
     <ClInclude Include="include\DexMath.h" />
-    <ClInclude Include="include\DexMeshSerializer.h" />
     <ClInclude Include="include\DexMeshStruct.h" />
     <ClInclude Include="include\DexCoreObject.h" />
     <ClInclude Include="include\DexPreCompletion.h" />
@@ -135,14 +134,12 @@
     <ClCompile Include="src\DexFileSystem.cpp" />
     <ClCompile Include="src\DexFolder.cpp" />
     <ClCompile Include="src\DexGeometryFile.cpp" />
-    <ClCompile Include="src\DexHardwareBuffer.cpp" />
     <ClCompile Include="src\DexHardwareBufferData.cpp" />
-    <ClCompile Include="src\DexHardwareIndexBuffer.cpp" />
-    <ClCompile Include="src\DexHardwareVertexBuffer.cpp" />
+    <ClCompile Include="src\DexIndexBuffer.cpp" />
+    <ClCompile Include="src\DexVertexBuffer.cpp" />
     <ClCompile Include="src\DexInputDevice.cpp" />
     <ClCompile Include="src\DexInputSystem.cpp" />
     <ClCompile Include="src\DexLightComponent.cpp" />
-    <ClCompile Include="src\DexMeshSerializer.cpp" />
     <ClCompile Include="src\DexCoreObject.cpp" />
     <ClCompile Include="src\DexPreCompletion.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

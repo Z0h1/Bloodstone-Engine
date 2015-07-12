@@ -47,6 +47,10 @@ namespace Dex
 		}
 
 		m_pCamera = camera;
+
+		if (m_pCamera) {
+			IInit();
+		}
 	}
 
 	CameraComponent* IRenderWindow::GetCamera()

@@ -1,17 +1,20 @@
 #include "DexSerializer.h"
-#include "DexStream.h"
 
 namespace Dex
 {
-	Serializer::Serializer(const string& c_name, ofstream* logger, const string& path)
-		: CoreObject(c_name, logger, WorkPriority::WP_FILE)
+	Serializer::Serializer(const string& path)
 	{
-		m_cPath = path;
+		mPath = path;
 	}
 
 	Serializer::~Serializer()
 	{
 		Close();
+	}
+
+	bool Serializer::IsOpen(void)
+	{
+		return m_pStream.is_open();
 	}
 
 	void Serializer::GetLine(string& cString)
@@ -145,15 +148,9 @@ namespace Dex
 			mode |= ios::binary;
 		}
 
-		m_pStream.open(m_cPath.c_str(), mode);
+		m_pStream.open(mPath.c_str(), mode);
 
-		if (!m_pStream.is_open())
-		{
-			DrawLine("Open: Невозможно открыть файл " + mObjectName, MT_ERROR);
-			return false;
-		}
-
-		return true;
+		return m_pStream.is_open();
 	}
 
 	void Serializer::Close(void)

@@ -71,16 +71,7 @@ namespace Dex
 				_p = parametors.find("type");
 				if (_p != parametors.end()) {
 					if (_p->second == "rander") {
-						_p = parametors.find("primitive_type");
-						if (_p != parametors.end()) {
-							PrimitiveType p_type = PrimitiveType::PT_NULL;
-							StringConverter::ParsePrimitiveType(_p->second, p_type);
-
-							component = m_pRenderSystem->CreateRenderComponent(name, obj, p_type);
-						}
-						else {
-							DrawLine("CreateObjectComponent: параметр primitive_type не указан");
-						}
+						component = m_pRenderSystem->CreateRenderComponent(name, obj);
 					}
 					else if (_p->second == "camera") {
 						_p = parametors.find("camera_focus");
@@ -88,7 +79,7 @@ namespace Dex
 							component = new CameraComponent(name, obj, StringConverter::Parse_Point(_p->second));
 						}
 						else {
-							DrawLine("CreateObjectComponent: параметр camera_focus не указан");
+							DrawLine("CreateObjectComponent: параметр camera_focus не указан", MT_ERROR);
 						}
 					}
 					else if (_p->second == "light") {
@@ -102,27 +93,27 @@ namespace Dex
 								component = new LightComponent(name, obj, color, StringConverter::Parse_Point(_p->second));
 							}
 							else {
-								DrawLine("CreateObjectComponent: параметр light_range не указан");
+								DrawLine("CreateObjectComponent: параметр light_range не указан", MT_ERROR);
 							}
 						}
 						else {
-							DrawLine("CreateObjectComponent: параметр light_color не указан");
+							DrawLine("CreateObjectComponent: параметр light_color не указан", MT_ERROR);
 						}
 					}
 					else {
-						DrawLine("CreateObjectComponent: значение type неверное = rander/camera/light");
+						DrawLine("CreateObjectComponent: значение type неверное = rander/camera/light", MT_ERROR);
 					}
 				}
 				else {
-					DrawLine("CreateObjectComponent: параметр type не указан");
+					DrawLine("CreateObjectComponent: параметр type не указан", MT_ERROR);
 				}
 			}
 			else {
-				DrawLine("CreateObjectComponent: параметр name не указан");
+				DrawLine("CreateObjectComponent: параметр name не указан", MT_ERROR);
 			}
 		}
 		else {
-			DrawLine("CreateObjectComponent: Cцена не создана или системя визуализации не инициализирована");
+			DrawLine("CreateObjectComponent: Cцена не создана или системя визуализации не инициализирована", MT_ERROR);
 		}
 
 		if (component) {

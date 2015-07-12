@@ -10,15 +10,14 @@ namespace Dex
 
 	Folder::~Folder(void)
 	{
-		_lCoreFile::iterator itFile;
-
-		for (itFile = m_lResource.begin(); itFile != m_lResource.end(); ++itFile)
-		{
+		_lCoreFile::iterator itFile = m_lResource.begin();
+		while (itFile != m_lResource.end()) {
 			CoreFile*  file = itFile->second;
 
 			itFile = m_lResource.erase(itFile);
 
 			delete file;
+			itFile = m_lResource.begin();
 		}
 
 		if (m_pParent)

@@ -19,14 +19,16 @@ namespace Dex
 		//		Ptr ( buffer )
 		// }
 		GEOMETRY_VERTEX_BEGIN,
-		// UInt32 ( Vertex count )
-		GEOMETRY_VERTEX_ELEMENT_BEGIN,
-		// int ( enum VertexSemantics )
-		GEOMETRY_VERTEX_ELEMENT_END,
-		// Ptr ( buffer )
+			// UInt32 ( Vertex count )
+			GEOMETRY_VERTEX_ELEMENT_BEGIN,
+			// int ( enum VertexSemantics )
+			GEOMETRY_VERTEX_ELEMENT_END,
+			// Ptr ( buffer )
 		GEOMETRY_VERTEX_END
 		// ASCII code shader
 	};
+
+	typedef vector< VertexBuffer* >	_lVertexBuffer;
 
 	class D_EXPORT GeometryFile : public CoreFile, public Serializer
 	{
@@ -36,5 +38,17 @@ namespace Dex
 		{
 
 		}
+
+		void ImportMesh();
+
+		IndexBuffer* GetIndexBuffer() const { return m_pIndexBuffer; }
+		void GetVertexBuffer(_lVertexBuffer& vbl) { vbl = m_lVertexBuffer; }
+
+	private:
+		void ReadGeometry(void);
+		void ReadVertex(void);
+
+		_lVertexBuffer			m_lVertexBuffer;
+		IndexBuffer*			m_pIndexBuffer;
 	};
 }

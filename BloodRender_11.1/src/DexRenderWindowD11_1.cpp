@@ -1,4 +1,11 @@
 #include "DexRenderWindowD11_1.h"
+#include "DexScene.h"
+#include "DexSceneObject.h"
+#include "DexGeometryFile.h"
+#include "DexIndexBuffer.h"
+#include "DexVertexBuffer.h"
+#include "DexCameraComponent.h"
+#include "DexRenderComponentD11_1.h"
 
 namespace Dex
 {
@@ -140,8 +147,154 @@ namespace Dex
 		return m_bInit;
 	}
 
+	void RenderWindowD11_1::IInit()
+	{
+		m_pScene = m_pCamera->GetSceneObject()->GetScene();
+	}
+
 	void RenderWindowD11_1::IRender()
 	{
+		_lSceneObject lObject;
+		m_pScene->GetSceneObjects(lObject);
+
+		for (auto object : lObject)
+		{
+			_lCoreComponent lComponent;
+			object->GetObjectComponents(lComponent);
+
+			for (auto component : lComponent)
+			{
+				switch (component->GetType())
+				{
+				case Dex::OCT_RENDER:
+					RenderComponentD11_1* render = (RenderComponentD11_1*)component; // TODO
+
+					GeometryFile* geometry = render->GetGeometry();
+					if (render->IsActive() && geometry) {
+						_lVertexBuffer vertexbuffers;
+						geometry->GetVertexBuffer(vertexbuffers);
+
+						for (auto vertex : vertexbuffers)
+						{
+							ID3D11Buffer* pD3D11Buffer = NULL;
+
+							_lD3D11Buffer::iterator itD3D11Buff = m_lD3D11Buffer.find(geometry->GetName() + "_vertex");
+							if (itD3D11Buff == m_lD3D11Buffer.end())
+							{
+								// LOADING !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+								HRESULT eResult = S_FALSE;
+
+								_lVertexLayout lLayout;
+								vector< D3D11_INPUT_ELEMENT_DESC > lD3D11Layout;
+								vertex->GetVertexSemantics(lLayout);
+								UINT nOffset = 0;
+
+								for (auto vertexlayout : lLayout)
+								{
+									D3D11_INPUT_ELEMENT_DESC eIE;
+									switch (vertexlayout)
+									{
+									case VertexLayout::VL_POSITION:
+									{
+										eIE.SemanticName = "POSITION";
+										eIE.SemanticIndex = 0;
+										eIE.Format = DXGI_FORMAT_R32G32B32_FLOAT;
+										eIE.InputSlot = 0;
+										eIE.AlignedByteOffset = nOffset;
+										eIE.InputSlotClass = D3D11_INPUT_PER_VERTEX_DATA;
+										eIE.InstanceDataStepRate = 0;
+
+										nOffset += 12;
+									}
+									break;
+
+									case VertexLayout::VL_TEXTURE:
+									{
+										eIE.SemanticName = "TEXTURE";
+										eIE.SemanticIndex = 0;
+										eIE.Format = DXGI_FORMAT_R32G32B32_FLOAT;
+										eIE.InputSlot = 0;
+										eIE.AlignedByteOffset = nOffset;
+										eIE.InputSlotClass = D3D11_INPUT_PER_VERTEX_DATA;
+										eIE.InstanceDataStepRate = 0;
+
+										nOffset += 8;
+									}
+									break;
+
+									case VertexLayout::VL_NORMAL:
+									{
+										eIE.SemanticName = "NORMAL";
+										eIE.SemanticIndex = 0;
+										eIE.Format = DXGI_FORMAT_R32G32B32_FLOAT;
+										eIE.InputSlot = 0;
+										eIE.AlignedByteOffset = nOffset;
+										eIE.InputSlotClass = D3D11_INPUT_PER_VERTEX_DATA;
+										eIE.InstanceDataStepRate = 0;
+
+										nOffset += 12;
+									}
+									break;
+									}
+
+									lD3D11Layout.push_back(eIE);
+								}
+
+								//eResult = m_pD3D11Device->CreateInputLayout(lD3D11Layout.data(), lD3D11Layout.size(), pVSBlob->GetBufferPointer(), pVSBlob->GetBufferSize(), &g_pVertexLayout);
+
+								D3D11_BUFFER_DESC bd;
+								ZeroMemory(&bd, sizeof(bd));
+
+								bd.Usage = D3D11_USAGE_DEFAULT;
+								bd.ByteWidth = vertex->GetSizeBuffer();
+								bd.BindFlags = D3D11_BIND_VERTEX_BUFFER;
+								bd.CPUAccessFlags = 0;
+
+								D3D11_SUBRESOURCE_DATA InitData;
+								ZeroMemory(&InitData, sizeof(InitData));
+
+								InitData.pSysMem = vertex->GetBuffer();
+
+								eResult = m_pD3D11Device->CreateBuffer(&bd, &InitData, &pD3D11Buffer);
+								if (SUCCEEDED(eResult))
+								{
+									m_lD3D11Buffer.insert(_lD3D11Buffer::value_type(geometry->GetName() + "_vertex", pD3D11Buffer));
+								}
+								else
+								{
+									wchar_t cBuff_WCAHR[256];
+									char cBuff_CHAR[256];
+									DXGetErrorDescription(eResult, cBuff_WCAHR, 256);
+									WideCharToMultiByte(CP_ACP, NULL, cBuff_WCAHR, 256, cBuff_CHAR, 256, NULL, NULL);
+
+									string str(cBuff_CHAR);
+									str = str.substr(0, str.length() - 2);
+
+									DrawLine("IRender: Îøèáêà - " + str);
+								}
+							}
+							else
+							{
+								pD3D11Buffer = itD3D11Buff->second;
+							}
+
+							UINT stride = vertex->GetSizeBuffer() / vertex->GetVertexCount();
+							UINT offset = vertex->GetOffsetBuffer();
+
+							m_pImmediateContext->IASetVertexBuffers(0, 1, &pD3D11Buffer, &stride, &offset);
+						}
+
+						IndexBuffer* indexbuffer = geometry->GetIndexBuffer();
+					}
+					break;
+				/*case Dex::OCT_CAMERA:
+					break;
+				case Dex::OCT_LIGHT:
+					break;*/
+				}
+			}
+		}
+
 		float ClearColor[4] = { 0.0f, 0.125f, 0.3f, 1.0f }; //red,green,blue,alpha
 		m_pImmediateContext->ClearRenderTargetView(m_pRenderTargetView, ClearColor);
 		m_pSwapChain->Present(0, 0);

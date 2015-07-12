@@ -13,7 +13,7 @@ namespace Dex
 		RenderSystemD11_1(ofstream* logger);
 		~RenderSystemD11_1();
 
-		virtual RenderComponent* CreateRenderComponent(const string& c_name, SceneObject* parent, const PrimitiveType& eType);
+		virtual RenderComponent* CreateRenderComponent(const string& c_name, SceneObject* parent);
 
 		virtual void GetAvailableDisplayMode(_lString& ls);
 		virtual void GetAvailableAdpter(_lString& ls);

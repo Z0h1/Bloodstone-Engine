@@ -5,7 +5,7 @@
 
 namespace Dex
 {
-	typedef map< UInt32, ID3D11Buffer* >		_lD3D11Buffer;
+	typedef map< string, ID3D11Buffer* >		_lD3D11Buffer;
 
 	class D_EXPORT_D11_1 RenderWindowD11_1 : public IRenderWindow
 	{
@@ -15,9 +15,10 @@ namespace Dex
 
 		virtual bool Create(const _lParametor& config);
 
-		virtual void IRender();
-
 	private:
+		virtual void IRender();
+		virtual void IInit();
+
 		IDXGIAdapter*				m_nAdapter;
 		ID3D11Device*				m_pD3D11Device;
 		ID3D11DeviceContext*		m_pImmediateContext;
@@ -25,5 +26,7 @@ namespace Dex
 		ID3D11RenderTargetView*		m_pRenderTargetView;
 
 		_lD3D11Buffer				m_lD3D11Buffer;
+
+		Scene*						m_pScene;
 	};
 }

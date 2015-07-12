@@ -1,16 +1,16 @@
 #pragma once
 
 #include "DexPreCompletion.h"
-#include "DexCoreObject.h"
 
 namespace Dex
 {
-	class D_EXPORT Serializer : public CoreObject
+	class D_EXPORT Serializer
 	{
 	public:
-		Serializer(const string& c_name, ofstream* logger, const string& path);
+		Serializer(const string& path);
 		virtual ~Serializer();
 
+		bool IsOpen(void);
 		void GetLine(string& cString);
 		bool Eof(void);
 
@@ -41,7 +41,7 @@ namespace Dex
 		void Read(void* pBuf, size_t nCount);
 		void Write(const void* pBuf, size_t nCount);
 		
-		string			m_cPath;
+		string			mPath;
 		fstream			m_pStream;
 	};
 }

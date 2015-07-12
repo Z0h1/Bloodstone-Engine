@@ -114,10 +114,17 @@ namespace Dex
 
 	EditorFrame::~EditorFrame()
 	{
+		m_pMainTimer.Stop();
+
 		if (m_pCore) {
 			delete m_pCore;
 			m_pCore = nullptr;
 		}
+
+		m_pCore = nullptr;
+		m_pRenderSystem = nullptr;
+		m_pScene = nullptr;
+		m_pFileSystem = nullptr;
 	}
 
 	void EditorFrame::CallFileSystemSetting(wxCommandEvent& WXUNUSED(event))
@@ -138,6 +145,8 @@ namespace Dex
 
 		if (m_pCore) {
 			m_pRenderSystem = m_pCore->GetRenderSystem();
+			m_pFileSystem = m_pCore->GetFileSystem();
+
 			if (m_pRenderSystem) {
 				m_pScene = m_pCore->CreateScene("TEST_SCENE");
 				m_pObjectList->SetEngine(m_pScene, m_pRenderSystem);
@@ -151,7 +160,16 @@ namespace Dex
 				m_pObjectList->CreateObjectComponent(test_obj2, _P);
 
 				SceneObject* test_obj3 = m_pObjectList->CreateSceneObject("TEST_SCENE_OBJECT2");
-				SceneObject* test_obj4 = m_pObjectList->CreateSceneObject("TEST_SCENE_OBJECT3");
+				
+
+				_P.clear();
+				_P["name"] = "RENDER_MES_COMPONENT";
+				_P["type"] = "rander";
+				SceneObject* viusal_obj = m_pObjectList->CreateSceneObject("VISUAL OBJECT");
+				RenderComponent* render_component_1 = (RenderComponent*)m_pObjectList->CreateObjectComponent(viusal_obj, _P);
+				render_component_1->SetPrimitiveType(PrimitiveType::PT_POLYGON);
+				render_component_1->SetActive(true);
+				render_component_1->LoadGeometry(m_pFileSystem->GetCFile("Data/TEST.dexg"));
 
 				_P.clear();
 				_P["window_name"] = "EditorWindow";
@@ -170,7 +188,7 @@ namespace Dex
 				window->SetCamera(camera);
 			}
 
-			m_pFileSystem = m_pCore->GetFileSystem();
+			
 		}
 	}
 
@@ -196,11 +214,13 @@ namespace Dex
 		}
 	}
 
-	void EditorFrame::OnMainTimerTick(wxTimerEvent& WXUNUSED(event))
+	void EditorFrame::OnMainTimerTick(wxTimerEvent& event)
 	{
 		if (m_pCore && m_pRenderSystem) {
 			m_pRenderSystem->RenderAllWindow();
 		}
+
+		event.Skip();
 	}
 
 	void EditorFrame::OnQuit(wxCommandEvent& WXUNUSED(event))

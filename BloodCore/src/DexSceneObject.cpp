@@ -52,7 +52,7 @@ namespace Dex
 				m_pScene->GetRenderConnects(lRenderConnect);
 				for (auto n : lRenderConnect)
 				{
-					n->BindBufferData(pRenderComponent, pRenderComponent->GetBufferData());
+					//n->BindBufferData(pRenderComponent, pRenderComponent->GetBufferData());
 				}
 			}
 			break;
@@ -77,7 +77,7 @@ namespace Dex
 				m_pScene->GetRenderConnects(lRenderConnect);
 				for (auto n : lRenderConnect)
 				{
-					n->RemoveBind(pRenderComponent);
+					//n->RemoveBind(pRenderComponent);
 				}
 			}
 			break;
@@ -89,7 +89,7 @@ namespace Dex
 				m_pScene->GetRenderConnects(lRenderConnect);
 				for (auto n : lRenderConnect)
 				{
-					n->RemoveFocus(pCameraComponent);
+					//n->RemoveFocus(pCameraComponent);
 				}
 			}
 			break;
@@ -101,10 +101,7 @@ namespace Dex
 
 	void SceneObject::GetObjectComponents(_lCoreComponent& ocs)
 	{
-		for (auto n : m_lObjectComponent)
-		{
-			ocs.push_back(n);
-		}
+		ocs = m_lObjectComponent;
 	}
 
 	void SceneObject::CalculatePosition(const Point3& position)

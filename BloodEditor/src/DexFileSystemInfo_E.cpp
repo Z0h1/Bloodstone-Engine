@@ -61,10 +61,27 @@ namespace Dex
 	{
 		if (m_pDynamicText) m_pDynamicText->InsertItem(0, wxT("OnTreeEndLableEdit"));
 	}
-	void TreeFileListE::OnActivated(wxTreeEvent& WXUNUSED(event))
+
+	void TreeFileListE::OnActivated(wxTreeEvent& event)
 	{
-		if (m_pDynamicText) m_pDynamicText->InsertItem(0, wxT("OnActivated"));
+		if (m_pDynamicText)
+			m_pDynamicText->InsertItem(0, wxT("OnActivated"));
+
+		wxTreeItemId itemId = event.GetItem();
+		TreeFileListDataE *item = (TreeFileListDataE*)GetItemData(itemId);
+		CoreFile* file = item->GetCoreFile();
+
+		switch (file->GetFormat())
+		{
+		case Dex::FF_DEXG:
+			GeometryFile* gfile = (GeometryFile*)file;
+			gfile->ImportMesh();
+			break;
+		}
+
+		event.Skip();
 	}
+
 	void TreeFileListE::OnTreeitemCollapsed(wxTreeEvent& WXUNUSED(event))
 	{
 		if (m_pDynamicText) m_pDynamicText->InsertItem(0, wxT("OnTreeitemCollapsed"));
@@ -88,7 +105,6 @@ namespace Dex
 			m_pDynamicText->InsertItem(0, wxT("OnTreeitemMenu"));
 
 		wxTreeItemId itemId = event.GetItem();
-		wxCHECK_RET(itemId.IsOk(), "should have a valid item");
 
 		TreeFileListDataE *item = (TreeFileListDataE*)GetItemData(itemId);
 		wxPoint clientpt = event.GetPoint();
@@ -124,7 +140,7 @@ namespace Dex
 
 		TreeFileListDataE* data = (TreeFileListDataE*)GetItemData(GetSelection());
 		if (data) {
-			CoreFile* file = data->GetCoreObject();
+			CoreFile* file = data->GetCoreFile();
 
 			m_pDynamicTextName->SetLabel(wxString(file->GetName().c_str()));
 

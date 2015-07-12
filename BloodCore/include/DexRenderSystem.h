@@ -14,7 +14,7 @@ namespace Dex
 		IRenderSystem(const string& c_name, ofstream* logger, const SystemsType st, bool fw = false);
 		virtual ~IRenderSystem(void);
 
-		virtual RenderComponent* CreateRenderComponent(const string& c_name, SceneObject* parent, const PrimitiveType& eType) = 0;
+		virtual RenderComponent* CreateRenderComponent(const string& c_name, SceneObject* parent) = 0;
 
 		void SetActiveAdapter(UInt32 adapter);
 

@@ -53,10 +53,7 @@ namespace Dex
 
 	void Scene::GetSceneObjects(_lSceneObject& so)
 	{
-		for (auto n : m_lSceneObject)
-		{
-			so.push_back(n);
-		}
+		so = m_lSceneObject;
 	}
 
 	void Scene::RemoveObject(const string& c_name)

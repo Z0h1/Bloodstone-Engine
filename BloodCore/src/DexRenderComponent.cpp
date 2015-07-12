@@ -2,58 +2,37 @@
 #include "DexHardwareBufferData.h"
 #include "DexScene.h"
 #include "DexSceneObject.h"
+#include "DexGeometryFile.h"
 
 namespace Dex
 {
-	RenderComponent::RenderComponent(const string& cName, SceneObject* pParent, const PrimitiveType& eType)
+	RenderComponent::RenderComponent(const string& cName, SceneObject* pParent)
 		: CoreComponent(cName, pParent, OCT_RENDER)
-		//, MeshSerializer(cName, pParent->GetOutFileStream()) // TODO tharde
 	{
-		//m_pBufferData = new HardwareBufferData();
-
-		m_ePrimitiveType = eType;
-		m_bActive = true;
+		m_ePrimitiveType = PrimitiveType::PT_NULL;
+		m_bActive = false;
+		m_pGeometry = nullptr;
 	}
 
 	RenderComponent::~RenderComponent(void)
 	{
-		//delete m_pBufferData;
 	}
 
-	void RenderComponent::Load(const string& cResource)
+	void RenderComponent::LoadGeometry(CoreFile* mesh)
 	{
-		//SetResource(cResource);
+		if (mesh->GetFormat() == FileFormat::FF_DEXG) {
+			m_pGeometry = (GeometryFile*)mesh;
 
-		//ImportMesh();
-
-		Scene* pScene = m_pObject->GetScene();
-
-		_lRenderConnect lRenderConnect;
-		pScene->GetRenderConnects(lRenderConnect);
-		for (auto n : lRenderConnect)
-		{
-			//n->BindBufferData(this, m_pBufferData);
+			m_pGeometry->ImportMesh();
 		}
-	}
 
-	const PrimitiveType RenderComponent::GetPrimitiveType(void)
-	{
-		return m_ePrimitiveType;
-	}
+		//Scene* pScene = m_pObject->GetScene();
 
-	HardwareBufferData* RenderComponent::GetBufferData(void)
-	{
-		//return m_pBufferData;
-		return nullptr;
-	}
-
-	bool RenderComponent::IsActive(void)
-	{
-		return m_bActive;
-	}
-
-	void RenderComponent::SetActive(bool bActive)
-	{
-		m_bActive = bActive;
+		//_lRenderConnect lRenderConnect;
+		//pScene->GetRenderConnects(lRenderConnect);
+		//for (auto n : lRenderConnect)
+		//{
+		//	//n->BindBufferData(this, m_pBufferData);
+		//}
 	}
 }

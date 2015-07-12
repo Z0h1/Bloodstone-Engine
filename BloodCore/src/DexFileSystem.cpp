@@ -1,5 +1,6 @@
 #include "DexFileSystem.h"
 #include "DexFolder.h"
+#include "DexGeometryFile.h"
 #include "Windows.h"
 
 namespace Dex
@@ -12,15 +13,14 @@ namespace Dex
 
 	FileSystem::~FileSystem(void)
 	{
-		_lCoreFile::iterator itFile;
-
-		for (itFile = m_lResource.begin(); itFile != m_lResource.end(); ++itFile)
-		{
+		_lCoreFile::iterator itFile = m_lResource.begin();
+		while (itFile != m_lResource.end()) {
 			CoreFile*  file = itFile->second;
 
 			itFile = m_lResource.erase(itFile);
 
 			delete file;
+			itFile = m_lResource.begin();
 		}
 	}
 
@@ -269,10 +269,12 @@ namespace Dex
 					else
 					{
 						FileFormat eFormat = FF_UNKNOWN;
+						CoreFile* pFile = nullptr;
+						string cFilePath(cPath + "/" + cFileName);
 
 						if (cFileFormat == "dexg")
 						{
-							eFormat = FF_DEXG;
+							pFile = new GeometryFile(mOutFileStream, pFolder, cFilePath, cFileName);
 						}
 						else if (cFileFormat == "dexm")
 						{
@@ -286,9 +288,6 @@ namespace Dex
 						{
 							eFormat = FF_DEXS;
 						}
-
-						string cFilePath(cPath + "/" + cFileName);
-						//CoreFile* pFile = new File(mOutFileStream, pFolder, eFormat, cFilePath, cFileName.substr(0, d_pos));
 					}
 				}
 				break;

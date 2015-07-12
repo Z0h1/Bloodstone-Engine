@@ -17,7 +17,7 @@ namespace Dex
 		{
 		}
 
-		CoreFile* GetCoreObject() const { return m_desc; }
+		CoreFile* GetCoreFile() const { return m_desc; }
 
 	private:
 		CoreFile*		m_desc;

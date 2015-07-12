@@ -21,9 +21,11 @@ namespace Dex
 		CameraComponent* GetCamera();
 
 		void Render();
-		virtual void IRender() = 0;
 
 	protected:
+		virtual void IRender() = 0;
+		virtual void IInit() = 0;
+
 		int					m_hWnd;
 
 		bool				m_bFullScrean;

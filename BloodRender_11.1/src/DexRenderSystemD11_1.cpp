@@ -98,9 +98,9 @@ namespace Dex
 		DrawLine("~RenderSystemD11_1: Модуль DirectX 11.1 выгружен");
 	}
 
-	RenderComponent* RenderSystemD11_1::CreateRenderComponent(const string& c_name, SceneObject* parent, const PrimitiveType& eType)
+	RenderComponent* RenderSystemD11_1::CreateRenderComponent(const string& c_name, SceneObject* parent)
 	{
-		return new RenderComponentD11_1(c_name, parent, eType);
+		return new RenderComponentD11_1(c_name, parent);
 	}
 
 	void RenderSystemD11_1::GetAvailableDisplayMode(_lString& ls)

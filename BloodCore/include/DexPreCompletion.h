@@ -34,17 +34,13 @@ namespace Dex
 	// Classes
 	class IInputSystem;
 	class IInputDevice;
-	class HardwareBufferData;
-	class HardwareVertexBuffer;
-	class HardwareIndexBuffer;
-	class ObjectLocation;
+	class VertexBuffer;
+	class IndexBuffer;
 	class CoreComponent;
 	class RenderComponent;
 	class CameraComponent;
 	class LightComponent;
-	class ArchiveFactory;
-	class FileArchive;
-	class ZipAchive;
+	class GeometryFile;
 	class ResourceManager;
 	class Folder;
 	class CoreFile;
@@ -167,10 +163,10 @@ namespace Dex
 		OCT_LIGHT
 	};
 
-	enum VertexSemantics
+	enum VertexLayout
 	{
-		VS_POSITION,
-		VS_NORMAL,
-		VS_TEX
+		VL_POSITION,
+		VL_NORMAL,
+		VL_TEXTURE
 	};
 }
