@@ -1,4 +1,5 @@
 #include "DexStringConverter.h"
+#include "DexMath.h"
 
 namespace Dex
 {
@@ -123,6 +124,24 @@ namespace Dex
 		return cString.str();
 	}
 
+	string StringConverter::toStringPoint4(Point x, Point y, Point z, Point w)
+	{
+		stringstream cString;
+
+		cString << x << " " << y << " " << z << " " << w;
+
+		return cString.str();
+	}
+
+	string StringConverter::toString(Point x)
+	{
+		stringstream cString;
+
+		cString << x;
+
+		return cString.str();
+	}
+
 	bool StringConverter::Parse_bool(string value, bool default_value)
 	{
 		bool result = default_value;
@@ -146,6 +165,25 @@ namespace Dex
 			return default_value;
 
 		return result;
+	}
+
+	Point StringConverter::Parse_Point(string value, Point default_value)
+	{
+		stringstream String(value);
+		Point result = default_value;
+		if (!(String >> result))
+			return default_value;
+
+		return result;
+	}
+
+	Point4 StringConverter::Parse_Point4(string value)
+	{
+		stringstream String(value);
+		Point x, y, z, w;
+		String >> x >> y >> z >> w;
+
+		return Point4(x, y, z, w);
 	}
 
 	unsigned int StringConverter::Parse_unsigned_int(string value, unsigned int default_value)

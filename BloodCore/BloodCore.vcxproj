@@ -90,15 +90,16 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="include\Dex.h" />
-    <ClInclude Include="include\DexArchiveFactory.h" />
     <ClInclude Include="include\DexCameraComponent.h" />
     <ClInclude Include="include\DexCommon.h" />
     <ClInclude Include="include\DexConfigFile.h" />
     <ClInclude Include="include\DexCore.h" />
     <ClInclude Include="include\DexCoreComponent.h" />
+    <ClInclude Include="include\DexCoreFile.h" />
     <ClInclude Include="include\DexDynamicLibrary.h" />
-    <ClInclude Include="include\DexFileArchive.h" />
     <ClInclude Include="include\DexFileSystem.h" />
+    <ClInclude Include="include\DexFolder.h" />
+    <ClInclude Include="include\DexGeometryFile.h" />
     <ClInclude Include="include\DexHardwareBuffer.h" />
     <ClInclude Include="include\DexHardwareBufferData.h" />
     <ClInclude Include="include\DexHardwareIndexBuffer.h" />
@@ -117,8 +118,6 @@
     <ClInclude Include="include\DexRenderConnect.h" />
     <ClInclude Include="include\DexRenderSystem.h" />
     <ClInclude Include="include\DexRenderWindow.h" />
-    <ClInclude Include="include\DexResource.h" />
-    <ClInclude Include="include\DexResourceManager.h" />
     <ClInclude Include="include\DexScene.h" />
     <ClInclude Include="include\DexSceneObject.h" />
     <ClInclude Include="include\DexSerializer.h" />
@@ -127,14 +126,15 @@
     <ClInclude Include="include\DexSystem.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\DexArchiveFactory.cpp" />
     <ClCompile Include="src\DexCameraComponent.cpp" />
     <ClCompile Include="src\DexConfigFile.cpp" />
     <ClCompile Include="src\DexCore.cpp" />
     <ClCompile Include="src\DexCoreComponent.cpp" />
+    <ClCompile Include="src\DexCoreFile.cpp" />
     <ClCompile Include="src\DexDynamicLibrary.cpp" />
-    <ClCompile Include="src\DexFileArchive.cpp" />
     <ClCompile Include="src\DexFileSystem.cpp" />
+    <ClCompile Include="src\DexFolder.cpp" />
+    <ClCompile Include="src\DexGeometryFile.cpp" />
     <ClCompile Include="src\DexHardwareBuffer.cpp" />
     <ClCompile Include="src\DexHardwareBufferData.cpp" />
     <ClCompile Include="src\DexHardwareIndexBuffer.cpp" />
@@ -152,7 +152,6 @@
     <ClCompile Include="src\DexRenderConnect.cpp" />
     <ClCompile Include="src\DexRenderSystem.cpp" />
     <ClCompile Include="src\DexRenderWindow.cpp" />
-    <ClCompile Include="src\DexResourceManager.cpp" />
     <ClCompile Include="src\DexScene.cpp" />
     <ClCompile Include="src\DexSceneObject.cpp" />
     <ClCompile Include="src\DexSerializer.cpp" />

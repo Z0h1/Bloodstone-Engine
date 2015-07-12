@@ -35,6 +35,18 @@
     <Filter Include="Source Files\Systems\File system\Serializer">
       <UniqueIdentifier>{5d26bb79-81cf-4ff5-96ff-0165c8f04e6a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Systems\File system\Format">
+      <UniqueIdentifier>{26086526-af14-4ff9-ab05-d3f8b9fcf1fb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Systems\File system\Format\File">
+      <UniqueIdentifier>{95b98cc3-4175-42a1-b7cf-85a97a5462e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Systems\File system\Format\Folder">
+      <UniqueIdentifier>{60052f27-8b5d-4d0a-8dc6-7e07795a5583}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Systems\File system\Format\File\DEX Geometry">
+      <UniqueIdentifier>{1a753f1a-b644-4c68-a5ed-2296dd93aac0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Dex.h">
@@ -97,25 +109,10 @@
     <ClInclude Include="include\DexHardwareVertexBuffer.h">
       <Filter>Source Files\Systems\Graphic\Hardware Buffer</Filter>
     </ClInclude>
-    <ClInclude Include="include\DexArchiveFactory.h">
-      <Filter>Source Files\Systems\File system</Filter>
-    </ClInclude>
-    <ClInclude Include="include\DexFileArchive.h">
-      <Filter>Source Files\Systems\File system</Filter>
-    </ClInclude>
-    <ClInclude Include="include\DexResource.h">
-      <Filter>Source Files\Systems\File system</Filter>
-    </ClInclude>
-    <ClInclude Include="include\DexResourceManager.h">
-      <Filter>Source Files\Systems\File system</Filter>
-    </ClInclude>
     <ClInclude Include="include\DexMeshSerializer.h">
       <Filter>Source Files\Systems\File system\Serializer</Filter>
     </ClInclude>
     <ClInclude Include="include\DexMeshStruct.h">
-      <Filter>Source Files\Systems\File system\Serializer</Filter>
-    </ClInclude>
-    <ClInclude Include="include\DexSerializer.h">
       <Filter>Source Files\Systems\File system\Serializer</Filter>
     </ClInclude>
     <ClInclude Include="include\DexCameraComponent.h">
@@ -144,6 +141,18 @@
     </ClInclude>
     <ClInclude Include="include\DexCoreComponent.h">
       <Filter>Source Files\Scene\Object\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="include\DexCoreFile.h">
+      <Filter>Source Files\Systems\File system\Format</Filter>
+    </ClInclude>
+    <ClInclude Include="include\DexFolder.h">
+      <Filter>Source Files\Systems\File system\Format\Folder</Filter>
+    </ClInclude>
+    <ClInclude Include="include\DexGeometryFile.h">
+      <Filter>Source Files\Systems\File system\Format\File\DEX Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="include\DexSerializer.h">
+      <Filter>Source Files\Systems\File system</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -189,19 +198,7 @@
     <ClCompile Include="src\DexInputSystem.cpp">
       <Filter>Source Files\Systems\Input</Filter>
     </ClCompile>
-    <ClCompile Include="src\DexArchiveFactory.cpp">
-      <Filter>Source Files\Systems\File system</Filter>
-    </ClCompile>
-    <ClCompile Include="src\DexFileArchive.cpp">
-      <Filter>Source Files\Systems\File system</Filter>
-    </ClCompile>
-    <ClCompile Include="src\DexResourceManager.cpp">
-      <Filter>Source Files\Systems\File system</Filter>
-    </ClCompile>
     <ClCompile Include="src\DexMeshSerializer.cpp">
-      <Filter>Source Files\Systems\File system\Serializer</Filter>
-    </ClCompile>
-    <ClCompile Include="src\DexSerializer.cpp">
       <Filter>Source Files\Systems\File system\Serializer</Filter>
     </ClCompile>
     <ClCompile Include="src\DexCameraComponent.cpp">
@@ -233,6 +230,18 @@
     </ClCompile>
     <ClCompile Include="src\DexCoreComponent.cpp">
       <Filter>Source Files\Scene\Object\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DexCoreFile.cpp">
+      <Filter>Source Files\Systems\File system\Format</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DexFolder.cpp">
+      <Filter>Source Files\Systems\File system\Format\Folder</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DexGeometryFile.cpp">
+      <Filter>Source Files\Systems\File system\Format\File\DEX Geometry</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DexSerializer.cpp">
+      <Filter>Source Files\Systems\File system</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

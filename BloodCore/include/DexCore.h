@@ -3,10 +3,6 @@
 #include "DexPreCompletion.h"
 #include "DexCoreObject.h"
 
-#include "DexResourceManager.h"
-#include "DexRenderSystem.h"
-#include "DexInputSystem.h"
-
 namespace Dex
 {
 	typedef map< string, Scene* >					_lScene;

@@ -6,9 +6,10 @@
 namespace Dex
 {
 	RenderComponent::RenderComponent(const string& cName, SceneObject* pParent, const PrimitiveType& eType)
-		: CoreComponent(cName, pParent, OCT_RENDER), MeshSerializer(cName, pParent->GetOutFileStream()) // TODO tharde
+		: CoreComponent(cName, pParent, OCT_RENDER)
+		//, MeshSerializer(cName, pParent->GetOutFileStream()) // TODO tharde
 	{
-		m_pBufferData = new HardwareBufferData();
+		//m_pBufferData = new HardwareBufferData();
 
 		m_ePrimitiveType = eType;
 		m_bActive = true;
@@ -16,14 +17,14 @@ namespace Dex
 
 	RenderComponent::~RenderComponent(void)
 	{
-		delete m_pBufferData;
+		//delete m_pBufferData;
 	}
 
 	void RenderComponent::Load(const string& cResource)
 	{
-		SetResource(cResource);
+		//SetResource(cResource);
 
-		ImportMesh();
+		//ImportMesh();
 
 		Scene* pScene = m_pObject->GetScene();
 
@@ -31,7 +32,7 @@ namespace Dex
 		pScene->GetRenderConnects(lRenderConnect);
 		for (auto n : lRenderConnect)
 		{
-			n->BindBufferData(this, m_pBufferData);
+			//n->BindBufferData(this, m_pBufferData);
 		}
 	}
 
@@ -42,7 +43,8 @@ namespace Dex
 
 	HardwareBufferData* RenderComponent::GetBufferData(void)
 	{
-		return m_pBufferData;
+		//return m_pBufferData;
+		return nullptr;
 	}
 
 	bool RenderComponent::IsActive(void)

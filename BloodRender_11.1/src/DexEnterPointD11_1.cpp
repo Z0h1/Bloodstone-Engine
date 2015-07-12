@@ -14,7 +14,7 @@ namespace Dex
 		{
 			ISystem* sysD11_1 = pCore->GetSystem(SystemsType::SYSTEM_RENDER_DIRECTX_11_1);
 
-			if (sysD11_1 != nullptr) {
+			if (sysD11_1) {
 				pCore->RemoveSystem(sysD11_1);
 
 				delete sysD11_1;

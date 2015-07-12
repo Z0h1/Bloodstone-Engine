@@ -34,11 +34,16 @@ namespace Dex
 
 	void IRenderWindow::SetCamera(CameraComponent* camera)
 	{
-		if (m_pCamera != nullptr) {
+		if (m_pCamera) {
 			DrawLine("SetCamera: смена камеры c " + m_pCamera->GetName() + " на " + camera->GetName());
 		}
 		else {
-			DrawLine("SetCamera: установка камеры " + camera->GetName());
+			if (camera) {
+				DrawLine("SetCamera: установка камеры " + camera->GetName());
+			}
+			else {
+				DrawLine("SetCamera: входной параметр пуст camera");
+			}
 		}
 
 		m_pCamera = camera;

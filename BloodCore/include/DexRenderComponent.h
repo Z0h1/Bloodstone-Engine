@@ -5,7 +5,7 @@
 
 namespace Dex
 {
-	class D_EXPORT RenderComponent : public CoreComponent, public MeshSerializer
+	class D_EXPORT RenderComponent : public CoreComponent
 	{
 	public:
 		RenderComponent(const string& cName, SceneObject* pParent, const PrimitiveType& eType);

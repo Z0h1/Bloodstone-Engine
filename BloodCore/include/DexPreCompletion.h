@@ -4,6 +4,7 @@
 #include <fstream>
 #include <sstream>
 #include <memory>
+#include <io.h>
 
 #include <vector>
 #include <list>
@@ -26,8 +27,9 @@ namespace Dex
 	typedef unsigned int UInt32;
 	typedef unsigned short UInt16;
 
-	typedef map<string, string>	_lParametor;
-	typedef vector<string>		_lString;
+	#define OPEN_MODE_READ		0x01
+	#define OPEN_MODE_WRITE		0x04
+	#define OPEN_MODE_BINARY	0x08
 
 	// Classes
 	class IInputSystem;
@@ -44,8 +46,12 @@ namespace Dex
 	class FileArchive;
 	class ZipAchive;
 	class ResourceManager;
+	class Folder;
+	class CoreFile;
+	class File;
 	class Core;
 	class SceneObject;
+	class Serializer;
 	class Scene;
 	class Log;
 	class IRenderSystem;
@@ -57,6 +63,31 @@ namespace Dex
 	class ISystem;
 	class FileSystem;
 	class CoreObject;
+	class Point4;
+	class Point3;
+	class Point2;
+
+	typedef map<string, string>			_lParametor;
+	typedef vector<string>				_lString;
+	typedef map<string, CoreFile*>		_lCoreFile;
+
+	// FileSystem
+	enum FileFormat // CoreFile
+	{
+		FF_UNKNOWN,		// NULL
+		FF_FOLDER,		// Folder
+		FF_DEXG,		// DEX Geometry *.dexg
+		FF_DEXM,		// DEX Material *.dexm
+		FF_DEXP,		// DEX Pack *.dexp
+		FF_DEXVOI,		// DEX visual Object info *.dexvoi
+		FF_DEXS			// DEX Shader *.dexs
+	};
+	enum FolderType
+	{
+		FT_FOLDER,		// Folder
+		FT_DEXP,		// DEX Pack *.dexp
+		FT_ZIP			// zip pack *.zip
+	};
 
 	enum SystemsType
 	{
@@ -79,6 +110,7 @@ namespace Dex
 		// TODO tharde
 		WP_MAIN,
 		WP_COLLECTION,
+		WP_FILE,
 		WP_SYSTEM,
 		WP_STEP_1,
 		WP_STEP_2,
@@ -133,12 +165,6 @@ namespace Dex
 		OCT_RENDER,
 		OCT_CAMERA,
 		OCT_LIGHT
-	};
-
-	enum ArchiveType
-	{
-		AT_FILE,
-		AT_ZIP
 	};
 
 	enum VertexSemantics

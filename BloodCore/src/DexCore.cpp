@@ -1,7 +1,8 @@
 #include "DexCore.h"
 #include "DexConfigFile.h"
 #include "DexDynamicLibrary.h"
-#include "DexResourceManager.h"
+#include "DexRenderSystem.h"
+#include "DexInputSystem.h"
 #include "DexScene.h"
 #include "DexSceneObject.h"
 #include "DexFileSystem.h"
@@ -60,10 +61,6 @@ namespace Dex
 			else if (it.first == "load_resource_folder")
 			{
 				m_pFileSystem->AddResourceFolder(it.second);
-			}
-			else if (it.first == "load_resource_archive")
-			{
-				//m_pFileSystem->AddResourceFolder(lConfig[i].cValue);
 			}
 		}
 

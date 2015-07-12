@@ -1,74 +1,166 @@
 #include "DexSerializer.h"
-#include "DexCore.h"
+#include "DexStream.h"
 
 namespace Dex
 {
-	Serializer::Serializer(const string& c_name, ofstream* logger, bool fw)
-		: CoreObject(c_name, logger, WorkPriority::WP_STEP_1, fw)
+	Serializer::Serializer(const string& c_name, ofstream* logger, const string& path)
+		: CoreObject(c_name, logger, WorkPriority::WP_FILE)
 	{
+		m_cPath = path;
 	}
 
 	Serializer::~Serializer()
 	{
+		Close();
 	}
 
-	void Serializer::ReadHeader( void* pData )
+	void Serializer::GetLine(string& cString)
 	{
-		m_pStream->Read( pData, sizeof( int ) );
+		if (m_pStream.is_open())
+		{
+			char cBuffer[256];
+			m_pStream.getline(cBuffer, 256);
+
+			cString.append(cBuffer);
+		}
 	}
 
-	void Serializer::ReadInt( void* pData )
+	bool Serializer::Eof(void)
 	{
-		m_pStream->Read( pData, sizeof( int ) );
+		return m_pStream.eof();
 	}
 
-	void Serializer::ReadUInt( void* pData )
+	void Serializer::Read(void* pBuf, size_t nCount)
 	{
-		m_pStream->Read( pData, sizeof( unsigned int ) );
+		if (m_pStream.is_open())
+		{
+			m_pStream.read(static_cast< char* >(pBuf), static_cast< streamsize >(nCount));
+		}
 	}
 
-	void Serializer::ReadBool( void* pData )
+	void Serializer::Write(const void* pBuf, size_t nCount)
 	{
-		m_pStream->Read( pData, sizeof( bool ) );
+		if (m_pStream.is_open())
+		{
+			m_pStream.write(static_cast< const char* >(pBuf), static_cast< streamsize >(nCount));
+		}
 	}
 
-	void Serializer::ReadPtr( void* pData, unsigned int nSize )
+	void Serializer::ReadCharPtr(void* pData, UInt32 nSize)
 	{
-		m_pStream->Read( pData, nSize );
+		Read(pData, nSize);
 	}
 
-	void Serializer::WriteHeader( int pData )
+	void Serializer::ReadString(void* pData, UInt32 nSize)
 	{
-		WriteInt( pData );
+		Read(pData, nSize);
 	}
 
-	void Serializer::WriteInt( int pData )
+	void Serializer::ReadHeader(void* pData)
 	{
-		m_pStream->Write( &pData, sizeof( int ) );
+		Read(pData, sizeof(int));
 	}
 
-	void Serializer::WriteUInt( UInt32 pData )
+	void Serializer::ReadInt(void* pData)
 	{
-		m_pStream->Write( &pData, sizeof( unsigned int ) );
+		Read(pData, sizeof(int));
 	}
 
-	void Serializer::WriteBool( bool pData )
+	void Serializer::ReadUInt(void* pData)
 	{
-		m_pStream->Write( &pData, sizeof( bool ) );
+		Read(pData, sizeof(UInt32));
 	}
 
-	void Serializer::WritePtr( const void* pData, unsigned int nSize )
+	void Serializer::ReadBool(void* pData)
 	{
-		m_pStream->Write( pData, nSize );
+		Read(pData, sizeof(bool));
 	}
 
-	void Serializer::SetResource( const string& cResource )
+	void Serializer::ReadFloat(void* pData)
 	{
-		//m_pStream = Core::GetResourceManager()->LoadResource( cResource );
+		Read(pData, sizeof(float));
 	}
 
-	void Serializer::SetStream( DataStream* pStream )
+	void Serializer::ReadPtr(void* pData, UInt32 nSize)
 	{
-		m_pStream = pStream;
+		Read(pData, nSize);
+	}
+
+	void Serializer::WriteCharPtr(const char* pData)
+	{
+		Write(&pData, sizeof(pData));
+	}
+
+	void Serializer::WriteString(const string& pData)
+	{
+		Write(&pData, pData.size());
+	}
+
+	void Serializer::WriteHeader(int pData)
+	{
+		WriteInt(pData);
+	}
+
+	void Serializer::WriteInt(int pData)
+	{
+		Write(&pData, sizeof(int));
+	}
+
+	void Serializer::WriteUInt(UInt32 pData)
+	{
+		Write(&pData, sizeof(UInt32));
+	}
+
+	void Serializer::WriteBool(bool pData)
+	{
+		Write(&pData, sizeof(bool));
+	}
+
+	void Serializer::WriteFloat(float pData)
+	{
+		Write(&pData, sizeof(float));
+	}
+
+	void Serializer::WritePtr(const void* pData, UInt32 nSize)
+	{
+		Write(pData, nSize);
+	}
+
+	bool Serializer::Open(long eOpenMode)
+	{
+		ios::openmode mode;
+
+		if (eOpenMode & OPEN_MODE_READ)
+		{
+			mode = ios::in;
+		}
+
+		if (eOpenMode & OPEN_MODE_WRITE)
+		{
+			mode = ios::out;
+		}
+
+		if (eOpenMode & OPEN_MODE_BINARY)
+		{
+			mode |= ios::binary;
+		}
+
+		m_pStream.open(m_cPath.c_str(), mode);
+
+		if (!m_pStream.is_open())
+		{
+			DrawLine("Open: Невозможно открыть файл " + mObjectName, MT_ERROR);
+			return false;
+		}
+
+		return true;
+	}
+
+	void Serializer::Close(void)
+	{
+		if (m_pStream.is_open())
+		{
+			m_pStream.close();
+		}
 	}
 }

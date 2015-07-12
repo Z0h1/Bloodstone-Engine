@@ -9,11 +9,17 @@ namespace Dex
 	{
 		m_pObject = obj;
 		m_eType = e_type;
+
+		if (m_pObject) {
+			m_pObject->AddComponent(this);
+		}
 	}
 
 	CoreComponent::~CoreComponent()
 	{
-
+		if (m_pObject) {
+			m_pObject->RemoveComponent(this);
+		}
 	}
 
 	SceneObject* CoreComponent::GetSceneObject()

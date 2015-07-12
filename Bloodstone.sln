@@ -21,6 +21,12 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BloodRender_11.1", "BloodRe
 		{2214C536-AF90-499C-A5C5-0639C01DF83D} = {2214C536-AF90-499C-A5C5-0639C01DF83D}
 	EndProjectSection
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BloodEditor", "BloodEditor\BloodEditor.vcxproj", "{81C7DF2D-0239-486C-A9DD-2667D69B75ED}"
+	ProjectSection(ProjectDependencies) = postProject
+		{2214C536-AF90-499C-A5C5-0639C01DF83D} = {2214C536-AF90-499C-A5C5-0639C01DF83D}
+		{56090F62-DA81-48E6-9227-DABB3F76C530} = {56090F62-DA81-48E6-9227-DABB3F76C530}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -43,6 +49,10 @@ Global
 		{56090F62-DA81-48E6-9227-DABB3F76C530}.Debug|x86.Build.0 = Debug|Win32
 		{56090F62-DA81-48E6-9227-DABB3F76C530}.Release|x86.ActiveCfg = Release|Win32
 		{56090F62-DA81-48E6-9227-DABB3F76C530}.Release|x86.Build.0 = Release|Win32
+		{81C7DF2D-0239-486C-A9DD-2667D69B75ED}.Debug|x86.ActiveCfg = Debug|Win32
+		{81C7DF2D-0239-486C-A9DD-2667D69B75ED}.Debug|x86.Build.0 = Debug|Win32
+		{81C7DF2D-0239-486C-A9DD-2667D69B75ED}.Release|x86.ActiveCfg = Release|Win32
+		{81C7DF2D-0239-486C-A9DD-2667D69B75ED}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
