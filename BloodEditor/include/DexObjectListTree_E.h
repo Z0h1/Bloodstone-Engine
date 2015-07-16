@@ -28,13 +28,13 @@ namespace Dex
 			const wxString& name = wxTreeCtrlNameStr);
 		~EObjectListTree();
 
-		void SetEngine(Scene* s, IRenderSystem* r);
+		void SetEngine(Scene* s, RenderSystem* r);
 
 		SceneObject* CreateSceneObject(const string& name);
 		CoreComponent* CreateObjectComponent(SceneObject* obj, const _lParametor& parametors);
 
 	private:
 		Scene*			m_pScene;
-		IRenderSystem*	m_pRenderSystem;
+		RenderSystem*	m_pRenderSystem;
 	};
 }

@@ -35,7 +35,7 @@ namespace Dex
 		void InitEngine();
 
 		Core*				m_pCore;
-		IRenderSystem*		m_pRenderSystem;
+		RenderSystem*		m_pRenderSystem;
 		Scene*				m_pScene;
 		FileSystem*			m_pFileSystem;
 

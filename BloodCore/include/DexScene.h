@@ -16,11 +16,11 @@ namespace Dex
 		~Scene(void);
 
 		SceneObject* CreateObject(const string& c_name, SceneObject* parent = nullptr);
-		SceneObject* GetSceneObject(UInt32 id);
+		SceneObject* GetSceneObject(_intun id);
 		void GetSceneObject(const string& c_name, _lSceneObject& so);
 		void RemoveObject(const string& c_name);
 		void RemoveObject(SceneObject* obj);
-		void RemoveObject(UInt32 id);
+		void RemoveObject(_intun id);
 
 		void GetSceneObjects(_lSceneObject& so);
 

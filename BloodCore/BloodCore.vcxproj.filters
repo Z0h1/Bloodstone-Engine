@@ -41,9 +41,6 @@
     <Filter Include="Source Files\Systems\File system\Format\Folder">
       <UniqueIdentifier>{60052f27-8b5d-4d0a-8dc6-7e07795a5583}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Systems\File system\Format\File\DEX Geometry">
-      <UniqueIdentifier>{1a753f1a-b644-4c68-a5ed-2296dd93aac0}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Systems\Graphic\Buffers">
       <UniqueIdentifier>{deb0ceb2-5218-419a-810d-0aae6a8750b4}</UniqueIdentifier>
     </Filter>
@@ -136,9 +133,6 @@
     <ClInclude Include="include\DexFolder.h">
       <Filter>Source Files\Systems\File system\Format\Folder</Filter>
     </ClInclude>
-    <ClInclude Include="include\DexGeometryFile.h">
-      <Filter>Source Files\Systems\File system\Format\File\DEX Geometry</Filter>
-    </ClInclude>
     <ClInclude Include="include\DexSerializer.h">
       <Filter>Source Files\Systems\File system</Filter>
     </ClInclude>
@@ -150,6 +144,12 @@
     </ClInclude>
     <ClInclude Include="include\DexIndexBuffer.h">
       <Filter>Source Files\Systems\Graphic\Buffers</Filter>
+    </ClInclude>
+    <ClInclude Include="include\DexFile.h">
+      <Filter>Source Files\Systems\File system\Format\File</Filter>
+    </ClInclude>
+    <ClInclude Include="include\DexShaderStructures.h">
+      <Filter>Source Files\Systems\Graphic</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -222,9 +222,6 @@
     <ClCompile Include="src\DexFolder.cpp">
       <Filter>Source Files\Systems\File system\Format\Folder</Filter>
     </ClCompile>
-    <ClCompile Include="src\DexGeometryFile.cpp">
-      <Filter>Source Files\Systems\File system\Format\File\DEX Geometry</Filter>
-    </ClCompile>
     <ClCompile Include="src\DexSerializer.cpp">
       <Filter>Source Files\Systems\File system</Filter>
     </ClCompile>
@@ -233,6 +230,9 @@
     </ClCompile>
     <ClCompile Include="src\DexIndexBuffer.cpp">
       <Filter>Source Files\Systems\Graphic\Buffers</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DexFile.cpp">
+      <Filter>Source Files\Systems\File system\Format\File</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

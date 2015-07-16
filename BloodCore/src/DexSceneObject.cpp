@@ -6,7 +6,7 @@
 
 namespace Dex
 {
-	SceneObject::SceneObject(const string& c_name, Scene* scene, UInt32 id, ofstream* logger, SceneObject* parent)
+	SceneObject::SceneObject(const string& c_name, Scene* scene, _intun id, ofstream* logger, SceneObject* parent)
 		: CoreObject(c_name, logger, WorkPriority::WP_STEP_2)
 	{
 		m_pScene = scene;
@@ -27,7 +27,7 @@ namespace Dex
 	{
 	}
 
-	UInt32 SceneObject::GetId(void)
+	_intun SceneObject::GetId(void)
 	{
 		return m_nId;
 	}

@@ -28,7 +28,7 @@ namespace Dex
 
 		return pObject;
 	}
-	SceneObject* Scene::GetSceneObject(UInt32 id)
+	SceneObject* Scene::GetSceneObject(_intun id)
 	{
 		for (auto n : m_lSceneObject)
 		{
@@ -80,7 +80,7 @@ namespace Dex
 		}
 	}
 
-	void Scene::RemoveObject(UInt32 id)
+	void Scene::RemoveObject(_intun id)
 	{
 		for (_lSceneObject::iterator i = m_lSceneObject.begin(); i != m_lSceneObject.end(); i++)
 		{

@@ -30,7 +30,7 @@ namespace Dex
 
 	}
 
-	void EObjectListTree::SetEngine(Scene* s, IRenderSystem* r)
+	void EObjectListTree::SetEngine(Scene* s, RenderSystem* r)
 	{
 		m_pScene = s;
 		m_pRenderSystem = r;

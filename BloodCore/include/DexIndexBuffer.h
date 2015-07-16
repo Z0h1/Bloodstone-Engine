@@ -8,16 +8,16 @@ namespace Dex
 	class D_EXPORT IndexBuffer : public Buffer
 	{
 	public:
-		IndexBuffer(UInt32 nIndexCount, IndexType eType);
+		IndexBuffer(_intun nIndexCount, IndexType eType);
 		~IndexBuffer(void);
 
-		UInt32 GetIndexCount(void);
-		UInt32 GetSizeIndex(void);
+		_intun GetIndexCount(void);
+		_intun GetSizeIndex(void);
 		IndexType GetIndexType(void);
 
 	protected:
-		UInt32				m_nIndexCount;
-		UInt32					m_nOffset;
+		_intun				m_nIndexCount;
+		_intun					m_nOffset;
 
 		IndexType			m_eIndexType;
 	};

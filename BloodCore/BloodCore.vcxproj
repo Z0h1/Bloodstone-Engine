@@ -99,7 +99,7 @@
     <ClInclude Include="include\DexDynamicLibrary.h" />
     <ClInclude Include="include\DexFileSystem.h" />
     <ClInclude Include="include\DexFolder.h" />
-    <ClInclude Include="include\DexGeometryFile.h" />
+    <ClInclude Include="include\DexFile.h" />
     <ClInclude Include="include\DexBuffer.h" />
     <ClInclude Include="include\DexHardwareBufferData.h" />
     <ClInclude Include="include\DexIndexBuffer.h" />
@@ -123,6 +123,7 @@
     <ClInclude Include="include\DexStream.h" />
     <ClInclude Include="include\DexStringConverter.h" />
     <ClInclude Include="include\DexSystem.h" />
+    <ClInclude Include="include\DexShaderStructures.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\DexCameraComponent.cpp" />
@@ -133,7 +134,7 @@
     <ClCompile Include="src\DexDynamicLibrary.cpp" />
     <ClCompile Include="src\DexFileSystem.cpp" />
     <ClCompile Include="src\DexFolder.cpp" />
-    <ClCompile Include="src\DexGeometryFile.cpp" />
+    <ClCompile Include="src\DexFile.cpp" />
     <ClCompile Include="src\DexHardwareBufferData.cpp" />
     <ClCompile Include="src\DexIndexBuffer.cpp" />
     <ClCompile Include="src\DexVertexBuffer.cpp" />

@@ -4,35 +4,39 @@
 
 namespace Dex
 {
-	IRenderWindow::IRenderWindow(const string& c_name, ofstream* logger, bool fw)
+	RenderWindow::RenderWindow(const string& c_name, ofstream* logger, bool fw)
 		: CoreObject(c_name, logger, WorkPriority::WP_STEP_1, fw)
 	{
 		m_pCamera = nullptr;
+		m_pSceneToRender = nullptr;
+
 		m_bActive = true;
+
 		m_bFullScrean = false;
 		m_bVSync = false;
 		m_nWidth = 800;
 		m_nHeight = 600;
 		m_nBit = 32;
 		m_hWnd = 0;
+
 		m_bInit = false;
 	}
 
-	IRenderWindow::~IRenderWindow()
+	RenderWindow::~RenderWindow()
 	{
 	}
 
-	bool IRenderWindow::IsFullScrean( void )
+	bool RenderWindow::IsFullScrean(void)
 	{
 		return m_bFullScrean;
 	}
 
-	bool IRenderWindow::IsActive( void )
+	bool RenderWindow::IsActive(void)
 	{
 		return m_bActive;
 	}
 
-	void IRenderWindow::SetCamera(CameraComponent* camera)
+	void RenderWindow::SetCamera(CameraComponent* camera)
 	{
 		if (m_pCamera) {
 			DrawLine("SetCamera: смена камеры c " + m_pCamera->GetName() + " на " + camera->GetName());
@@ -49,19 +53,12 @@ namespace Dex
 		m_pCamera = camera;
 
 		if (m_pCamera) {
-			IInit();
+			m_pSceneToRender = m_pCamera->GetSceneObject()->GetScene();
 		}
 	}
 
-	CameraComponent* IRenderWindow::GetCamera()
+	CameraComponent* RenderWindow::GetCamera()
 	{
 		return m_pCamera;
-	}
-
-	void IRenderWindow::Render()
-	{
-		if (m_bActive && m_pCamera != nullptr) {
-			IRender();
-		}
 	}
 }

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
@@ -11,19 +11,18 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{FF8DE7BB-AD50-47D5-A08F-AAE44C8C914A}</ProjectGuid>
-    <RootNamespace>BloodRender_9</RootNamespace>
-    <TargetPlatformVersion>8.1</TargetPlatformVersion>
+    <ProjectGuid>{57FD3C22-9603-4B63-8F4B-8674CFA214F1}</ProjectGuid>
+    <RootNamespace>BloodMeshConverter</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -31,8 +30,6 @@
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
-  </ImportGroup>
-  <ImportGroup Label="Shared">
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
@@ -54,16 +51,12 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <PrecompiledHeader>Use</PrecompiledHeader>
-      <PrecompiledHeaderFile>DexPreCompletionD3D9.h</PrecompiledHeaderFile>
-      <ForcedIncludeFiles>DexPreCompletionD3D9.h</ForcedIncludeFiles>
-      <AdditionalIncludeDirectories>$(IncludePath);$(DXSDK_DIR)Include;$(ProjectDir)include;$(SolutionDir)BloodCore/include</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BLOODRENDER_9_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(ProjectDir)include;$(SolutionDir)BloodCore/include;$(SolutionDir)wxWidgets/include;$(SolutionDir)wxWidgets\lib\vc_lib\mswu</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(LibraryPath);$(DXSDK_DIR)Lib\x86;$(SolutionDir)bin\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>BloodCore.lib;d3d9.lib;d3dx9.lib;dxerr.lib;dxguid.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>BloodCore.lib;BloodRender_11.2.lib;wxmsw31ud_core.lib;wxbase31ud.lib;wxtiffd.lib;wxjpegd.lib;wxpngd.lib;wxzlibd.lib;wxregexud.lib;wxexpatd.lib;kernel32.lib;user32.lib;gdi32.lib;comdlg32.lib;winspool.lib;winmm.lib;shell32.lib;comctl32.lib;ole32.lib;oleaut32.lib;uuid.lib;rpcrt4.lib;advapi32.lib;wsock32.lib;wininet.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)wxWidgets/lib/vc_lib;$(SolutionDir)bin\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -73,37 +66,23 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PrecompiledHeader>Use</PrecompiledHeader>
-      <PrecompiledHeaderFile>DexPreCompletionD3D9.h</PrecompiledHeaderFile>
-      <ForcedIncludeFiles>DexPreCompletionD3D9.h</ForcedIncludeFiles>
-      <AdditionalIncludeDirectories>$(IncludePath);$(DXSDK_DIR)Include;$(ProjectDir)include;$(SolutionDir)BloodCore/include</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>BLOODRENDER_9_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(ProjectDir)include;$(SolutionDir)BloodCore/include;$(SolutionDir)wxWidgets/include;$(SolutionDir)wxWidgets\lib\vc_lib\mswu</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalLibraryDirectories>$(LibraryPath);$(DXSDK_DIR)Lib\x86;$(SolutionDir)bin\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>BloodCore.lib;d3d9.lib;d3dx9.lib;dxerr.lib;dxguid.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>BloodCore.lib;BloodRender_11.2.lib;wxmsw31ud_core.lib;wxbase31ud.lib;wxtiffd.lib;wxjpegd.lib;wxpngd.lib;wxzlibd.lib;wxregexud.lib;wxexpatd.lib;kernel32.lib;user32.lib;gdi32.lib;comdlg32.lib;winspool.lib;winmm.lib;shell32.lib;comctl32.lib;ole32.lib;oleaut32.lib;uuid.lib;rpcrt4.lib;advapi32.lib;wsock32.lib;wininet.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)wxWidgets/lib/vc_lib;$(SolutionDir)bin\$(Configuration);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\DexEnterPointD3D9.cpp" />
-    <ClCompile Include="src\DexPreCompletionD3D9.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="src\DexRenderAdapterD3D9.cpp" />
-    <ClCompile Include="src\DexRenderComponentD3D9.cpp" />
-    <ClCompile Include="src\DexRenderSystemD3D9.cpp" />
-    <ClCompile Include="src\DexRenderWindowD3D9.cpp" />
+    <ClInclude Include="include\DexApp_MC.h" />
+    <ClInclude Include="include\DexFrame_MC.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\DexPreCompletionD3D9.h" />
-    <ClInclude Include="include\DexRenderAdapterD3D9.h" />
-    <ClInclude Include="include\DexRenderComponentD3D9.h" />
-    <ClInclude Include="include\DexRenderSystemD3D9.h" />
-    <ClInclude Include="include\DexRenderWindowD3D9.h" />
+    <ClCompile Include="src\DexApp_MC.cpp" />
+    <ClCompile Include="src\DexFrame_MC.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

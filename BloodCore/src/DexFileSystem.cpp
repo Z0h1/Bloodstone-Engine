@@ -1,6 +1,6 @@
 #include "DexFileSystem.h"
 #include "DexFolder.h"
-#include "DexGeometryFile.h"
+#include "DexFile.h"
 #include "Windows.h"
 
 namespace Dex
@@ -274,7 +274,7 @@ namespace Dex
 
 						if (cFileFormat == "dexg")
 						{
-							pFile = new GeometryFile(mOutFileStream, pFolder, cFilePath, cFileName);
+							eFormat = FF_DEXG;
 						}
 						else if (cFileFormat == "dexm")
 						{
@@ -288,6 +288,8 @@ namespace Dex
 						{
 							eFormat = FF_DEXS;
 						}
+
+						pFile = new File(mOutFileStream, pFolder, cFilePath, cFileName);
 					}
 				}
 				break;

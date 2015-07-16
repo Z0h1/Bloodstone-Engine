@@ -14,7 +14,7 @@ using namespace Dex;
 HINSTANCE               g_hInst = NULL;
 HWND                    g_hWnd = NULL;
 Core*					g_pCore = nullptr;
-IRenderSystem*			g_pRenderSystem = nullptr;
+RenderSystem*			g_pRenderSystem = nullptr;
 //--------------------------------------------------------------------------------------
 // Forward declarations
 //--------------------------------------------------------------------------------------
@@ -159,7 +159,7 @@ HRESULT InitDevice()
 	
 	if (g_pRenderSystem != nullptr)
 	{
-		IRenderWindow* window = g_pRenderSystem->CreateRenderWindow(win);
+		RenderWindow* window = g_pRenderSystem->CreateRenderWindow(win);
 
 		window->SetCamera(camera);
 	}

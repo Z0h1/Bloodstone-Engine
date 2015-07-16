@@ -74,8 +74,7 @@ namespace Dex
 		switch (file->GetFormat())
 		{
 		case Dex::FF_DEXG:
-			GeometryFile* gfile = (GeometryFile*)file;
-			gfile->ImportMesh();
+			File* gfile = (File*)file;
 			break;
 		}
 

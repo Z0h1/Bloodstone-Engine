@@ -8,7 +8,7 @@
 #include "DexPreCompletion.h"
 #include "DexFileSystem.h"
 #include "DexFolder.h"
-#include "DexGeometryFile.h"
+#include "DexFile.h"
 #include "DexCommon.h"
 #include "DexConfigFile.h"
 #include "DexDynamicLibrary.h"

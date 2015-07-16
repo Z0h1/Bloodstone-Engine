@@ -24,7 +24,7 @@ namespace Dex
 	#endif
 
 	typedef float Point;
-	typedef unsigned int UInt32;
+	typedef unsigned int _intun;
 	typedef unsigned short UInt16;
 
 	#define OPEN_MODE_READ		0x01
@@ -50,11 +50,11 @@ namespace Dex
 	class Serializer;
 	class Scene;
 	class Log;
-	class IRenderSystem;
+	class RenderSystem;
 	class ConfigFile;
 	class StringConverter;
 	class DynamicLibrary;
-	class IRenderWindow;
+	class RenderWindow;
 	class IRenderConnect;
 	class ISystem;
 	class FileSystem;
@@ -62,6 +62,7 @@ namespace Dex
 	class Point4;
 	class Point3;
 	class Point2;
+	class FileSystem;
 
 	typedef map<string, string>			_lParametor;
 	typedef vector<string>				_lString;
@@ -90,6 +91,7 @@ namespace Dex
 		SYSTEM_RENDER_DIRECTX_9,
 		SYSTEM_RENDER_DIRECTX_11,
 		SYSTEM_RENDER_DIRECTX_11_1,
+		SYSTEM_RENDER_DIRECTX_11_2,
 		SYSTEM_INPUT_DX,
 		SYSTEM_FILE_DEX
 	};
@@ -162,6 +164,10 @@ namespace Dex
 		OCT_CAMERA,
 		OCT_LIGHT
 	};
+
+	#define VL_OFFSET_POSITION(offset) offset += 12;
+	#define VL_OFFSET_NORMAL(offset) offset += 12;
+	#define VL_OFFSET_TEXTURE(offset) offset += 8;
 
 	enum VertexLayout
 	{

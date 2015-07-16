@@ -28,26 +28,9 @@ namespace Dex
 			}
 			else if (it.first == "set_render_system")
 			{
-				if (it.second == "DirectX_11_1" || it.second == "directX_11_1" || it.second == "Directx_11_1" || it.second == "directx_11_1"
-					|| it.second == "DirectX 11.1" || it.second == "directX 11.1" || it.second == "Directx 11.1" || it.second == "directx 11.1"
-					|| it.second == "DirectX11.1" || it.second == "directX11.1" || it.second == "Directx11.1" || it.second == "directx11.1"
-					|| it.second == "11.1")
+				if (it.second == "11.2")
 				{
-					ChangeSystem(SystemsType::SYSTEM_RENDER_DIRECTX_11_1);
-				}
-				else if (it.second == "DirectX_9" || it.second == "directX_9" || it.second == "Directx_9" || it.second == "directx_9"
-					|| it.second == "DirectX 9" || it.second == "directX 9" || it.second == "Directx 9" || it.second == "directx 9"
-					|| it.second == "DirectX9" || it.second == "directX9" || it.second == "Directx9" || it.second == "directx9"
-					|| it.second == "9")
-				{
-					ChangeSystem(SystemsType::SYSTEM_RENDER_DIRECTX_9);
-				}
-				else if (it.second == "DirectX_11" || it.second == "directX_11" || it.second == "Directx_11" || it.second == "directx_11"
-					|| it.second == "DirectX 11" || it.second == "directX 11" || it.second == "Directx 11" || it.second == "directx 11"
-					|| it.second == "DirectX11" || it.second == "directX11" || it.second == "Directx11" || it.second == "directx11"
-					|| it.second == "11")
-				{
-					ChangeSystem(SystemsType::SYSTEM_RENDER_DIRECTX_11);
+					ChangeSystem(SystemsType::SYSTEM_RENDER_DIRECTX_11_2);
 				}
 				else
 				{
@@ -199,13 +182,14 @@ namespace Dex
 			case Dex::SYSTEM_RENDER_DIRECTX_9:
 			case Dex::SYSTEM_RENDER_DIRECTX_11:
 			case Dex::SYSTEM_RENDER_DIRECTX_11_1:
+			case Dex::SYSTEM_RENDER_DIRECTX_11_2:
 				if (m_pRenderSystem && m_pRenderSystem->GetType() == eType)
 				{
 					DrawLine("ChangeSystem: Данная система визуализации уже инициализирована!");
 				}
 				else
 				{
-					m_pRenderSystem = (IRenderSystem*)m_lSystems[eType];
+					m_pRenderSystem = (RenderSystem*)m_lSystems[eType];
 					DrawLine("ChangeSystem: Установлена системы визуализации " + m_pRenderSystem->GetName());
 				}
 				break;
@@ -274,7 +258,7 @@ namespace Dex
 		return m_lSystems[st];
 	}
 
-	IRenderSystem* Core::GetRenderSystem()
+	RenderSystem* Core::GetRenderSystem()
 	{
 		return m_pRenderSystem;
 	}

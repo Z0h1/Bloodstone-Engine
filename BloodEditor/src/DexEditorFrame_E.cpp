@@ -145,13 +145,48 @@ namespace Dex
 
 		if (m_pCore) {
 			m_pRenderSystem = m_pCore->GetRenderSystem();
+			_lParametor _P;
+			_P["asd"] = "asd";
+			m_pRenderSystem->Init(_P);
+
 			m_pFileSystem = m_pCore->GetFileSystem();
+
+			//enum GeometryStruct
+			//{
+			//	// int ( version visual object )
+			//	// bool ( bUseIndex )
+			//	// if ( bUseIndex )
+			//	// {
+			//	//		int ( enum IndexType )
+			//	//		_intun ( Index count )
+			//	//		Ptr ( buffer )
+			//	// }
+			//	GEOMETRY_VERTEX_BEGIN,
+			//	// _intun ( Vertex count )
+			//	GEOMETRY_VERTEX_ELEMENT_BEGIN,
+			//	// int ( enum VertexSemantics )
+			//	GEOMETRY_VERTEX_ELEMENT_END,
+			//	// Ptr ( buffer )
+			//	GEOMETRY_VERTEX_END
+			//	// ASCII code shader
+			//};
+			CoreFile* cfile = m_pFileSystem->GetCFile("Data/use.dexg", true, FF_DEXG);
+			File* file = dynamic_cast<File*>(cfile);
+
+			CoreFile* cfile_load = m_pFileSystem->GetCFile("Data/Models/torus.obj");
+			File* file_load = dynamic_cast<File*>(cfile_load);
+			file_load->Open(OPEN_MODE_READ | OPEN_MODE_BINARY);
+			file_load->Close();
+
+			file->Open(OPEN_MODE_WRITE | OPEN_MODE_BINARY);
+			file->WriteInt(3);
+			file->Close();
 
 			if (m_pRenderSystem) {
 				m_pScene = m_pCore->CreateScene("TEST_SCENE");
 				m_pObjectList->SetEngine(m_pScene, m_pRenderSystem);
 
-				_lParametor _P;
+				_P.clear();
 				_P["name"] = "light_component";
 				_P["type"] = "light";
 				_P["light_color"] = StringConverter::toStringPoint4(0.7f, 0.2f, 0.1f, 0.5f);
@@ -169,7 +204,7 @@ namespace Dex
 				RenderComponent* render_component_1 = (RenderComponent*)m_pObjectList->CreateObjectComponent(viusal_obj, _P);
 				render_component_1->SetPrimitiveType(PrimitiveType::PT_POLYGON);
 				render_component_1->SetActive(true);
-				render_component_1->LoadGeometry(m_pFileSystem->GetCFile("Data/TEST.dexg"));
+				render_component_1->LoadGeometryFromFile(m_pFileSystem->GetCFile("Data/torus.dexg"));
 
 				_P.clear();
 				_P["window_name"] = "EditorWindow";
@@ -177,7 +212,7 @@ namespace Dex
 				wxSize sz = m_pRenderWindow->GetSize();
 				_P["display_mode"] = StringConverter::toString(sz.GetWidth(), sz.GetHeight(), 32);
 				_P["window_handle"] = StringConverter::toString((int)m_pRenderWindow->GetHWND());
-				IRenderWindow* window = m_pRenderSystem->CreateRenderWindow(_P);
+				RenderWindow* window = m_pRenderSystem->CreateRenderWindow(_P);
 
 				_P.clear();
 				_P["name"] = "CAMERA_1_COMPONENT";

@@ -11,10 +11,10 @@ namespace Dex
 	class D_EXPORT SceneObject : public CoreObject
 	{
 	public:
-		SceneObject(const string& c_name, Scene* scene, UInt32 id, ofstream* logger, SceneObject* parent = nullptr);
+		SceneObject(const string& c_name, Scene* scene, _intun id, ofstream* logger, SceneObject* parent = nullptr);
 		virtual ~SceneObject(void);
 
-		UInt32 GetId(void);
+		_intun GetId(void);
 		Scene* GetScene(void);
 
 		void AddComponent(CoreComponent* pComponent);
@@ -52,7 +52,7 @@ namespace Dex
 		bool IsCalculateMatrix(void);
 
 	protected:
-		UInt32				m_nId;
+		_intun				m_nId;
 		Scene*				m_pScene;
 		SceneObject*		m_pParent;
 

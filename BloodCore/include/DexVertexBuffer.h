@@ -17,14 +17,14 @@ namespace Dex
 		void AddVertexSemantic(VertexLayout eSemantics);
 		void RemoveVertexSemantic(VertexLayout eSemantics);
 
-		UInt32 GetSizeBuffer(void);
-		UInt32 GetVertexCount(void);
-		UInt32 GetOffsetBuffer(void);
+		_intun GetSizeBuffer(void);
+		_intun GetVertexCount(void);
+		_intun GetOffsetBuffer(void);
 
 	protected:
 		_lVertexLayout			m_lVertexSemantic;
 
-		UInt32					m_nVertexCount;
-		UInt32					m_nOffset;
+		_intun					m_nVertexCount;
+		_intun					m_nOffset;
 	};
 }

@@ -6,26 +6,21 @@
 
 namespace Dex
 {
-	class D_EXPORT IRenderWindow : public CoreObject
+	class D_EXPORT RenderWindow : public CoreObject
 	{
 	public:
-		IRenderWindow(const string& c_name, ofstream* logger, bool fw = false);
-		virtual ~IRenderWindow();
+		RenderWindow(const string& c_name, ofstream* logger, bool fw = false);
+		virtual ~RenderWindow();
 
 		bool IsFullScrean(void);
 		bool IsActive(void);
 
 		virtual bool Create(const _lParametor & config) = 0;
-		
+
 		void SetCamera(CameraComponent* camera);
 		CameraComponent* GetCamera();
 
-		void Render();
-
 	protected:
-		virtual void IRender() = 0;
-		virtual void IInit() = 0;
-
 		int					m_hWnd;
 
 		bool				m_bFullScrean;
@@ -34,10 +29,11 @@ namespace Dex
 		bool				m_bInit;
 
 		// Display Mode
-		UInt32				m_nWidth;
-		UInt32				m_nHeight;
-		UInt32				m_nBit;
+		_intun				m_nWidth;
+		_intun				m_nHeight;
+		_intun				m_nBit;
 
 		CameraComponent*	m_pCamera;
+		Scene*				m_pSceneToRender;
 	};
 }

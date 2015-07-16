@@ -31,7 +31,7 @@ namespace Dex
 		static unsigned int Parse_unsigned_int(string value, unsigned int default_value = 0);
 		static size_t Parse_size_t(string value, size_t default_value = 0);
 
-		static void ParseDisplyaMode(const string& mode, UInt32& Width, UInt32& Height, UInt32& bit);
+		static void ParseDisplyaMode(const string& mode, _intun& Width, _intun& Height, _intun& bit);
 		static void ParseXYZ(const string& str, Point& X, Point& Y, Point& Z);
 		static void ParsePrimitiveType(const string& str, PrimitiveType& type);
 	};

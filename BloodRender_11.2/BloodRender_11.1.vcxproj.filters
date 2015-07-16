@@ -7,39 +7,33 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\DexEnterPointD11_1.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\DexPreComplitionD11_1.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\DexRenderSystemD11_1.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\DexRenderWindowD11_1.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\DexRenderComponentD11_1.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Dex_dxerr.cpp">
+    <ClCompile Include="src\DexRenderSystemD11_2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DexRenderWindowD11_2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DexPreComplitionD11_2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DexEnterPointD11_2.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\DexPreComplitionD11_1.h">
+    <ClInclude Include="include\DexRenderSystemD11_2.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\DexRenderSystemD11_1.h">
+    <ClInclude Include="include\DexRenderWindowD11_2.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\DexRenderWindowD11_1.h">
+    <ClInclude Include="include\DexRenderComponentD11_2.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\DexRenderComponentD11_1.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Dex_dxerr.h">
+    <ClInclude Include="include\DexPreComplitionD11_2.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>

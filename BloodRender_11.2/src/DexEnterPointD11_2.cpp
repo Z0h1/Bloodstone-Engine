@@ -1,5 +1,5 @@
 #include "DexCore.h"
-#include "DexRenderSystemD11_1.h"
+#include "DexRenderSystemD11_2.h"
 
 namespace Dex
 {
@@ -7,7 +7,7 @@ namespace Dex
 	{
 		void D_EXPORT_D11_1 Start_DexDynamicLibrary(Core* pCore)
 		{
-			pCore->AddSystem(new RenderSystemD11_1(pCore->GetLogger()));
+			pCore->AddSystem(new RenderSystemD11_2(pCore->GetLogger(), pCore->GetFileSystem()));
 		}
 
 		void D_EXPORT_D11_1 Stop_DexDynamicLibrary(Core* pCore)
