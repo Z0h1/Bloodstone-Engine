@@ -8,7 +8,7 @@ using namespace Microsoft::WRL;
 namespace Dex
 {
 	RenderSystemD11_2::RenderSystemD11_2(ofstream* logger, FileSystem* fileSystem)
-		: RenderSystem("RENDER_SYSTEM_D11_1", logger, SystemsType::SYSTEM_RENDER_DIRECTX_11_2)
+		: RenderSystem("RENDER_SYSTEM_D11_2", logger, SystemsType::SYSTEM_RENDER_DIRECTX_11_2)
 	{
 		m_pFileSystem = fileSystem;
 	}
@@ -27,7 +27,7 @@ namespace Dex
 			FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_IGNORE_INSERTS,
 			nullptr, hr, MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), (LPTSTR)&errorText, 0, nullptr);
 
-		if (nullptr != errorText)
+		if (errorText)
 		{
 			str = errorText;
 			str = str.substr(0, str.size() - 2);
@@ -105,6 +105,80 @@ namespace Dex
 		else {
 			device.As(&m_d3dDevice);
 			context.As(&m_d3dContext);
+
+			ComPtr<IDXGIDevice2> dxgiDevice;
+			m_d3dDevice.As(&dxgiDevice);
+
+			ComPtr<IDXGIAdapter> dxgiAdapter;
+			dxgiDevice->GetAdapter(&dxgiAdapter);
+
+			ComPtr<IDXGIFactory2> dxgiFactory;
+			dxgiAdapter->GetParent(IID_PPV_ARGS(&dxgiFactory));
+
+			ComPtr<IDXGIAdapter> adapter;
+
+			// Use the factory to create an adapter for the primary graphics interface (video card).
+			hr = dxgiFactory->EnumAdapters(0, &adapter);
+			if (FAILED(hr))
+			{
+				return false;
+			}
+
+			ComPtr<IDXGIOutput> adapterOutput;
+
+			// Enumerate the primary adapter output (monitor).
+			hr = adapter->EnumOutputs(0, &adapterOutput);
+			if (FAILED(hr))
+			{
+				return false;
+			}
+
+			unsigned int numModes;
+
+			// Get the number of modes that fit the DXGI_FORMAT_R8G8B8A8_UNORM display format for the adapter output (monitor).
+			hr = adapterOutput->GetDisplayModeList(DXGI_FORMAT_R8G8B8A8_UNORM, DXGI_ENUM_MODES_INTERLACED, &numModes, NULL);
+			if (FAILED(hr))
+			{
+				return false;
+			}
+
+			DXGI_MODE_DESC* displayModeList;
+
+			// Create a list to hold all the possible display modes for this monitor/video card combination.
+			displayModeList = new DXGI_MODE_DESC[numModes];
+			if (!displayModeList)
+			{
+				return false;
+			}
+
+			// Now fill the display mode list structures.
+			hr = adapterOutput->GetDisplayModeList(DXGI_FORMAT_R8G8B8A8_UNORM, DXGI_ENUM_MODES_INTERLACED, &numModes, displayModeList);
+			if (FAILED(hr))
+			{
+				return false;
+			}
+
+			// Now go through all the display modes and find the one that matches the screen width and height.
+			// When a match is found store the numerator and denominator of the refresh rate for that monitor.
+			for (int i = 0; i < numModes; i++)
+			{
+				stringstream sstr;
+				sstr << displayModeList[i].Width << "x" << displayModeList[i].Height
+					<< " Numerator = " << displayModeList[i].RefreshRate.Numerator << " Denominator = " << displayModeList[i].RefreshRate.Denominator;
+				DrawLine(sstr.str());
+				/*if (displayModeList[i].Width == (UINT)screenWidth)
+				{
+					if (displayModeList[i].Height == (UINT)screenHeight)
+					{
+						numerator = displayModeList[i].RefreshRate.Numerator;
+						denominator = displayModeList[i].RefreshRate.Denominator;
+					}
+				}*/
+			}
+
+			// Release the display mode list.
+			delete[] displayModeList;
+			displayModeList = 0;
 
 			m_bInit = true;
 		}

@@ -26,58 +26,20 @@ namespace Dex
 	{
 	}
 
-	void RenderWindowD11_2::CreateWindowSizeDependentResources()
-	{
-		// Create a render target view of the swap chain back buffer.
-		ComPtr<ID3D11Texture2D> backBuffer;
-		m_swapChain->GetBuffer(0, IID_PPV_ARGS(&backBuffer));
-
-		m_pRSystem->GetD3DDevice()->CreateRenderTargetView(
-			backBuffer.Get(),
-			nullptr,
-			&m_d3dRenderTargetView
-			);
-
-		// Create a depth stencil view for use with 3D rendering if needed.
-		CD3D11_TEXTURE2D_DESC depthStencilDesc(
-			DXGI_FORMAT_D24_UNORM_S8_UINT,
-			lround(m_nWidth),
-			lround(m_nHeight),
-			1, // This depth stencil view has only one texture.
-			1, // Use a single mipmap level.
-			D3D11_BIND_DEPTH_STENCIL
-			);
-
-		ComPtr<ID3D11Texture2D> depthStencil;
-		m_pRSystem->GetD3DDevice()->CreateTexture2D(
-			&depthStencilDesc,
-			nullptr,
-			&depthStencil
-			);
-
-		CD3D11_DEPTH_STENCIL_VIEW_DESC depthStencilViewDesc(D3D11_DSV_DIMENSION_TEXTURE2D);
-		m_pRSystem->GetD3DDevice()->CreateDepthStencilView(
-			depthStencil.Get(),
-			&depthStencilViewDesc,
-			&m_d3dDepthStencilView
-			);
-
-		// Set the 3D rendering viewport to target the entire window.
-		m_screenViewport = CD3D11_VIEWPORT(
-			0.0f,
-			0.0f,
-			(FLOAT)m_nWidth,
-			(FLOAT)m_nHeight
-			);
-
-		m_pRSystem->GetD3DDeviceContext()->RSSetViewports(1, &m_screenViewport);
-	}
-
 	// TODO create software window
 	bool RenderWindowD11_2::Create(const _lParametor& config)
 	{
 		_lParametor::const_iterator parametor;
 		HRESULT hr = S_FALSE;
+		auto divace = m_pRSystem->GetD3DDevice();
+		auto context = m_pRSystem->GetD3DDeviceContext();
+
+		// Очистить предыдущая размер окна конкретного контекста.
+		ID3D11RenderTargetView* nullViews[] = { nullptr };
+		context->OMSetRenderTargets(ARRAYSIZE(nullViews), nullViews, nullptr);
+		m_d3dRenderTargetView = nullptr;
+		m_d3dDepthStencilView = nullptr;
+		context->Flush();
 
 		parametor = config.find("window_name");
 		if (parametor != config.end()) {
@@ -118,17 +80,9 @@ namespace Dex
 			return false;
 		}
 
-		// Очистить предыдущая размер окна конкретного контекста.
-		ID3D11RenderTargetView* nullViews[] = { nullptr };
-		m_pRSystem->GetD3DDeviceContext()->OMSetRenderTargets(ARRAYSIZE(nullViews), nullViews, nullptr);
-		m_d3dRenderTargetView = nullptr;
-		m_d3dDepthStencilView = nullptr;
-		m_pRSystem->GetD3DDeviceContext()->Flush();
-
 		DXGI_SWAP_CHAIN_DESC1 swapChainDesc = { 0 };
-
 		swapChainDesc.Width = m_nWidth;
-		swapChainDesc.Height = m_nWidth;
+		swapChainDesc.Height = m_nHeight;
 		swapChainDesc.Format = DXGI_FORMAT_B8G8R8A8_UNORM; // Это наиболее распространенный формат swap chain.
 		swapChainDesc.Stereo = false;
 		swapChainDesc.SampleDesc.Count = 1; // Don't use multi-sampling.
@@ -141,7 +95,7 @@ namespace Dex
 		swapChainDesc.AlphaMode = DXGI_ALPHA_MODE_IGNORE;
 
 		ComPtr<IDXGIDevice2> dxgiDevice;
-		m_pRSystem->GetD3DDevice()->QueryInterface(__uuidof(IDXGIDevice2), (void **)&dxgiDevice);
+		divace->QueryInterface(IID_PPV_ARGS(&dxgiDevice));
 
 		ComPtr<IDXGIAdapter> dxgiAdapter;
 		dxgiDevice->GetAdapter(&dxgiAdapter);
@@ -150,7 +104,7 @@ namespace Dex
 		dxgiAdapter->GetParent(IID_PPV_ARGS(&dxgiFactory));
 
 		hr = dxgiFactory->CreateSwapChainForHwnd(
-			m_pRSystem->GetD3DDevice(),			// pDevice [in]
+			divace,			// pDevice [in]
 			(HWND)m_hWnd,						// hWnd [in]
 			&swapChainDesc,						// pDesc [in]
 			nullptr,							// pFullscreenDesc [in, optional]
@@ -171,7 +125,7 @@ namespace Dex
 		ComPtr<ID3D11Texture2D> backBuffer;
 		m_swapChain->GetBuffer(0, IID_PPV_ARGS(&backBuffer));
 
-		m_pRSystem->GetD3DDevice()->CreateRenderTargetView(
+		divace->CreateRenderTargetView(
 			backBuffer.Get(),
 			nullptr,
 			&m_d3dRenderTargetView
@@ -188,14 +142,14 @@ namespace Dex
 			);
 
 		ComPtr<ID3D11Texture2D> depthStencil;
-		m_pRSystem->GetD3DDevice()->CreateTexture2D(
+		divace->CreateTexture2D(
 			&depthStencilDesc,
 			nullptr,
 			&depthStencil
 			);
 
 		CD3D11_DEPTH_STENCIL_VIEW_DESC depthStencilViewDesc(D3D11_DSV_DIMENSION_TEXTURE2D);
-		m_pRSystem->GetD3DDevice()->CreateDepthStencilView(
+		divace->CreateDepthStencilView(
 			depthStencil.Get(),
 			&depthStencilViewDesc,
 			&m_d3dDepthStencilView
@@ -209,7 +163,7 @@ namespace Dex
 			(FLOAT)m_nHeight
 			);
 
-		m_pRSystem->GetD3DDeviceContext()->RSSetViewports(1, &m_screenViewport);
+		context->RSSetViewports(1, &m_screenViewport);
 
 		m_bInit = true;
 
@@ -301,7 +255,7 @@ namespace Dex
 		context->RSSetViewports(1, &m_screenViewport);
 
 		ID3D11RenderTargetView *const targets[1] = { m_d3dRenderTargetView.Get() };
-		//context->OMSetRenderTargets(1, targets, m_d3dDepthStencilView.Get());
+		context->OMSetRenderTargets(1, targets, m_d3dDepthStencilView.Get());
 
 		context->ClearRenderTargetView(m_d3dRenderTargetView.Get(), DirectX::Colors::CornflowerBlue);
 		context->ClearDepthStencilView(m_d3dDepthStencilView.Get(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);

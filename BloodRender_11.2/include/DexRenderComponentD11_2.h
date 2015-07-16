@@ -14,9 +14,9 @@ namespace Dex
 
 		virtual void LoadVertexShader(void* shader_code_ptr, _intun count_byte);
 		virtual void LoadVertexLayout(_vertexLayouts& vertexLayouts, void* shader_code_ptr, _intun count_byte);
-		virtual void LoadVertexBuffer(void* buffer, _intun _stride);
+		virtual void LoadVertexBuffer(void* buffer, _intun offset, _intun size);
 		virtual void LoadPixelShader(void* shader_code_ptr, _intun count_byte);
-		virtual void LoadIndexBuffer(void* buffer, _intun size, IndexType type);
+		virtual void LoadIndexBuffer(void* buffer, _intun offset, _intun size);
 
 		ID3D11Buffer* const* GetVertexBuffer() const { return m_vertexBuffer.GetAddressOf(); }
 		UINT GetStrideVertex() { return m_strideVertex; }

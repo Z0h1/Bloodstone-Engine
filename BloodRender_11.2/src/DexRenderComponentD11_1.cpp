@@ -3,6 +3,7 @@
 #include "DexCoreFile.h"
 #include "DexFile.h"
 #include "DexFileSystem.h"
+#include "DexMath.h"
 
 namespace Dex
 {
@@ -49,15 +50,6 @@ namespace Dex
 	void RenderComponentD11_2::LoadVertexShader(void* shader_code_ptr, _intun count_byte)
 	{
 		HRESULT hr = S_FALSE;
-		/*HRESULT hr = D3DCompile(shader_code_ptr, count_byte, NULL, NULL, NULL, "main", "vs_5_0", D3D10_SHADER_ENABLE_STRICTNESS, 0, &pShaderCode, NULL);
-
-		if (FAILED(hr))
-		{
-			DrawLine("LoadVertexShader: Ошибка D3DCompile " + RenderSystemD11_2::GetErrorHR(hr), MT_ERROR);
-
-			m_bActive = false;
-			return;
-		}*/
 
 		hr = m_pRSystem->GetD3DDevice()->CreateVertexShader(
 			shader_code_ptr,
@@ -147,16 +139,16 @@ namespace Dex
 		}
 	}
 
-	void RenderComponentD11_2::LoadVertexBuffer(void* buffer, _intun _stride)
+	void RenderComponentD11_2::LoadVertexBuffer(void* buffer, _intun offset, _intun size)
 	{
 		D3D11_SUBRESOURCE_DATA vertexBufferData = { 0 };
 		vertexBufferData.pSysMem = buffer;
 		vertexBufferData.SysMemPitch = 0;
 		vertexBufferData.SysMemSlicePitch = 0;
 
-		m_strideVertex = _stride;
+		m_strideVertex = offset;
 
-		CD3D11_BUFFER_DESC vertexBufferDesc(sizeof(buffer), D3D11_BIND_VERTEX_BUFFER);
+		CD3D11_BUFFER_DESC vertexBufferDesc(size * offset, D3D11_BIND_VERTEX_BUFFER);
 		HRESULT hr = m_pRSystem->GetD3DDevice()->CreateBuffer(
 			&vertexBufferDesc,
 			&vertexBufferData,
@@ -171,13 +163,13 @@ namespace Dex
 		}
 	}
 
-	void RenderComponentD11_2::LoadIndexBuffer(void* buffer, _intun size, IndexType type)
+	void RenderComponentD11_2::LoadIndexBuffer(void* buffer, _intun offset, _intun size)
 	{
 		D3D11_SUBRESOURCE_DATA indexBufferData = { 0 };
 		indexBufferData.pSysMem = buffer;
 		indexBufferData.SysMemPitch = 0;
 		indexBufferData.SysMemSlicePitch = 0;
-		CD3D11_BUFFER_DESC indexBufferDesc(sizeof(buffer), D3D11_BIND_INDEX_BUFFER);
+		CD3D11_BUFFER_DESC indexBufferDesc(size * offset, D3D11_BIND_INDEX_BUFFER);
 
 		m_indexCount = size;
 
@@ -200,14 +192,6 @@ namespace Dex
 		auto divace = m_pRSystem->GetD3DDevice();
 
 		HRESULT hr;
-		/*hr = D3DCompile(shader_code_ptr, count_byte, NULL, NULL, NULL, "main", "ps_5_0", D3D10_SHADER_ENABLE_STRICTNESS, 0, &pShaderCodePS, NULL);
-
-		if (FAILED(hr))
-		{
-			DrawLine("LoadVertexShader: Ошибка D3DCompile " + RenderSystemD11_2::GetErrorHR(hr), MT_ERROR);
-
-			m_bActive = false;
-		}*/
 
 		hr = divace->CreatePixelShader(
 			shader_code_ptr,
@@ -218,7 +202,7 @@ namespace Dex
 
 		if (FAILED(hr))
 		{
-			DrawLine("LoadVertexShader: Ошибка CreateVertexShader " + RenderSystemD11_2::GetErrorHR(hr), MT_ERROR);
+			DrawLine("LoadVertexShader: Ошибка CreatePixelShader " + RenderSystemD11_2::GetErrorHR(hr), MT_ERROR);
 
 			m_bActive = false;
 		}
@@ -232,7 +216,7 @@ namespace Dex
 
 		if (FAILED(hr))
 		{
-			DrawLine("LoadVertexShader: Ошибка CreateVertexShader " + RenderSystemD11_2::GetErrorHR(hr), MT_ERROR);
+			DrawLine("LoadVertexShader: Ошибка CreateBuffer " + RenderSystemD11_2::GetErrorHR(hr), MT_ERROR);
 
 			m_bActive = false;
 		}

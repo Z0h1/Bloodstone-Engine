@@ -50,9 +50,9 @@ namespace Dex
 
 		virtual void LoadVertexShader(void* shader_code_ptr, _intun count_byte) = 0;
 		virtual void LoadVertexLayout(_vertexLayouts& vertexLayouts, void* shader_code_ptr, _intun count_byte) = 0;
-		virtual void LoadVertexBuffer(void* buffer, _intun _stride) = 0;
+		virtual void LoadVertexBuffer(void* buffer, _intun offset, _intun size) = 0;
 		virtual void LoadPixelShader(void* shader_code_ptr, _intun count_byte) = 0;
-		virtual void LoadIndexBuffer(void* buffer, _intun size, IndexType type) = 0;
+		virtual void LoadIndexBuffer(void* buffer, _intun offset, _intun size) = 0;
 
 	protected:
 		bool				m_bActive;

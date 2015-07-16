@@ -70,8 +70,9 @@ namespace Dex
 
 			void* indexBufferPtr = malloc(nIndexCount * offset);
 			m_pGeometryFile->ReadPtr(indexBufferPtr, nIndexCount * offset);
-			LoadIndexBuffer(indexBufferPtr, nIndexCount, eIndexType);
+			LoadIndexBuffer(indexBufferPtr, offset, nIndexCount);
 		}
+
 		// VS
 		_intun byte_count = 0;
 		m_pGeometryFile->ReadUInt(&byte_count);
@@ -114,7 +115,7 @@ namespace Dex
 		m_pGeometryFile->ReadUInt(&nVertexCount);
 		void* vertexBuffer = malloc(nVertexCount * offset);
 		m_pGeometryFile->ReadPtr(vertexBuffer, nVertexCount * offset);
-		LoadVertexBuffer(vertexBuffer, offset);
+		LoadVertexBuffer(vertexBuffer, offset, nVertexCount);
 
 		// PS
 		byte_count = 0;

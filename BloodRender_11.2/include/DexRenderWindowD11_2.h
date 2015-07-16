@@ -20,8 +20,6 @@ namespace Dex
 		void Present();
 		void RenderOneComponent(RenderComponentD11_2* component);
 
-		void CreateWindowSizeDependentResources();
-
 		Microsoft::WRL::ComPtr<IDXGISwapChain1>			m_swapChain;
 
 		Microsoft::WRL::ComPtr<ID3D11RenderTargetView>	m_d3dRenderTargetView;
