@@ -12,7 +12,8 @@ namespace Dex
 	{
 		m_pRSystem = system;
 
-		m_strideVertex = 0;
+		m_vertexOffset = 0;
+		m_indexCount = 0;
 	}
 
 	RenderComponentD11_2::~RenderComponentD11_2()
@@ -37,7 +38,8 @@ namespace Dex
 	void RenderComponentD11_2::ReleaseResource()
 	{
 		m_bGeometryLoaded = false;
-		m_strideVertex = 0;
+		m_vertexOffset = 0;
+		m_indexCount = 0;
 
 		m_vertexShader.Reset();
 		m_inputLayout.Reset();
@@ -47,7 +49,7 @@ namespace Dex
 		m_indexBuffer.Reset();
 	}
 
-	void RenderComponentD11_2::LoadVertexShader(void* shader_code_ptr, _intun count_byte)
+	void RenderComponentD11_2::LoadVertexShader(void* shader_code_ptr, _32un count_byte)
 	{
 		HRESULT hr = S_FALSE;
 
@@ -66,10 +68,10 @@ namespace Dex
 		}
 	}
 
-	void RenderComponentD11_2::LoadVertexLayout(_vertexLayouts& vertexLayouts, void* shader_code_ptr, _intun count_byte)
+	void RenderComponentD11_2::LoadVertexLayout(_vertexLayouts& vertexLayouts, void* shader_code_ptr, _32un count_byte)
 	{
 		vector<D3D11_INPUT_ELEMENT_DESC> lD3D11Layout;
-		_intun offset = 0;
+		_32un offset = 0;
 
 		for (auto layout : vertexLayouts)
 		{
@@ -80,13 +82,6 @@ namespace Dex
 			case VertexLayout::VL_POSITION:
 			{
 				eIE.SemanticName = "POSITION";
-				eIE.SemanticIndex = 0;
-				eIE.Format = DXGI_FORMAT_R32G32B32_FLOAT;
-				eIE.InputSlot = 0;
-				eIE.AlignedByteOffset = offset;
-				eIE.InputSlotClass = D3D11_INPUT_PER_VERTEX_DATA;
-				eIE.InstanceDataStepRate = 0;
-
 				VL_OFFSET_POSITION(offset);
 			}
 			break;
@@ -94,13 +89,6 @@ namespace Dex
 			case VertexLayout::VL_TEXTURE:
 			{
 				eIE.SemanticName = "TEXCOORD";
-				eIE.SemanticIndex = 0;
-				eIE.Format = DXGI_FORMAT_R32G32B32_FLOAT;
-				eIE.InputSlot = 0;
-				eIE.AlignedByteOffset = offset;
-				eIE.InputSlotClass = D3D11_INPUT_PER_VERTEX_DATA;
-				eIE.InstanceDataStepRate = 0;
-
 				VL_OFFSET_TEXTURE(offset);
 			}
 			break;
@@ -108,17 +96,17 @@ namespace Dex
 			case VertexLayout::VL_NORMAL:
 			{
 				eIE.SemanticName = "NORMAL";
-				eIE.SemanticIndex = 0;
-				eIE.Format = DXGI_FORMAT_R32G32B32_FLOAT;
-				eIE.InputSlot = 0;
-				eIE.AlignedByteOffset = offset;
-				eIE.InputSlotClass = D3D11_INPUT_PER_VERTEX_DATA;
-				eIE.InstanceDataStepRate = 0;
-
 				VL_OFFSET_NORMAL(offset);
 			}
 			break;
 			}
+
+			eIE.SemanticIndex = 0;
+			eIE.Format = DXGI_FORMAT_R32G32B32_FLOAT;
+			eIE.InputSlot = 0;
+			eIE.AlignedByteOffset = offset;
+			eIE.InputSlotClass = D3D11_INPUT_PER_VERTEX_DATA;
+			eIE.InstanceDataStepRate = 0;
 
 			lD3D11Layout.push_back(eIE);
 		}
@@ -139,14 +127,14 @@ namespace Dex
 		}
 	}
 
-	void RenderComponentD11_2::LoadVertexBuffer(void* buffer, _intun offset, _intun size)
+	void RenderComponentD11_2::LoadVertexBuffer(void* buffer, _32un offset, _32un size)
 	{
 		D3D11_SUBRESOURCE_DATA vertexBufferData = { 0 };
 		vertexBufferData.pSysMem = buffer;
 		vertexBufferData.SysMemPitch = 0;
 		vertexBufferData.SysMemSlicePitch = 0;
 
-		m_strideVertex = offset;
+		m_vertexOffset = offset;
 
 		CD3D11_BUFFER_DESC vertexBufferDesc(size * offset, D3D11_BIND_VERTEX_BUFFER);
 		HRESULT hr = m_pRSystem->GetD3DDevice()->CreateBuffer(
@@ -163,7 +151,7 @@ namespace Dex
 		}
 	}
 
-	void RenderComponentD11_2::LoadIndexBuffer(void* buffer, _intun offset, _intun size)
+	void RenderComponentD11_2::LoadIndexBuffer(void* buffer, _32un offset, _32un size)
 	{
 		D3D11_SUBRESOURCE_DATA indexBufferData = { 0 };
 		indexBufferData.pSysMem = buffer;
@@ -179,6 +167,12 @@ namespace Dex
 			&m_indexBuffer
 			);
 
+		m_IndexFormat = DXGI_FORMAT_R32_UINT;
+
+		if (offset == sizeof(unsigned short)) {
+			m_IndexFormat = DXGI_FORMAT_R16_UINT;
+		}
+
 		if (FAILED(hr))
 		{
 			DrawLine("LoadShaderVertexShader: Îøèáêà CreateBuffer " + RenderSystemD11_2::GetErrorHR(hr), MT_ERROR);
@@ -187,7 +181,7 @@ namespace Dex
 		}
 	}
 
-	void RenderComponentD11_2::LoadPixelShader(void* shader_code_ptr, _intun count_byte)
+	void RenderComponentD11_2::LoadPixelShader(void* shader_code_ptr, _32un count_byte)
 	{
 		auto divace = m_pRSystem->GetD3DDevice();
 
@@ -220,5 +214,69 @@ namespace Dex
 
 			m_bActive = false;
 		}
+	}
+
+	void RenderComponentD11_2::Render(ID3D11DeviceContext2* context)
+	{
+		if (!context) {
+			return;
+		}
+
+		if (!m_bActive) {
+			return;
+		}
+
+		context->UpdateSubresource(
+			m_constantBuffer.Get(),
+			0,
+			nullptr,
+			&m_constantBufferData,
+			0,
+			0
+		);
+
+		UINT stride = m_vertexOffset;
+		UINT offset = 0;
+		context->IASetVertexBuffers(
+			0,
+			1,
+			m_vertexBuffer.GetAddressOf(),
+			&stride,
+			&offset
+		);
+
+		context->IASetIndexBuffer(
+			m_indexBuffer.Get(),
+			m_IndexFormat,
+			0
+		);
+
+		context->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+
+		context->IASetInputLayout(m_inputLayout.Get());
+
+		context->VSSetShader(
+			m_vertexShader.Get(),
+			nullptr,
+			0
+		);
+
+		context->VSSetConstantBuffers(
+			0,
+			1,
+			m_constantBuffer.GetAddressOf()
+		);
+
+		context->PSSetShader(
+			m_pixelShader.Get(),
+			nullptr,
+			0
+		);
+
+		context->DrawIndexed(
+			m_indexCount,
+			0,
+			0
+		);
 	}
 }

@@ -9,23 +9,23 @@ namespace Dex
 
 	struct ConstantBuffer_ModelViewProjection
 	{
-		Matrix4 model;
-		Matrix4 view;
-		Matrix4 projection;
+		_4matrix model;
+		_4matrix view;
+		_4matrix projection;
 	};
 
 	// vertex layout
 
 	struct Vertex_PositionColor
 	{
-		Point3 pos;
-		Point3 color;
+		_3point pos;
+		_3point color;
 	};
 
 	struct Vertex_PositionTextureNormal
 	{
-		Point3 pos;
-		Point2 tex;
-		Point3 nrm;
+		_3point pos;
+		_2point tex;
+		_3point nrm;
 	};
 }

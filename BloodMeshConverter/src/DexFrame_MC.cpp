@@ -105,9 +105,9 @@ namespace Dex
 				file.clear();
 				file.seekg(0, std::ios::beg);
 
-				vector< Point3 > position;
-				vector< Point2 > texcoord;
-				vector< Point3 > normal;
+				vector< _3point > position;
+				vector< _2point > texcoord;
+				vector< _3point > normal;
 
 				nCount = 0;
 				m_ProgressBar->SetValue(0);
@@ -123,7 +123,7 @@ namespace Dex
 						file >> x >> y >> z;
 						m_ProgressBar->SetValue(nCount++);
 
-						position.push_back(Point3(x, y, z));
+						position.push_back(_3point(x, y, z));
 					}
 					else if (line == "vt")
 					{
@@ -131,7 +131,7 @@ namespace Dex
 						file >> u >> v;
 						m_ProgressBar->SetValue(nCount++);
 
-						texcoord.push_back(Point2(u, v));
+						texcoord.push_back(_2point(u, v));
 					}
 					else if (line == "vn")
 					{
@@ -139,7 +139,7 @@ namespace Dex
 						file >> x >> y >> z;
 						m_ProgressBar->SetValue(nCount++);
 
-						normal.push_back(Point3(x, y, z));
+						normal.push_back(_3point(x, y, z));
 					}
 					else if (line == "f")
 					{
@@ -195,11 +195,11 @@ namespace Dex
 				//	// if ( bUseIndex )
 				//	// {
 				//	//		int ( enum IndexType )
-				//	//		_intun ( Index count )
+				//	//		_32un ( Index count )
 				//	//		Ptr ( buffer )
 				//	// }
 				//	GEOMETRY_VERTEX_BEGIN,
-				//	// _intun ( Vertex count )
+				//	// _32un ( Vertex count )
 				//	GEOMETRY_VERTEX_ELEMENT_BEGIN,
 				//	// int ( enum VertexSemantics )
 				//	GEOMETRY_VERTEX_ELEMENT_END,

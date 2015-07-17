@@ -158,11 +158,11 @@ namespace Dex
 			//	// if ( bUseIndex )
 			//	// {
 			//	//		int ( enum IndexType )
-			//	//		_intun ( Index count )
+			//	//		_32un ( Index count )
 			//	//		Ptr ( buffer )
 			//	// }
 			//	GEOMETRY_VERTEX_BEGIN,
-			//	// _intun ( Vertex count )
+			//	// _32un ( Vertex count )
 			//	GEOMETRY_VERTEX_ELEMENT_BEGIN,
 			//	// int ( enum VertexSemantics )
 			//	GEOMETRY_VERTEX_ELEMENT_END,

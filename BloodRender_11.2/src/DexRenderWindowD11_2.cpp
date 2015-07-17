@@ -7,6 +7,7 @@
 #include "DexIndexBuffer.h"
 #include "DexVertexBuffer.h"
 #include "DexCameraComponent.h"
+#include "DexCoreComponent.h"
 #include "DexShaderStructures.h"
 
 using namespace D2D1;
@@ -46,7 +47,7 @@ namespace Dex
 			mObjectName = parametor->second;
 		}
 
-		_intun bit = 0;
+		_32un bit = 0;
 		parametor = config.find("display_mode");
 		if (parametor != config.end())
 		{
@@ -170,9 +171,18 @@ namespace Dex
 		return true;
 	}
 
-	void RenderWindowD11_2::Present()
+	void RenderWindowD11_2::EndRender()
 	{
-		HRESULT hr = m_swapChain->Present(1, 0);
+		HRESULT hr = S_FALSE;
+
+		if (m_bVSync)
+		{
+			hr = m_swapChain->Present(1, 0);
+		}
+		else
+		{
+			hr = m_swapChain->Present(0, 0);
+		}
 
 		if (hr == DXGI_ERROR_DEVICE_REMOVED)
 		{
@@ -180,75 +190,57 @@ namespace Dex
 		}
 	}
 
-	void RenderWindowD11_2::RenderOneComponent(RenderComponentD11_2* component)
+	void RenderWindowD11_2::CalculateMatrix()
 	{
-		if (component) {
-			if (!component->IsActive()) {
-				return;
-			}
 
-			if (!component->IsGeometryLoaded()) {
-				component->LoadGeometry();
-			}
-
-			auto context = m_pRSystem->GetD3DDeviceContext();
-
-			context->UpdateSubresource(
-				component->GetConstantBuffer().Get(),
-				0,
-				NULL,
-				&component->GetConstantBufferStruct(),
-				0,
-				0
-				);
-
-			UINT stride = component->GetStrideVertex();
-			UINT offset = 0;
-			context->IASetVertexBuffers(
-				0,
-				1,
-				component->GetVertexBuffer(),
-				&stride,
-				&offset
-				);
-
-			context->IASetIndexBuffer(
-				component->GetIndexBuffer(),
-				DXGI_FORMAT_R16_UINT,
-				0
-				);
-
-			context->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-
-			context->IASetInputLayout(component->GetInputLayout());
-
-			context->VSSetShader(
-				component->GetVertexShader(),
-				nullptr,
-				0
-				);
-
-			context->VSSetConstantBuffers(
-				0,
-				1,
-				component->GetConstantBuffer().GetAddressOf()
-				);
-
-			context->PSSetShader(
-				component->GetPixelShader(),
-				nullptr,
-				0
-				);
-
-			context->DrawIndexed(
-				component->GetIndexCount(),
-				0,
-				0
-				);
-		}
 	}
 
-	void RenderWindowD11_2::PreRender()
+	void RenderWindowD11_2::RenderOneComponent(RenderComponentD11_2* component)
+	{
+		if (!component) {
+			return;
+		}
+
+		auto sceneObject = component->GetSceneObject();
+
+		//auto constantBuffer = component->GetConstantBufferStruct();
+
+		if (!sceneObject->IsCalculateMatrix()) {
+			//DirectX::D3DXMATRIX buffer;
+			//D3DXMatrixIdentity(&m_WorldMatrixD3D9);
+
+			//// Rotation X
+			//D3DXMatrixIdentity(&buffer);
+			//D3DXMatrixRotationX(&buffer, D3DXToRadian(rotation.x));
+			//D3DXMatrixMultiply(&m_WorldMatrixD3D9, &buffer, &m_WorldMatrixD3D9);
+
+			//// Rotation Y
+			//D3DXMatrixIdentity(&buffer);
+			//D3DXMatrixRotationY(&buffer, D3DXToRadian(rotation.y));
+			//D3DXMatrixMultiply(&m_WorldMatrixD3D9, &buffer, &m_WorldMatrixD3D9);
+
+			//// Rotation Z
+			//D3DXMatrixIdentity(&buffer);
+			//D3DXMatrixRotationZ(&buffer, D3DXToRadian(rotation.z));
+			//D3DXMatrixMultiply(&m_WorldMatrixD3D9, &buffer, &m_WorldMatrixD3D9);
+
+			//// Scaling
+			//D3DXMatrixIdentity(&buffer);
+			//D3DXMatrixScaling(&buffer, scale.x, scale.y, scale.z);
+			//D3DXMatrixMultiply(&m_WorldMatrixD3D9, &buffer, &m_WorldMatrixD3D9);
+
+			//// Translation
+			//D3DXMatrixIdentity(&buffer);
+			//D3DXMatrixTranslation(&buffer, position.x, position.y, position.z);
+			//D3DXMatrixMultiply(&m_WorldMatrixD3D9, &buffer, &m_WorldMatrixD3D9);
+
+			//constantBuffer.model = buffer;
+		}
+
+		component->Render(m_pRSystem->GetD3DDeviceContext());
+	}
+
+	void RenderWindowD11_2::BeginRender()
 	{
 		auto context = m_pRSystem->GetD3DDeviceContext();
 
@@ -257,16 +249,19 @@ namespace Dex
 		ID3D11RenderTargetView *const targets[1] = { m_d3dRenderTargetView.Get() };
 		context->OMSetRenderTargets(1, targets, m_d3dDepthStencilView.Get());
 
-		context->ClearRenderTargetView(m_d3dRenderTargetView.Get(), DirectX::Colors::CornflowerBlue);
+		context->ClearRenderTargetView(m_d3dRenderTargetView.Get(), DirectX::Colors::CornflowerBlue); // TODO SET COLOR
 		context->ClearDepthStencilView(m_d3dDepthStencilView.Get(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
 	}
 
 	void RenderWindowD11_2::Render()
 	{
-		PreRender();
+		BeginRender();
 
 		// Render all render component from scene
-		if (m_bActive && m_pSceneToRender && m_pCamera) {		
+		if (m_bActive && m_pSceneToRender && m_pCamera) {	
+			_4matrix view = m_pCamera->GetMatrixView();
+
+
 			_lSceneObject objects;
 			m_pSceneToRender->GetSceneObjects(objects);
 
@@ -294,6 +289,6 @@ namespace Dex
 			}
 		}
 
-		Present();
+		EndRender();
 	}
 }

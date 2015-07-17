@@ -13,9 +13,9 @@ namespace Dex
 {
 	struct OBJ_File
 	{
-		Point3 position;
-		Point2 texcoord;
-		Point3 normal;
+		_3point position;
+		_2point texcoord;
+		_3point normal;
 	};
 
 	#define GEOMETRY_VERSION_CONVERTER 3

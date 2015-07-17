@@ -18,7 +18,7 @@
 //		virtual void CalculateMatrix( RenderComponent* pRenderComponent ) = 0;
 //		virtual void SetMatrixIdentity( void ) = 0;
 //		virtual void SetViewMatrix( CameraComponent* pCamera ) = 0;
-//		virtual void SetWorldMatrix( const Point3& position, const Point3& rotation, const Point3& scale ) = 0;
+//		virtual void SetWorldMatrix( const _3point& position, const _3point& rotation, const _3point& scale ) = 0;
 //
 //		virtual bool IsLostControl( void ) = 0;
 //		virtual bool PreRender( void ) = 0;

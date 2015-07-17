@@ -23,9 +23,13 @@ namespace Dex
 	#	define D_EXPORT __declspec( dllimport )
 	#endif
 
-	typedef float Point;
-	typedef unsigned int _intun;
-	typedef unsigned short UInt16;
+	// MATH BEGIN
+
+	typedef float _point;
+	typedef unsigned int _32un;
+	typedef unsigned short _16un;
+
+	// MATH END
 
 	#define OPEN_MODE_READ		0x01
 	#define OPEN_MODE_WRITE		0x04
@@ -59,9 +63,10 @@ namespace Dex
 	class ISystem;
 	class FileSystem;
 	class CoreObject;
-	class Point4;
-	class Point3;
-	class Point2;
+	class _4point;
+	class _3point;
+	class _2point;
+	class _4matrix;
 	class FileSystem;
 
 	typedef map<string, string>			_lParametor;

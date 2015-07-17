@@ -6,16 +6,16 @@
 
 namespace Dex
 {
-	SceneObject::SceneObject(const string& c_name, Scene* scene, _intun id, ofstream* logger, SceneObject* parent)
+	SceneObject::SceneObject(const string& c_name, Scene* scene, _32un id, ofstream* logger, SceneObject* parent)
 		: CoreObject(c_name, logger, WorkPriority::WP_STEP_2)
 	{
 		m_pScene = scene;
 		m_pParent = parent;
 		m_nId = id;
 
-		m_Position = Point3(0.0f, 0.0f, 0.0f);
-		m_Rotation = Point3(0.0f, 0.0f, 0.0f);
-		m_Scale = Point3(1.0f, 1.0f, 1.0f);
+		m_Position = _3point(0.0f, 0.0f, 0.0f);
+		m_Rotation = _3point(0.0f, 0.0f, 0.0f);
+		m_Scale = _3point(1.0f, 1.0f, 1.0f);
 
 		if (parent != nullptr) {
 			m_Position = m_Position + parent->GetPosition();
@@ -27,7 +27,7 @@ namespace Dex
 	{
 	}
 
-	_intun SceneObject::GetId(void)
+	_32un SceneObject::GetId(void)
 	{
 		return m_nId;
 	}
@@ -104,21 +104,21 @@ namespace Dex
 		ocs = m_lObjectComponent;
 	}
 
-	void SceneObject::CalculatePosition(const Point3& position)
+	void SceneObject::CalculatePosition(const _3point& position)
 	{
 		m_Position = position;
 
 		m_bIsCalculateMatrix = false;
 	}
 
-	void SceneObject::CalculateRotation(const Point3& rotation)
+	void SceneObject::CalculateRotation(const _3point& rotation)
 	{
 		m_Rotation = rotation;
 
 		m_bIsCalculateMatrix = false;
 	}
 
-	void SceneObject::CalculateScale(const Point3& scale)
+	void SceneObject::CalculateScale(const _3point& scale)
 	{
 		m_Scale = scale;
 
@@ -126,31 +126,31 @@ namespace Dex
 	}
 
 	// Position
-	void SceneObject::Move(const Point3& position)
+	void SceneObject::Move(const _3point& position)
 	{
 		CalculatePosition(m_Position + position);
 	}
-	void SceneObject::MoveX(const Point& move)
+	void SceneObject::MoveX(const _point& move)
 	{
-		CalculatePosition(m_Position + Point3(move, 0.0f, 0.0f));
+		CalculatePosition(m_Position + _3point(move, 0.0f, 0.0f));
 	}
-	void SceneObject::MoveY(const Point& move)
+	void SceneObject::MoveY(const _point& move)
 	{
-		CalculatePosition(m_Position + Point3(0.0f, move, 0.0f));
+		CalculatePosition(m_Position + _3point(0.0f, move, 0.0f));
 	}
-	void SceneObject::MoveZ(const Point& move)
+	void SceneObject::MoveZ(const _point& move)
 	{
-		CalculatePosition(m_Position + Point3(0.0f, 0.0f, move));
+		CalculatePosition(m_Position + _3point(0.0f, 0.0f, move));
 	}
-	void SceneObject::MoveTo(const Point3& position)
+	void SceneObject::MoveTo(const _3point& position)
 	{
 		CalculatePosition(position);
 	}
-	Point3& SceneObject::GetPosition(void)
+	_3point& SceneObject::GetPosition(void)
 	{
 		return m_Position;
 	}
-	Point3 SceneObject::GetFullPosition(void)
+	_3point SceneObject::GetFullPosition(void)
 	{
 		if (m_pParent)
 		{
@@ -163,31 +163,31 @@ namespace Dex
 	}
 
 	// Rotation
-	void SceneObject::Rotation(const Point3& rotation)
+	void SceneObject::Rotation(const _3point& rotation)
 	{
 		CalculateRotation(m_Rotation + rotation);
 	}
-	void SceneObject::RotationX(const Point& angle)
+	void SceneObject::RotationX(const _point& angle)
 	{
-		CalculateRotation(m_Rotation + Point3(angle, 0.0f, 0.0f));
+		CalculateRotation(m_Rotation + _3point(angle, 0.0f, 0.0f));
 	}
-	void SceneObject::RotationY(const Point& angle)
+	void SceneObject::RotationY(const _point& angle)
 	{
-		CalculateRotation(m_Rotation + Point3(0.0f, angle, 0.0f));
+		CalculateRotation(m_Rotation + _3point(0.0f, angle, 0.0f));
 	}
-	void SceneObject::RotationZ(const Point& angle)
+	void SceneObject::RotationZ(const _point& angle)
 	{
-		CalculateRotation(m_Rotation + Point3(0.0f, 0.0f, angle));
+		CalculateRotation(m_Rotation + _3point(0.0f, 0.0f, angle));
 	}
-	void SceneObject::RotationTo(const Point3& rotation)
+	void SceneObject::RotationTo(const _3point& rotation)
 	{
 		CalculateRotation(rotation);
 	}
-	Point3& SceneObject::GetRotation(void)
+	_3point& SceneObject::GetRotation(void)
 	{
 		return m_Rotation;
 	}
-	Point3 SceneObject::GetFullRotation(void)
+	_3point SceneObject::GetFullRotation(void)
 	{
 		if (m_pParent)
 		{
@@ -200,31 +200,31 @@ namespace Dex
 	}
 
 	// Scale
-	void SceneObject::Scale(const Point3& scale)
+	void SceneObject::Scale(const _3point& scale)
 	{
 		CalculateScale(m_Scale + scale);
 	}
-	void SceneObject::ScaleX(const Point& size)
+	void SceneObject::ScaleX(const _point& size)
 	{
-		CalculateScale(m_Scale + Point3(size, 0.0f, 0.0f));
+		CalculateScale(m_Scale + _3point(size, 0.0f, 0.0f));
 	}
-	void SceneObject::ScaleY(const Point& size)
+	void SceneObject::ScaleY(const _point& size)
 	{
-		CalculateScale(m_Scale + Point3(0.0f, size, 0.0f));
+		CalculateScale(m_Scale + _3point(0.0f, size, 0.0f));
 	}
-	void SceneObject::ScaleZ(const Point& size)
+	void SceneObject::ScaleZ(const _point& size)
 	{
-		CalculateScale(m_Scale + Point3(0.0f, 0.0f, size));
+		CalculateScale(m_Scale + _3point(0.0f, 0.0f, size));
 	}
-	void SceneObject::ScaleTo(const Point3& scale)
+	void SceneObject::ScaleTo(const _3point& scale)
 	{
 		CalculateScale(scale);
 	}
-	Point3& SceneObject::GetScale(void)
+	_3point& SceneObject::GetScale(void)
 	{
 		return m_Scale;
 	}
-	Point3 SceneObject::GetFullScale(void)
+	_3point SceneObject::GetFullScale(void)
 	{
 		return m_Scale;
 	}

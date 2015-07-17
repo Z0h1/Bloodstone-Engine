@@ -2,7 +2,7 @@
 
 namespace Dex
 {
-	VertexBuffer::VertexBuffer(_intun nVertexCount)
+	VertexBuffer::VertexBuffer(_32un nVertexCount)
 		: Buffer(nullptr)
 	{
 		m_nVertexCount = nVertexCount;
@@ -62,17 +62,17 @@ namespace Dex
 		}
 	}
 
-	_intun VertexBuffer::GetSizeBuffer(void)
+	_32un VertexBuffer::GetSizeBuffer(void)
 	{
 		return m_nVertexCount * m_nOffset;
 	}
 
-	_intun VertexBuffer::GetVertexCount(void)
+	_32un VertexBuffer::GetVertexCount(void)
 	{
 		return m_nVertexCount;
 	}
 
-	_intun VertexBuffer::GetOffsetBuffer(void)
+	_32un VertexBuffer::GetOffsetBuffer(void)
 	{
 		return m_nOffset;
 	}

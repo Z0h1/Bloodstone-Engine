@@ -16,9 +16,11 @@ namespace Dex
 		void Render();
 
 	private:
-		void PreRender();
-		void Present();
+		void BeginRender();
+		void EndRender();
 		void RenderOneComponent(RenderComponentD11_2* component);
+
+		void CalculateMatrix();
 
 		Microsoft::WRL::ComPtr<IDXGISwapChain1>			m_swapChain;
 

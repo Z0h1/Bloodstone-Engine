@@ -85,7 +85,7 @@ namespace Dex
 					else if (_p->second == "light") {
 						_p = parametors.find("light_color");
 						if (_p != parametors.end()) {
-							Point4 color(0, 0, 0, 0);
+							_4point color = _4point::zero();
 							color = StringConverter::Parse_Point4(_p->second);
 
 							_p = parametors.find("light_range");

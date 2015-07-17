@@ -2,7 +2,7 @@
 
 namespace Dex
 {
-	IndexBuffer::IndexBuffer(_intun nIndexCount, IndexType eType)
+	IndexBuffer::IndexBuffer(_32un nIndexCount, IndexType eType)
 		: Buffer(nullptr)
 	{
 		m_nIndexCount = nIndexCount;
@@ -21,12 +21,12 @@ namespace Dex
 	{
 	}
 
-	_intun IndexBuffer::GetIndexCount(void)
+	_32un IndexBuffer::GetIndexCount(void)
 	{
 		return m_nIndexCount;
 	}
 
-	_intun IndexBuffer::GetSizeIndex(void)
+	_32un IndexBuffer::GetSizeIndex(void)
 	{
 		return m_nIndexCount * m_nOffset;
 	}

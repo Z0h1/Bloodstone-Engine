@@ -3,7 +3,7 @@
 namespace Dex
 {
 	LightComponent::LightComponent( const string& cName, SceneObject* pParent,
-		const Point4& nColor, const Point& nRange )
+		const _4point& nColor, const _point& nRange )
 		: CoreComponent( cName, pParent, OCT_LIGHT )
 	{
 		m_nColor = nColor;
@@ -14,17 +14,17 @@ namespace Dex
 	{
 	}
 
-	void LightComponent::SetColor( const Point4& nColor )
+	void LightComponent::SetColor( const _4point& nColor )
 	{
 		m_nColor = nColor;
 	}
 
-	const Point4& LightComponent::GetColor( void )
+	const _4point& LightComponent::GetColor( void )
 	{
 		return m_nColor;
 	}
 
-	const Point& LightComponent::GetRange( void )
+	const _point& LightComponent::GetRange( void )
 	{
 		return m_nRange;
 	}

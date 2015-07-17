@@ -17,7 +17,7 @@ namespace Dex
 		return m_pStream.is_open();
 	}
 
-	void Serializer::ReadLine(string& cString, _intun nSize)
+	void Serializer::ReadLine(string& cString, _32un nSize)
 	{
 		if (m_pStream.is_open())
 		{
@@ -49,14 +49,14 @@ namespace Dex
 		}
 	}
 
-	void Serializer::ReadCharPtr(void* pData, _intun nSize)
+	void Serializer::ReadCharPtr(void* pData, _32un nSize)
 	{
 		Read(pData, nSize);
 	}
 
 	void Serializer::ReadString(string& pData)
 	{
-		_intun read_size = 0;
+		_32un read_size = 0;
 		ReadUInt(&read_size);
 
 		unique_ptr<char[], default_delete<char[]> > read_charptr(new char[read_size]);
@@ -80,7 +80,7 @@ namespace Dex
 
 	void Serializer::ReadUInt(void* pData)
 	{
-		Read(pData, sizeof(_intun));
+		Read(pData, sizeof(_32un));
 	}
 
 	void Serializer::ReadBool(void* pData)
@@ -93,7 +93,7 @@ namespace Dex
 		Read(pData, sizeof(float));
 	}
 
-	void Serializer::ReadPtr(void* pData, _intun nSize)
+	void Serializer::ReadPtr(void* pData, _32un nSize)
 	{
 		Read(pData, nSize);
 	}
@@ -108,14 +108,14 @@ namespace Dex
 		Write(&pData, sizeof(unsigned char));
 	}
 
-	void Serializer::WriteCharPtr(const char* pData, _intun size)
+	void Serializer::WriteCharPtr(const char* pData, _32un size)
 	{
 		Write(pData, size);
 	}
 
 	void Serializer::WriteString(const string& pData)
 	{
-		_intun write_size = pData.size();
+		_32un write_size = pData.size();
 		WriteUInt(write_size);
 
 		WriteCharPtr(pData.c_str(), write_size);
@@ -131,9 +131,9 @@ namespace Dex
 		Write(&pData, sizeof(int));
 	}
 
-	void Serializer::WriteUInt(_intun pData)
+	void Serializer::WriteUInt(_32un pData)
 	{
-		Write(&pData, sizeof(_intun));
+		Write(&pData, sizeof(_32un));
 	}
 
 	void Serializer::WriteBool(bool pData)
@@ -146,7 +146,7 @@ namespace Dex
 		Write(&pData, sizeof(float));
 	}
 
-	void Serializer::WritePtr(const void* pData, _intun nSize)
+	void Serializer::WritePtr(const void* pData, _32un nSize)
 	{
 		Write(pData, nSize);
 	}

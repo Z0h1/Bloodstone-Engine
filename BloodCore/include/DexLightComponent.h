@@ -8,16 +8,16 @@ namespace Dex
 	class D_EXPORT LightComponent : public CoreComponent
 	{
 	public:
-		LightComponent(const string& cName, SceneObject* pParent, const Point4& nColor, const Point& nRange);
+		LightComponent(const string& cName, SceneObject* pParent, const _4point& nColor, const _point& nRange);
 		~LightComponent(void);
 
-		void SetColor(const Point4& nColor);
+		void SetColor(const _4point& nColor);
 
-		const Point4& GetColor(void);
-		const Point& GetRange(void);
+		const _4point& GetColor(void);
+		const _point& GetRange(void);
 
 	private:
-		Point4				m_nColor;
-		Point				m_nRange;
+		_4point				m_nColor;
+		_point				m_nRange;
 	};
 }

@@ -57,12 +57,12 @@ namespace Dex
 		if (bUseIndex)
 		{
 			IndexType eIndexType = IndexType::IT_16;
-			_intun nIndexCount = 0;
+			_32un nIndexCount = 0;
 
 			m_pGeometryFile->ReadInt(&eIndexType);
 			m_pGeometryFile->ReadUInt(&nIndexCount);
 
-			_intun offset = sizeof(unsigned long);
+			_32un offset = sizeof(unsigned long);
 			if (eIndexType == IT_16)
 			{
 				offset = sizeof(unsigned short);
@@ -74,7 +74,7 @@ namespace Dex
 		}
 
 		// VS
-		_intun byte_count = 0;
+		_32un byte_count = 0;
 		m_pGeometryFile->ReadUInt(&byte_count);
 
 		vector<unsigned char> shader_data(byte_count);
@@ -82,7 +82,7 @@ namespace Dex
 
 		LoadVertexShader(shader_data.data(), byte_count);
 
-		_intun offset = 0;
+		_32un offset = 0;
 		_vertexLayouts vertexLayous;
 
 		m_pGeometryFile->ReadHeader(&gs);
@@ -111,7 +111,7 @@ namespace Dex
 
 		LoadVertexLayout(vertexLayous, shader_data.data(), byte_count);
 
-		_intun nVertexCount = 0;
+		_32un nVertexCount = 0;
 		m_pGeometryFile->ReadUInt(&nVertexCount);
 		void* vertexBuffer = malloc(nVertexCount * offset);
 		m_pGeometryFile->ReadPtr(vertexBuffer, nVertexCount * offset);

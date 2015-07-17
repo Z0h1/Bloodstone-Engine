@@ -29,9 +29,9 @@ namespace Dex
 		bool				m_bInit;
 
 		// Display Mode
-		_intun				m_nWidth;
-		_intun				m_nHeight;
-		_intun				m_nBit;
+		_32un				m_nWidth;
+		_32un				m_nHeight;
+		_32un				m_nBit;
 
 		CameraComponent*	m_pCamera;
 		Scene*				m_pSceneToRender;

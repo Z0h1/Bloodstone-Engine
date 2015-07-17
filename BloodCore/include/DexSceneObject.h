@@ -11,10 +11,10 @@ namespace Dex
 	class D_EXPORT SceneObject : public CoreObject
 	{
 	public:
-		SceneObject(const string& c_name, Scene* scene, _intun id, ofstream* logger, SceneObject* parent = nullptr);
+		SceneObject(const string& c_name, Scene* scene, _32un id, ofstream* logger, SceneObject* parent = nullptr);
 		virtual ~SceneObject(void);
 
-		_intun GetId(void);
+		_32un GetId(void);
 		Scene* GetScene(void);
 
 		void AddComponent(CoreComponent* pComponent);
@@ -23,48 +23,48 @@ namespace Dex
 		void GetObjectComponents(_lCoreComponent& ocs);
 
 		// Position
-		void Move(const Point3& position);
-		void MoveX(const Point& move);
-		void MoveY(const Point& move);
-		void MoveZ(const Point& move);
-		void MoveTo(const Point3& position);
-		Point3& GetPosition(void);
-		Point3 GetFullPosition(void);
+		void Move(const _3point& position);
+		void MoveX(const _point& move);
+		void MoveY(const _point& move);
+		void MoveZ(const _point& move);
+		void MoveTo(const _3point& position);
+		_3point& GetPosition(void);
+		_3point GetFullPosition(void);
 
 		// Rotation
-		void Rotation(const Point3& rotation);
-		void RotationX(const Point& angle);
-		void RotationY(const Point& angle);
-		void RotationZ(const Point& angle);
-		void RotationTo(const Point3& rotation);
-		Point3& GetRotation(void);
-		Point3 GetFullRotation(void);
+		void Rotation(const _3point& rotation);
+		void RotationX(const _point& angle);
+		void RotationY(const _point& angle);
+		void RotationZ(const _point& angle);
+		void RotationTo(const _3point& rotation);
+		_3point& GetRotation(void);
+		_3point GetFullRotation(void);
 
 		// Scale
-		void Scale(const Point3& scale);
-		void ScaleX(const Point& size);
-		void ScaleY(const Point& size);
-		void ScaleZ(const Point& size);
-		void ScaleTo(const Point3& scale);
-		Point3& GetScale(void);
-		Point3 GetFullScale(void);
+		void Scale(const _3point& scale);
+		void ScaleX(const _point& size);
+		void ScaleY(const _point& size);
+		void ScaleZ(const _point& size);
+		void ScaleTo(const _3point& scale);
+		_3point& GetScale(void);
+		_3point GetFullScale(void);
 
 		bool IsCalculateMatrix(void);
 
 	protected:
-		_intun				m_nId;
+		_32un				m_nId;
 		Scene*				m_pScene;
 		SceneObject*		m_pParent;
 
-		Point3				m_Position;
-		Point3				m_Rotation;
-		Point3				m_Scale;
+		_3point				m_Position;
+		_3point				m_Rotation;
+		_3point				m_Scale;
 		bool				m_bIsCalculateMatrix;
 
 		_lCoreComponent	m_lObjectComponent;
 
-		void CalculatePosition(const Point3& position);
-		void CalculateRotation(const Point3& rotation);
-		void CalculateScale(const Point3& scale);
+		void CalculatePosition(const _3point& position);
+		void CalculateRotation(const _3point& rotation);
+		void CalculateScale(const _3point& scale);
 	};
 }

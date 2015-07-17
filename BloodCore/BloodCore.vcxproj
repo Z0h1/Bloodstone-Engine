@@ -137,6 +137,7 @@
     <ClCompile Include="src\DexFile.cpp" />
     <ClCompile Include="src\DexHardwareBufferData.cpp" />
     <ClCompile Include="src\DexIndexBuffer.cpp" />
+    <ClCompile Include="src\DexMath.cpp" />
     <ClCompile Include="src\DexVertexBuffer.cpp" />
     <ClCompile Include="src\DexInputDevice.cpp" />
     <ClCompile Include="src\DexInputSystem.cpp" />

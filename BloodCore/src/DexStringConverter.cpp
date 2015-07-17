@@ -88,7 +88,7 @@ namespace Dex
 		return String.str();
 	}
 
-	string StringConverter::toString(Point X, Point Y, Point Z)
+	string StringConverter::toString(_point X, _point Y, _point Z)
 	{
 		stringstream String;
 		String << X << " " << Y << " " << Z;
@@ -101,7 +101,7 @@ namespace Dex
 
 		if (type == PT_POINT)
 		{
-			str == "point";
+			str == "_point";
 		}
 		else if (type == PT_LINE)
 		{
@@ -124,7 +124,7 @@ namespace Dex
 		return cString.str();
 	}
 
-	string StringConverter::toStringPoint4(Point x, Point y, Point z, Point w)
+	string StringConverter::toStringPoint4(_point x, _point y, _point z, _point w)
 	{
 		stringstream cString;
 
@@ -133,7 +133,7 @@ namespace Dex
 		return cString.str();
 	}
 
-	string StringConverter::toString(Point x)
+	string StringConverter::toString(_point x)
 	{
 		stringstream cString;
 
@@ -167,23 +167,23 @@ namespace Dex
 		return result;
 	}
 
-	Point StringConverter::Parse_Point(string value, Point default_value)
+	_point StringConverter::Parse_Point(string value, _point default_value)
 	{
 		stringstream String(value);
-		Point result = default_value;
+		_point result = default_value;
 		if (!(String >> result))
 			return default_value;
 
 		return result;
 	}
 
-	Point4 StringConverter::Parse_Point4(string value)
+	_4point StringConverter::Parse_Point4(string value)
 	{
 		stringstream String(value);
-		Point x, y, z, w;
+		_point x, y, z, w;
 		String >> x >> y >> z >> w;
 
-		return Point4(x, y, z, w);
+		return _4point(x, y, z, w);
 	}
 
 	unsigned int StringConverter::Parse_unsigned_int(string value, unsigned int default_value)
@@ -206,7 +206,7 @@ namespace Dex
 		return result;
 	}
 
-	void StringConverter::ParseDisplyaMode(const string& mode, _intun& Width, _intun& Height, _intun& bit)
+	void StringConverter::ParseDisplyaMode(const string& mode, _32un& Width, _32un& Height, _32un& bit)
 	{
 		string buffer;
 
@@ -234,7 +234,7 @@ namespace Dex
 
 	void StringConverter::ParsePrimitiveType(const string& str, PrimitiveType& type)
 	{
-		if (str == "point")
+		if (str == "_point")
 		{
 			type = PT_POINT;
 		}

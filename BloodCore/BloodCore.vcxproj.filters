@@ -234,5 +234,8 @@
     <ClCompile Include="src\DexFile.cpp">
       <Filter>Source Files\Systems\File system\Format\File</Filter>
     </ClCompile>
+    <ClCompile Include="src\DexMath.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
