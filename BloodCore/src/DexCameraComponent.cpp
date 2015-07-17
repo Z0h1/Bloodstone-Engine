@@ -28,7 +28,7 @@ namespace Dex
 			return;
 		}
 
-		m_matrixView = MatrixTranspose(MatrixLookAtRH(m_nRight, m_nLookAt, m_nUp));
+		//m_matrixView = MatrixTranspose(MatrixLookAtRH(m_nRight, m_nLookAt, m_nUp));
 
 		m_bIsCalculateViewMatrix = true;
 	}
