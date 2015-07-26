@@ -200,7 +200,7 @@ namespace Dex
 				}
 				else
 				{
-					m_pInputSystem = (IInputSystem*)m_lSystems[eType];
+					m_pInputSystem = (InputSystem*)m_lSystems[eType];
 					DrawLine("ChangeSystem: Установлена системы ввода " + m_pInputSystem->GetName());
 				}
 				break;
@@ -263,7 +263,7 @@ namespace Dex
 		return m_pRenderSystem;
 	}
 
-	IInputSystem* Core::GetInputSystem()
+	InputSystem* Core::GetInputSystem()
 	{
 		return m_pInputSystem;
 	}

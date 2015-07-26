@@ -33,6 +33,12 @@ namespace Dex
 		void LoadResource();
 		void ReleaseResource();
 
+		void SetViewMatrix(const _4matrix& view, const _4matrix& proj)
+		{
+			m_constantBufferData.view = view;
+			m_constantBufferData.view = proj;
+		}
+
 	private:
 		UINT										m_indexCount;
 		UINT										m_vertexOffset;

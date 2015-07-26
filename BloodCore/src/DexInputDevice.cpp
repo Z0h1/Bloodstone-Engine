@@ -2,12 +2,13 @@
 
 namespace Dex
 {
-	IInputDevice::~IInputDevice( void )
+	InputDevice::InputDevice(ofstream* logger, const string& name)
+		: CoreObject(name, logger, WorkPriority::WP_STEP_1)
 	{
 	}
 
-	const string& IInputDevice::GetName( void )
+	InputDevice::~InputDevice(void)
 	{
-		return m_cName;
 	}
+
 }

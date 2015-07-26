@@ -5,9 +5,6 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
-    <Filter Include="Source Files\Core">
-      <UniqueIdentifier>{41d279d3-49ec-468b-ac7b-cdbdb0e600f3}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Scene">
       <UniqueIdentifier>{fdd77a7c-b02f-4a37-b773-818350d2582e}</UniqueIdentifier>
     </Filter>
@@ -44,6 +41,9 @@
     <Filter Include="Source Files\Systems\Graphic\Buffers">
       <UniqueIdentifier>{deb0ceb2-5218-419a-810d-0aae6a8750b4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Math">
+      <UniqueIdentifier>{388d1194-154b-45ef-9017-b1d0a0e00522}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Dex.h">
@@ -52,29 +52,8 @@
     <ClInclude Include="include\DexCommon.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\DexMath.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="include\DexPreCompletion.h">
       <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\DexConfigFile.h">
-      <Filter>Source Files\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="include\DexCore.h">
-      <Filter>Source Files\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="include\DexDynamicLibrary.h">
-      <Filter>Source Files\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="include\DexIndexedArray.h">
-      <Filter>Source Files\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="include\DexStream.h">
-      <Filter>Source Files\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="include\DexStringConverter.h">
-      <Filter>Source Files\Core</Filter>
     </ClInclude>
     <ClInclude Include="include\DexRenderConnect.h">
       <Filter>Source Files\Systems\Graphic</Filter>
@@ -115,9 +94,6 @@
     <ClInclude Include="include\DexScene.h">
       <Filter>Source Files\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="include\DexCoreObject.h">
-      <Filter>Source Files\Core</Filter>
-    </ClInclude>
     <ClInclude Include="include\DexSystem.h">
       <Filter>Source Files\Systems</Filter>
     </ClInclude>
@@ -151,23 +127,44 @@
     <ClInclude Include="include\DexShaderStructures.h">
       <Filter>Source Files\Systems\Graphic</Filter>
     </ClInclude>
+    <ClInclude Include="include\DexStringConverter.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\DexConfigFile.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\DexCore.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\DexCoreObject.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\DexDynamicLibrary.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\DexIndexedArray.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\DexStream.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\DexMath.h">
+      <Filter>Source Files\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="include\DexMatrix.h">
+      <Filter>Source Files\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="include\DexMathFunction.h">
+      <Filter>Source Files\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="include\DexPoint.h">
+      <Filter>Source Files\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="include\DexMathConst.h">
+      <Filter>Source Files\Math</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\DexConfigFile.cpp">
-      <Filter>Source Files\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="src\DexCore.cpp">
-      <Filter>Source Files\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="src\DexDynamicLibrary.cpp">
-      <Filter>Source Files\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="src\DexStream.cpp">
-      <Filter>Source Files\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="src\DexStringConverter.cpp">
-      <Filter>Source Files\Core</Filter>
-    </ClCompile>
     <ClCompile Include="src\DexRenderConnect.cpp">
       <Filter>Source Files\Systems\Graphic</Filter>
     </ClCompile>
@@ -201,9 +198,6 @@
     <ClCompile Include="src\DexScene.cpp">
       <Filter>Source Files\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="src\DexCoreObject.cpp">
-      <Filter>Source Files\Core</Filter>
-    </ClCompile>
     <ClCompile Include="src\DexSystem.cpp">
       <Filter>Source Files\Systems</Filter>
     </ClCompile>
@@ -234,8 +228,29 @@
     <ClCompile Include="src\DexFile.cpp">
       <Filter>Source Files\Systems\File system\Format\File</Filter>
     </ClCompile>
-    <ClCompile Include="src\DexMath.cpp">
+    <ClCompile Include="src\DexConfigFile.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DexCore.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DexCoreObject.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DexDynamicLibrary.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DexStream.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DexStringConverter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DexPoint.cpp">
+      <Filter>Source Files\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DexMatrix.cpp">
+      <Filter>Source Files\Math</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

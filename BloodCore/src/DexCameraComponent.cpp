@@ -9,8 +9,8 @@ namespace Dex
 		m_nRange = nRange;
 		m_bIsCalculateViewMatrix = false;
 
-		m_nLookAt = _4point(0.0f, 0.0f, 1.0f);
-		m_nRight = _4point(1.0f, 0.0f, 0.0f);
+		m_nLookAt = _4point(0.0f, -0.1f, 0.0f);
+		m_nRight = _4point(0.0f, 0.7f, 1.5f);
 		m_nUp = _4point(0.0f, 1.0f, 0.0f);
 
 		m_matrixView = _4matrix::zero();
@@ -27,6 +27,8 @@ namespace Dex
 		if (m_bIsCalculateViewMatrix) {
 			return;
 		}
+
+		m_matrixView * m_matrixView;
 
 		//m_matrixView = MatrixTranspose(MatrixLookAtRH(m_nRight, m_nLookAt, m_nUp));
 

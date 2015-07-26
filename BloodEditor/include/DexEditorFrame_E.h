@@ -20,12 +20,15 @@ namespace Dex
 		EditorFrame(const wxString& title);
 		~EditorFrame();
 
+		void OnKayDown(wxKeyEvent& event);
 		void OnQuit(wxCommandEvent& event);
 		void OnAbout(wxCommandEvent& event);
 		void OnMainTimerTick(wxTimerEvent& event);
 
 		void FindAndAddObjectList(CoreObject* obj, CoreObject* add);
 		void CallFileSystemSetting(wxCommandEvent& event);
+
+		bool KeyPressed(int nKey);
 
 	private:
 		wxPanel*			m_pRenderWindow;
@@ -38,6 +41,11 @@ namespace Dex
 		RenderSystem*		m_pRenderSystem;
 		Scene*				m_pScene;
 		FileSystem*			m_pFileSystem;
+		SceneObject*		m_pCamera;
+		InputDevice*		m_pMouse;
+		InputDevice*		m_pKeyboard;
+		InputSystem*		m_pInputSystem;
+		char				m_KeyBuffer[256];
 
 		wxDECLARE_EVENT_TABLE();
 	};

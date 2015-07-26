@@ -9,6 +9,7 @@ namespace Dex
 		EVT_MENU(EDITOR_ABOUT, EditorFrame::OnAbout)
 		EVT_TIMER(EDITOR_MAINTIMER, EditorFrame::OnMainTimerTick)
 		EVT_MENU(EDITOR_FILESYSTEM, EditorFrame::CallFileSystemSetting)
+		EVT_KEY_DOWN(EditorFrame::OnKayDown)
 	wxEND_EVENT_TABLE()
 
 	EditorFrame::EditorFrame(const wxString& title)
@@ -19,6 +20,7 @@ namespace Dex
 		m_pRenderSystem = nullptr;
 		m_pScene = nullptr;
 		m_pFileSystem = nullptr;
+		m_pInputSystem = nullptr;
 
 		//SetIcon(wxICON(sample));
 		SetBackgroundColour(wxSystemSettings::GetColour(wxSYS_COLOUR_BTNHIGHLIGHT));
@@ -56,7 +58,7 @@ namespace Dex
 		// START FRAME BUILDER
 
 		m_pMainTimer.SetOwner(this, EDITOR_MAINTIMER);
-		m_pMainTimer.Start(1000);
+		m_pMainTimer.Start(500);
 
 		wxBoxSizer* _mainSizer;
 		_mainSizer = new wxBoxSizer(wxHORIZONTAL);
@@ -127,6 +129,11 @@ namespace Dex
 		m_pFileSystem = nullptr;
 	}
 
+	void EditorFrame::OnKayDown(wxKeyEvent& event)
+	{
+
+	}
+
 	void EditorFrame::CallFileSystemSetting(wxCommandEvent& WXUNUSED(event))
 	{
 		if (m_pCore && m_pFileSystem) {
@@ -150,37 +157,6 @@ namespace Dex
 			m_pRenderSystem->Init(_P);
 
 			m_pFileSystem = m_pCore->GetFileSystem();
-
-			//enum GeometryStruct
-			//{
-			//	// int ( version visual object )
-			//	// bool ( bUseIndex )
-			//	// if ( bUseIndex )
-			//	// {
-			//	//		int ( enum IndexType )
-			//	//		_32un ( Index count )
-			//	//		Ptr ( buffer )
-			//	// }
-			//	GEOMETRY_VERTEX_BEGIN,
-			//	// _32un ( Vertex count )
-			//	GEOMETRY_VERTEX_ELEMENT_BEGIN,
-			//	// int ( enum VertexSemantics )
-			//	GEOMETRY_VERTEX_ELEMENT_END,
-			//	// Ptr ( buffer )
-			//	GEOMETRY_VERTEX_END
-			//	// ASCII code shader
-			//};
-			CoreFile* cfile = m_pFileSystem->GetCFile("Data/use.dexg", true, FF_DEXG);
-			File* file = dynamic_cast<File*>(cfile);
-
-			CoreFile* cfile_load = m_pFileSystem->GetCFile("Data/Models/torus.obj");
-			File* file_load = dynamic_cast<File*>(cfile_load);
-			file_load->Open(OPEN_MODE_READ | OPEN_MODE_BINARY);
-			file_load->Close();
-
-			file->Open(OPEN_MODE_WRITE | OPEN_MODE_BINARY);
-			file->WriteInt(3);
-			file->Close();
 
 			if (m_pRenderSystem) {
 				m_pScene = m_pCore->CreateScene("TEST_SCENE");
@@ -218,12 +194,26 @@ namespace Dex
 				_P["name"] = "CAMERA_1_COMPONENT";
 				_P["type"] = "camera";
 				_P["camera_focus"] = StringConverter::toString(0.7f);
-				SceneObject* camera_obj = m_pObjectList->CreateSceneObject("CAMERA_1");
-				CameraComponent* camera = (CameraComponent*)m_pObjectList->CreateObjectComponent(camera_obj, _P);
+				m_pCamera = m_pObjectList->CreateSceneObject("CAMERA_1");
+				CameraComponent* camera = (CameraComponent*)m_pObjectList->CreateObjectComponent(m_pCamera, _P);
 				window->SetCamera(camera);
 			}
 
-			
+			m_pInputSystem = m_pCore->GetInputSystem();
+
+			if (m_pInputSystem)
+			{
+				_P.clear();
+				_P["window_handle"] = StringConverter::toString((unsigned int)GetHWND());
+
+				_P["device_name"] = "Mouse_1";
+				_P["device_type"] = "Mouse";
+				m_pMouse = m_pInputSystem->CreateDevice(_P);
+
+				_P["device_name"] = "Keyboard_1";
+				_P["device_type"] = "Keyboard";
+				m_pKeyboard = m_pInputSystem->CreateDevice(_P);
+			}		
 		}
 	}
 
@@ -249,9 +239,50 @@ namespace Dex
 		}
 	}
 
+	bool EditorFrame::KeyPressed(int nKey)
+	{
+		if (m_KeyBuffer[nKey] & 0x80)
+		{
+			return true;
+		}
+
+		return false;
+	}
+
 	void EditorFrame::OnMainTimerTick(wxTimerEvent& event)
 	{
 		if (m_pCore && m_pRenderSystem) {
+			if (m_pKeyboard && m_pCamera) {
+				if (m_pKeyboard->GetState(&m_KeyBuffer, 256))
+				{
+					if (KeyPressed(DIK_W))
+					{
+						m_pCamera->MoveZ(1);
+						SetStatusText(wxString("DIK_W"));
+					}
+					else if (KeyPressed(DIK_S))
+					{
+						m_pCamera->MoveZ(-1);
+						SetStatusText(wxString("DIK_S"));
+					}
+					else if (KeyPressed(DIK_D))
+					{
+						m_pCamera->MoveX(1);
+						SetStatusText(wxString("DIK_D"));
+					}
+					else if (KeyPressed(DIK_A))
+					{
+						m_pCamera->MoveX(-1);
+						SetStatusText(wxString("DIK_A"));
+					}
+				}
+
+				stringstream str;
+				str << m_pCamera->GetFullPosition().data.d_p32[0] << " " << m_pCamera->GetFullPosition().data.d_p32[2] << " " << m_pCamera->GetFullPosition().data.d_p32[3];
+
+				//SetStatusText(wxString(str.str().c_str()));
+			}
+
 			m_pRenderSystem->RenderAllWindow();
 		}
 

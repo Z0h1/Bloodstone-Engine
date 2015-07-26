@@ -142,6 +142,18 @@ namespace Dex
 		return cString.str();
 	}
 
+	string StringConverter::toString(const _4matrix& x)
+	{
+		stringstream str;
+		str << endl;
+		str << x.data.d_p32[0][0] << " " << x.data.d_p32[0][1] << " " << x.data.d_p32[0][2] << " " << x.data.d_p32[0][3] << endl;
+		str << x.data.d_p32[1][0] << " " << x.data.d_p32[1][1] << " " << x.data.d_p32[1][2] << " " << x.data.d_p32[1][3] << endl;
+		str << x.data.d_p32[2][0] << " " << x.data.d_p32[2][1] << " " << x.data.d_p32[2][2] << " " << x.data.d_p32[2][3] << endl;
+		str << x.data.d_p32[3][0] << " " << x.data.d_p32[3][1] << " " << x.data.d_p32[3][2] << " " << x.data.d_p32[3][3] << endl;
+		str << endl;
+		return str.str();
+	}
+
 	bool StringConverter::Parse_bool(string value, bool default_value)
 	{
 		bool result = default_value;

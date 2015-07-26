@@ -203,6 +203,46 @@ namespace Dex
 
 		auto sceneObject = component->GetSceneObject();
 
+		_point aspectRatio = (_point)m_nWidth / m_nHeight;
+		_point fovAngleY = 70.0f * MDEX_PI / 180.0f;
+
+		if (aspectRatio < 1.0f)
+		{
+			fovAngleY *= 2.0f;
+		}
+
+		XMMATRIX xmpr = XMMatrixPerspectiveFovRH(
+			fovAngleY,
+			aspectRatio,
+			0.01f,
+			100.0f
+		);
+
+		/*_4matrix pr = MatrixPerspectiveFovRH(
+			fovAngleY,
+			aspectRatio,
+			0.01f,
+			100.0f
+		);*/
+
+		//pr = MatrixTranspose(MatrixMultiply(pr, _4matrix::identity()));
+
+		
+
+		//DrawLine(StringConverter::toString(pr));
+
+		stringstream str;
+		str << xmpr.r[0].m128_f32[0] << " " << xmpr.r[0].m128_f32[1] << " " << xmpr.r[0].m128_f32[2] << " " << xmpr.r[0].m128_f32[3] << endl;
+		str << xmpr.r[1].m128_f32[0] << " " << xmpr.r[1].m128_f32[1] << " " << xmpr.r[1].m128_f32[2] << " " << xmpr.r[1].m128_f32[3] << endl;
+		str << xmpr.r[2].m128_f32[0] << " " << xmpr.r[2].m128_f32[1] << " " << xmpr.r[2].m128_f32[2] << " " << xmpr.r[2].m128_f32[3] << endl;
+		str << xmpr.r[3].m128_f32[0] << " " << xmpr.r[3].m128_f32[1] << " " << xmpr.r[3].m128_f32[2] << " " << xmpr.r[3].m128_f32[3] << endl;
+		str << endl;
+		DrawLine(str.str());
+
+		_4matrix view = m_pCamera->GetMatrixView();
+
+		//component->SetViewMatrix(view, pr);
+
 		//auto constantBuffer = component->GetConstantBufferStruct();
 
 		if (!sceneObject->IsCalculateMatrix()) {
@@ -259,9 +299,6 @@ namespace Dex
 
 		// Render all render component from scene
 		if (m_bActive && m_pSceneToRender && m_pCamera) {	
-			_4matrix view = m_pCamera->GetMatrixView();
-
-
 			_lSceneObject objects;
 			m_pSceneToRender->GetSceneObjects(objects);
 

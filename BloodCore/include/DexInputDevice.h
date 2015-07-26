@@ -1,31 +1,28 @@
 #pragma once
 
 #include "DexPreCompletion.h"
-#include "DexCommon.h"
+#include "DexCoreObject.h"
 
 namespace Dex
 {
-	typedef struct _sMouseState
+	typedef struct
 	{
 		long lX;
 		long lY;
 		long lZ;
 		unsigned char rgbButtons[4];
 
-	} g_sMouseState;
+	} _mouseState;
 
-	class D_EXPORT IInputDevice
+	class D_EXPORT InputDevice : public CoreObject
 	{
 	public:
-		virtual ~IInputDevice( void );
+		InputDevice(ofstream* logger, const string& name);
+		virtual ~InputDevice(void);
 
-		const string& GetName( void );
-
-	public:
-		virtual bool GetState( void* pBuf, int nSize ) = 0;
+		virtual bool GetState(void* pBuf, int nSize) = 0;
 
 	protected:
 		int						m_hWnd;
-		string					m_cName;
 	};
 }

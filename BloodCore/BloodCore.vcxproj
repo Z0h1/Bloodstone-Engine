@@ -103,6 +103,10 @@
     <ClInclude Include="include\DexBuffer.h" />
     <ClInclude Include="include\DexHardwareBufferData.h" />
     <ClInclude Include="include\DexIndexBuffer.h" />
+    <ClInclude Include="include\DexMathConst.h" />
+    <ClInclude Include="include\DexMathFunction.h" />
+    <ClInclude Include="include\DexMatrix.h" />
+    <ClInclude Include="include\DexPoint.h" />
     <ClInclude Include="include\DexVertexBuffer.h" />
     <ClInclude Include="include\DexIndexedArray.h" />
     <ClInclude Include="include\DexInputDevice.h" />
@@ -137,7 +141,8 @@
     <ClCompile Include="src\DexFile.cpp" />
     <ClCompile Include="src\DexHardwareBufferData.cpp" />
     <ClCompile Include="src\DexIndexBuffer.cpp" />
-    <ClCompile Include="src\DexMath.cpp" />
+    <ClCompile Include="src\DexMatrix.cpp" />
+    <ClCompile Include="src\DexPoint.cpp" />
     <ClCompile Include="src\DexVertexBuffer.cpp" />
     <ClCompile Include="src\DexInputDevice.cpp" />
     <ClCompile Include="src\DexInputSystem.cpp" />

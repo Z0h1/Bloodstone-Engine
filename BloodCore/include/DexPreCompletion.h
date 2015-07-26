@@ -36,8 +36,8 @@ namespace Dex
 	#define OPEN_MODE_BINARY	0x08
 
 	// Classes
-	class IInputSystem;
-	class IInputDevice;
+	class InputSystem;
+	class InputDevice;
 	class VertexBuffer;
 	class IndexBuffer;
 	class CoreComponent;

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.22823.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BloodCore", "BloodCore\BloodCore.vcxproj", "{2214C536-AF90-499C-A5C5-0639C01DF83D}"
 EndProject
@@ -14,6 +14,7 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BloodEditor", "BloodEditor\BloodEditor.vcxproj", "{81C7DF2D-0239-486C-A9DD-2667D69B75ED}"
 	ProjectSection(ProjectDependencies) = postProject
 		{2214C536-AF90-499C-A5C5-0639C01DF83D} = {2214C536-AF90-499C-A5C5-0639C01DF83D}
+		{AB799845-D8FD-4607-B5CA-ACA66985508D} = {AB799845-D8FD-4607-B5CA-ACA66985508D}
 		{56090F62-DA81-48E6-9227-DABB3F76C530} = {56090F62-DA81-48E6-9227-DABB3F76C530}
 	EndProjectSection
 EndProject
@@ -27,7 +28,25 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BloodMeshConverter", "Blood
 		{2214C536-AF90-499C-A5C5-0639C01DF83D} = {2214C536-AF90-499C-A5C5-0639C01DF83D}
 	EndProjectSection
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BloodInput_DX", "BloodInput_DX\BloodInput_DX.vcxproj", "{AB799845-D8FD-4607-B5CA-ACA66985508D}"
+	ProjectSection(ProjectDependencies) = postProject
+		{2214C536-AF90-499C-A5C5-0639C01DF83D} = {2214C536-AF90-499C-A5C5-0639C01DF83D}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "BloodDebug", "BloodDebug\BloodDebug.vcxproj", "{2ED482CA-2AFF-4526-9EE7-2C10170D7468}"
+	ProjectSection(ProjectDependencies) = postProject
+		{2214C536-AF90-499C-A5C5-0639C01DF83D} = {2214C536-AF90-499C-A5C5-0639C01DF83D}
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9CFCAF73-5CF9-4D6F-9EEB-336260F3F9CD}"
+	ProjectSection(SolutionItems) = preProject
+		Performance1.psess = Performance1.psess
+	EndProjectSection
+EndProject
 Global
+	GlobalSection(Performance) = preSolution
+		HasPerformanceSessions = true
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Mixed Platforms = Debug|Mixed Platforms
 		Debug|Win32 = Debug|Win32
@@ -97,6 +116,30 @@ Global
 		{57FD3C22-9603-4B63-8F4B-8674CFA214F1}.Release|Win32.Build.0 = Release|Win32
 		{57FD3C22-9603-4B63-8F4B-8674CFA214F1}.Release|x86.ActiveCfg = Release|Win32
 		{57FD3C22-9603-4B63-8F4B-8674CFA214F1}.Release|x86.Build.0 = Release|Win32
+		{AB799845-D8FD-4607-B5CA-ACA66985508D}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
+		{AB799845-D8FD-4607-B5CA-ACA66985508D}.Debug|Mixed Platforms.Build.0 = Debug|Win32
+		{AB799845-D8FD-4607-B5CA-ACA66985508D}.Debug|Win32.ActiveCfg = Debug|Win32
+		{AB799845-D8FD-4607-B5CA-ACA66985508D}.Debug|Win32.Build.0 = Debug|Win32
+		{AB799845-D8FD-4607-B5CA-ACA66985508D}.Debug|x86.ActiveCfg = Debug|Win32
+		{AB799845-D8FD-4607-B5CA-ACA66985508D}.Debug|x86.Build.0 = Debug|Win32
+		{AB799845-D8FD-4607-B5CA-ACA66985508D}.Release|Mixed Platforms.ActiveCfg = Release|Win32
+		{AB799845-D8FD-4607-B5CA-ACA66985508D}.Release|Mixed Platforms.Build.0 = Release|Win32
+		{AB799845-D8FD-4607-B5CA-ACA66985508D}.Release|Win32.ActiveCfg = Release|Win32
+		{AB799845-D8FD-4607-B5CA-ACA66985508D}.Release|Win32.Build.0 = Release|Win32
+		{AB799845-D8FD-4607-B5CA-ACA66985508D}.Release|x86.ActiveCfg = Release|Win32
+		{AB799845-D8FD-4607-B5CA-ACA66985508D}.Release|x86.Build.0 = Release|Win32
+		{2ED482CA-2AFF-4526-9EE7-2C10170D7468}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
+		{2ED482CA-2AFF-4526-9EE7-2C10170D7468}.Debug|Mixed Platforms.Build.0 = Debug|Win32
+		{2ED482CA-2AFF-4526-9EE7-2C10170D7468}.Debug|Win32.ActiveCfg = Debug|Win32
+		{2ED482CA-2AFF-4526-9EE7-2C10170D7468}.Debug|Win32.Build.0 = Debug|Win32
+		{2ED482CA-2AFF-4526-9EE7-2C10170D7468}.Debug|x86.ActiveCfg = Debug|Win32
+		{2ED482CA-2AFF-4526-9EE7-2C10170D7468}.Debug|x86.Build.0 = Debug|Win32
+		{2ED482CA-2AFF-4526-9EE7-2C10170D7468}.Release|Mixed Platforms.ActiveCfg = Release|Win32
+		{2ED482CA-2AFF-4526-9EE7-2C10170D7468}.Release|Mixed Platforms.Build.0 = Release|Win32
+		{2ED482CA-2AFF-4526-9EE7-2C10170D7468}.Release|Win32.ActiveCfg = Release|Win32
+		{2ED482CA-2AFF-4526-9EE7-2C10170D7468}.Release|Win32.Build.0 = Release|Win32
+		{2ED482CA-2AFF-4526-9EE7-2C10170D7468}.Release|x86.ActiveCfg = Release|Win32
+		{2ED482CA-2AFF-4526-9EE7-2C10170D7468}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

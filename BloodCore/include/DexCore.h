@@ -31,12 +31,12 @@ namespace Dex
 		ISystem* GetSystem(const SystemsType st);
 
 		RenderSystem* GetRenderSystem();
-		IInputSystem* GetInputSystem();
+		InputSystem* GetInputSystem();
 		FileSystem* GetFileSystem();
 
 	private:
 		RenderSystem*			m_pRenderSystem;
-		IInputSystem*			m_pInputSystem;
+		InputSystem*			m_pInputSystem;
 		FileSystem*				m_pFileSystem;
 
 		_lDynamicLibrary		m_lDynamicLibrary;
