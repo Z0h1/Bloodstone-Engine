@@ -1,9 +1,8 @@
-#include "DexMatrix.h"
+#include "Dex3DMatrix.h"
 
 namespace Dex
 {
-	// matrix 4 class
-	_4matrix::_4matrix
+	_3DMatrix::_3DMatrix
 	(
 		_point m00, _point m01, _point m02, _point m03,
 		_point m10, _point m11, _point m12, _point m13,
@@ -32,32 +31,36 @@ namespace Dex
 		data.d_p32[3][3] = m33;
 	}
 
-	_4matrix::_4matrix(void)
+	_3DMatrix::_3DMatrix()
 	{
-		data.d_p32[0][0] = 1;
-		data.d_p32[0][1] = 0;
-		data.d_p32[0][2] = 0;
-		data.d_p32[0][3] = 0;
+		data.d_p32[0][0] = 1.0f;
+		data.d_p32[0][1] = 0.0f;
+		data.d_p32[0][2] = 0.0f;
+		data.d_p32[0][3] = 0.0f;
 
-		data.d_p32[1][0] = 0;
-		data.d_p32[1][1] = 1;
-		data.d_p32[1][2] = 0;
-		data.d_p32[1][3] = 0;
+		data.d_p32[1][0] = 0.0f;
+		data.d_p32[1][1] = 1.0f;
+		data.d_p32[1][2] = 0.0f;
+		data.d_p32[1][3] = 0.0f;
 
-		data.d_p32[2][0] = 0;
-		data.d_p32[2][1] = 0;
-		data.d_p32[2][2] = 1;
-		data.d_p32[2][3] = 0;
+		data.d_p32[2][0] = 0.0f;
+		data.d_p32[2][1] = 0.0f;
+		data.d_p32[2][2] = 1.0f;
+		data.d_p32[2][3] = 0.0f;
 
-		data.d_p32[3][0] = 0;
-		data.d_p32[3][1] = 0;
-		data.d_p32[3][2] = 0;
-		data.d_p32[3][3] = 1;
+		data.d_p32[3][0] = 0.0f;
+		data.d_p32[3][1] = 0.0f;
+		data.d_p32[3][2] = 0.0f;
+		data.d_p32[3][3] = 1.0f;
 	}
 
-	_4matrix _4matrix::operator*(const _4matrix M)
+	_3DMatrix::~_3DMatrix()
 	{
-		_4matrix result = _4matrix::zero();
+	}
+
+	_3DMatrix _3DMatrix::operator*(const _3DMatrix M)
+	{
+		_3DMatrix result = _3DMatrix::zero();
 
 		_point this_col_1 = data.d_p32[0][0];
 		_point this_col_2 = data.d_p32[0][1];

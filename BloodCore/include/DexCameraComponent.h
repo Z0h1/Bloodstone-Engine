@@ -23,7 +23,7 @@ namespace Dex
 		_4point GetUp(void) const { return m_nUp; }
 		_point GetRotateUp(void) const { return m_nRotateUp; }
 
-		_4matrix& GetMatrixView(void);
+		_3DMatrix& GetMatrixView(void);
 
 		void ResetRotate(void);
 
@@ -40,7 +40,7 @@ namespace Dex
 		_4point				m_nRight;
 		_4point				m_nUp;
 
-		_4matrix			m_matrixView;
+		_3DMatrix			m_matrixView;
 		bool				m_bIsCalculateViewMatrix;
 	};
 }

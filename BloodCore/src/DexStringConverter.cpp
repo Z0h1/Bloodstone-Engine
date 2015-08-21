@@ -142,7 +142,7 @@ namespace Dex
 		return cString.str();
 	}
 
-	string StringConverter::toString(const _4matrix& x)
+	string StringConverter::toString(const _3DMatrix& x)
 	{
 		stringstream str;
 		str << endl;

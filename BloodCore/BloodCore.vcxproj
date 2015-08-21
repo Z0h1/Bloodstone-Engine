@@ -90,7 +90,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="include\Dex.h" />
+    <ClInclude Include="include\Dex3DVector.h" />
     <ClInclude Include="include\DexCameraComponent.h" />
+    <ClInclude Include="include\DEXCOL.h" />
     <ClInclude Include="include\DexCommon.h" />
     <ClInclude Include="include\DexConfigFile.h" />
     <ClInclude Include="include\DexCore.h" />
@@ -105,8 +107,10 @@
     <ClInclude Include="include\DexIndexBuffer.h" />
     <ClInclude Include="include\DexMathConst.h" />
     <ClInclude Include="include\DexMathFunction.h" />
-    <ClInclude Include="include\DexMatrix.h" />
+    <ClInclude Include="include\Dex3DMatrix.h" />
+    <ClInclude Include="include\DEXPlatform.h" />
     <ClInclude Include="include\DexPoint.h" />
+    <ClInclude Include="include\DEXString.h" />
     <ClInclude Include="include\DexVertexBuffer.h" />
     <ClInclude Include="include\DexIndexedArray.h" />
     <ClInclude Include="include\DexInputDevice.h" />
@@ -130,7 +134,9 @@
     <ClInclude Include="include\DexShaderStructures.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Dex3DVector.cpp" />
     <ClCompile Include="src\DexCameraComponent.cpp" />
+    <ClCompile Include="src\DEXCOL.cpp" />
     <ClCompile Include="src\DexConfigFile.cpp" />
     <ClCompile Include="src\DexCore.cpp" />
     <ClCompile Include="src\DexCoreComponent.cpp" />
@@ -141,8 +147,10 @@
     <ClCompile Include="src\DexFile.cpp" />
     <ClCompile Include="src\DexHardwareBufferData.cpp" />
     <ClCompile Include="src\DexIndexBuffer.cpp" />
-    <ClCompile Include="src\DexMatrix.cpp" />
+    <ClCompile Include="src\Dex3DMatrix.cpp" />
+    <ClCompile Include="src\DexMathFunction.cpp" />
     <ClCompile Include="src\DexPoint.cpp" />
+    <ClCompile Include="src\DEXString.cpp" />
     <ClCompile Include="src\DexVertexBuffer.cpp" />
     <ClCompile Include="src\DexInputDevice.cpp" />
     <ClCompile Include="src\DexInputSystem.cpp" />

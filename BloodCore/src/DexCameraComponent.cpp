@@ -13,7 +13,7 @@ namespace Dex
 		m_nRight = _4point(0.0f, 0.7f, 1.5f);
 		m_nUp = _4point(0.0f, 1.0f, 0.0f);
 
-		m_matrixView = _4matrix::zero();
+		m_matrixView = _3DMatrix::zero();
 
 		CalculateMatrixView();
 	}
@@ -35,7 +35,7 @@ namespace Dex
 		m_bIsCalculateViewMatrix = true;
 	}
 
-	_4matrix& CameraComponent::GetMatrixView(void)
+	_3DMatrix& CameraComponent::GetMatrixView(void)
 	{
 		CalculateMatrixView();
 

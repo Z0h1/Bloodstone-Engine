@@ -5,34 +5,26 @@
 
 namespace Dex
 {
-	//==================================================
-	//=====Class Matrix 4x4=============================
-	//==================================================
-
-	class D_EXPORT _4matrix
+	class D_EXPORT _3DMatrix
 	{
 	public:
-		_4matrix
-		(
+		_3DMatrix(
 			_point m00, _point m01, _point m02, _point m03,
 			_point m10, _point m11, _point m12, _point m13,
 			_point m20, _point m21, _point m22, _point m23,
 			_point m30, _point m31, _point m32, _point m33
 		);
-		_4matrix(void);
+		_3DMatrix();
+		~_3DMatrix();
 
-		inline ~_4matrix(void)
+		inline static _3DMatrix Identity()
 		{
+			return _3DMatrix();
 		}
 
-		static inline _4matrix identity(void)
+		inline static _3DMatrix zero(void)
 		{
-			return _4matrix();
-		}
-
-		static inline _4matrix zero(void)
-		{
-			return _4matrix(
+			return _3DMatrix(
 				0.0f, 0.0f, 0.0f, 0.0f,
 				0.0f, 0.0f, 0.0f, 0.0f,
 				0.0f, 0.0f, 0.0f, 0.0f,
@@ -40,7 +32,7 @@ namespace Dex
 			);
 		}
 
-		_4matrix operator*(const _4matrix M);
+		_3DMatrix operator*(const _3DMatrix M);
 
 		_4matrix_dat data;
 	};

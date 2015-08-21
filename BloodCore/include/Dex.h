@@ -19,3 +19,9 @@
 #include "DexCameraComponent.h"
 #include "DexSerializer.h"
 #include "DexInputStruct.h"
+// math
+#include "DexMathConst.h"
+#include "DexMathFunction.h"
+#include "Dex3DVector.h"
+#include "Dex3DMatrix.h"
+#include "DexPoint.h"

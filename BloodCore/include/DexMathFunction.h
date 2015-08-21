@@ -1,6 +1,11 @@
-//#pragma once
-//
-//#include "DexPreCompletion.h"
+#pragma once
+
+#include "DexPreCompletion.h"
+
+namespace Dex
+{
+	_3DVector D_EXPORT Normalize(const _3DVector _in);
+}
 //#include "DexMathConst.h
 //#include "DexMatrix.h"
 //#include "DexPoint.h"

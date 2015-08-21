@@ -44,6 +44,12 @@
     <Filter Include="Source Files\Math">
       <UniqueIdentifier>{388d1194-154b-45ef-9017-b1d0a0e00522}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Core">
+      <UniqueIdentifier>{734edca3-2c4a-4382-bedc-3b9c1dad76ac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core\Collection">
+      <UniqueIdentifier>{254b4f30-b150-44dc-b905-58630edf7381}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Dex.h">
@@ -151,9 +157,6 @@
     <ClInclude Include="include\DexMath.h">
       <Filter>Source Files\Math</Filter>
     </ClInclude>
-    <ClInclude Include="include\DexMatrix.h">
-      <Filter>Source Files\Math</Filter>
-    </ClInclude>
     <ClInclude Include="include\DexMathFunction.h">
       <Filter>Source Files\Math</Filter>
     </ClInclude>
@@ -162,6 +165,21 @@
     </ClInclude>
     <ClInclude Include="include\DexMathConst.h">
       <Filter>Source Files\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Dex3DMatrix.h">
+      <Filter>Source Files\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Dex3DVector.h">
+      <Filter>Source Files\Math</Filter>
+    </ClInclude>
+    <ClInclude Include="include\DEXString.h">
+      <Filter>Source Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\DEXPlatform.h">
+      <Filter>Source Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="include\DEXCOL.h">
+      <Filter>Source Files\Core\Collection</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -249,8 +267,20 @@
     <ClCompile Include="src\DexPoint.cpp">
       <Filter>Source Files\Math</Filter>
     </ClCompile>
-    <ClCompile Include="src\DexMatrix.cpp">
+    <ClCompile Include="src\Dex3DMatrix.cpp">
       <Filter>Source Files\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Dex3DVector.cpp">
+      <Filter>Source Files\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DexMathFunction.cpp">
+      <Filter>Source Files\Math</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DEXString.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DEXCOL.cpp">
+      <Filter>Source Files\Core\Collection</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

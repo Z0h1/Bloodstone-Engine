@@ -22,7 +22,7 @@ namespace Dex
 		static string toString(int nWidth, int nHeight, int nBit);
 		static string toStringPoint4(_point x, _point y, _point z, _point w);
 		static string toString(_point x);
-		static string toString(const _4matrix& x);
+		static string toString(const _3DMatrix& x);
 
 		// Parse
 		static bool Parse_bool(string value, bool default_value = false);

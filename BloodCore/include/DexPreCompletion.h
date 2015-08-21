@@ -1,5 +1,6 @@
 #pragma once
 
+#include <cstring>
 #include <string>
 #include <fstream>
 #include <sstream>
@@ -10,9 +11,18 @@
 #include <list>
 #include <map>
 
+#include "DEXPlatform.h"
+
 #pragma warning ( disable : 4251 )
 
 using namespace std;
+
+typedef unsigned int DEXUINT;
+typedef char DEXCHAR;
+typedef char* DEXPCHAR;
+typedef void DEXVOID;
+typedef void* DEXPVOID;
+typedef void** DEXPPVOID;
 
 namespace Dex
 {
@@ -28,6 +38,12 @@ namespace Dex
 	typedef float _point;
 	typedef unsigned int _32un;
 	typedef unsigned short _16un;
+
+	class _4point;
+	class _3point;
+	class _2point;
+	class _3DMatrix;
+	class _3DVector;
 
 	// MATH END
 
@@ -63,10 +79,6 @@ namespace Dex
 	class ISystem;
 	class FileSystem;
 	class CoreObject;
-	class _4point;
-	class _3point;
-	class _2point;
-	class _4matrix;
 	class FileSystem;
 
 	typedef map<string, string>			_lParametor;
