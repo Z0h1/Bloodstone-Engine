@@ -1,18 +1,7 @@
-#include "DexSystem.h"
+#include "DEXSystem.h"
 
-namespace Dex
+DEXSystem::DEXSystem(DEX_PCore core)
+	: DEXClass(core)
 {
-	ISystem::ISystem(const string& c_name, ofstream* logger, const SystemsType st, bool fw)
-		: CoreObject(c_name, logger, WorkPriority::WP_SYSTEM, fw), m_Type(st)
-	{
-	}
-
-	ISystem::~ISystem()
-	{
-	}
-
-	const SystemsType ISystem::GetType()
-	{
-		return m_Type;
-	}
+	//pCore->DrowLog();
 }

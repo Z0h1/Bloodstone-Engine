@@ -1,49 +1,28 @@
 #pragma once
 
-#include "DexPreCompletion.h"
-#include "DexCoreObject.h"
+#include "DEXPreCompletion.h"
 
-namespace Dex
+class DEX_EXPORT DEXCore
 {
-	typedef map< string, Scene* >					_lScene;
-	typedef map< string, DynamicLibrary* >			_lDynamicLibrary;
-	typedef map< const SystemsType, ISystem* >		_lSystemsByType;
+public:
+	DEXCore();
 
-	class D_EXPORT Core : public CoreObject
-	{
-	public:
-		Core(const string& cLog = "DexLog.log", const string& cConfig = "DexConfig.cfg");
-		~Core(void);
+	DEX_PVOID NewMemory(DEX_UINT size_one_block);
+	DEX_PVOID NewMemory(DEX_UINT size_one_block, DEX_UINT count_block);
 
-		// Dynamic Library
-		bool LoadModule(const string& cModule);
-		bool UnLoadModule(const string& cModule);
+	DEX_PCollection NewCollection(DEX_UINT size_one_block);
+	DEX_PCollection NewCollection(DEX_UINT size_one_block, DEX_UINT count_block);
 
-		void AddSystem(ISystem* s_ptr, bool set_def = false);
-		void RemoveSystem(ISystem* s_ptr);
-		void ChangeSystem(const SystemsType eType);
+	// Debug
+	void FreeAllMemory();
+	void PrintMemory(bool show = false);
 
-		// Scene System
-		Scene* CreateScene(const string& cName);
-		Scene* GetScene(const string& cName);
+	DEX_PClass InitSystem();
 
-		ofstream* GetLogger();
-		ISystem* GetSystem(const SystemsType st);
-
-		RenderSystem* GetRenderSystem();
-		InputSystem* GetInputSystem();
-		FileSystem* GetFileSystem();
-
-	private:
-		RenderSystem*			m_pRenderSystem;
-		InputSystem*			m_pInputSystem;
-		FileSystem*				m_pFileSystem;
-
-		_lDynamicLibrary		m_lDynamicLibrary;
-		_lSystemsByType			m_lSystems;
-		_lScene					m_lScene;
-
-		ofstream*				mLogger;
-		ofstream*				mStateDump;
-	};
-}
+private:
+	DEX_PMemory			pMemoryOverwatch;
+	DEX_BOOL			bMemoryDebug;
+	DEX_UINT			nMemoryCountBlock;
+	DEX_UINT			nMemoryBlockStep;
+	DEX_UINT			nMemoryMaxCountBlock;
+};

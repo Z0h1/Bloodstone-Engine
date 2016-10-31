@@ -9,6 +9,29 @@
       <Configuration>Release</Configuration>
       <Platform>Win32</Platform>
     </ProjectConfiguration>
+    <ProjectConfiguration Include="UnityDebug|Win32">
+      <Configuration>UnityDebug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\DEXClass.cpp" />
+    <ClCompile Include="src\DEXCore.cpp" />
+    <ClCompile Include="src\DEXPreCompletion.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='UnityDebug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="src\DEXSystem.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\DEX.h" />
+    <ClInclude Include="include\DEXClass.h" />
+    <ClInclude Include="include\DEXCollection.h" />
+    <ClInclude Include="include\DEXCore.h" />
+    <ClInclude Include="include\DEXPlatform.h" />
+    <ClInclude Include="include\DEXPreCompletion.h" />
+    <ClInclude Include="include\DEXSystem.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{2214C536-AF90-499C-A5C5-0639C01DF83D}</ProjectGuid>
@@ -18,6 +41,12 @@
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='UnityDebug|Win32'" Label="Configuration">
     <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v140</PlatformToolset>
@@ -38,11 +67,19 @@
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='UnityDebug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <OutDir>$(SolutionDir)bin\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)tresh\$(ProjectName)\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='UnityDebug|Win32'">
     <LinkIncremental>true</LinkIncremental>
     <OutDir>$(SolutionDir)bin\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)tresh\$(ProjectName)\$(Configuration)\</IntDir>
@@ -59,9 +96,29 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;BLOODCORE_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <PrecompiledHeaderFile>DexPreCompletion.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile>DEXPreCompletion.h</PrecompiledHeaderFile>
       <ForcedIncludeFiles>DexPreCompletion.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
       <AdditionalIncludeDirectories>$(ProjectDir)include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <MinimalRebuild>false</MinimalRebuild>
+      <AdditionalOptions>/MP %(AdditionalOptions)</AdditionalOptions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Windows</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='UnityDebug|Win32'">
+    <ClCompile>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;BLOODCORE_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <SDLCheck>true</SDLCheck>
+      <PrecompiledHeaderFile>DEXPreCompletion.h</PrecompiledHeaderFile>
+      <ForcedIncludeFiles>DexPreCompletion.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
+      <AdditionalIncludeDirectories>$(ProjectDir)include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <MinimalRebuild>false</MinimalRebuild>
+      <AdditionalOptions>/MP %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -77,9 +134,10 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_USRDLL;BLOODCORE_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <PrecompiledHeaderFile>DexPreCompletion.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderFile>DEXPreCompletion.h</PrecompiledHeaderFile>
       <ForcedIncludeFiles>DexPreCompletion.h;%(ForcedIncludeFiles)</ForcedIncludeFiles>
       <AdditionalIncludeDirectories>$(ProjectDir)include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>/MP %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -88,89 +146,6 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClInclude Include="include\Dex.h" />
-    <ClInclude Include="include\Dex3DVector.h" />
-    <ClInclude Include="include\DexCameraComponent.h" />
-    <ClInclude Include="include\DEXCOL.h" />
-    <ClInclude Include="include\DexCommon.h" />
-    <ClInclude Include="include\DexConfigFile.h" />
-    <ClInclude Include="include\DexCore.h" />
-    <ClInclude Include="include\DexCoreComponent.h" />
-    <ClInclude Include="include\DexCoreFile.h" />
-    <ClInclude Include="include\DexDynamicLibrary.h" />
-    <ClInclude Include="include\DexFileSystem.h" />
-    <ClInclude Include="include\DexFolder.h" />
-    <ClInclude Include="include\DexFile.h" />
-    <ClInclude Include="include\DexBuffer.h" />
-    <ClInclude Include="include\DexHardwareBufferData.h" />
-    <ClInclude Include="include\DexIndexBuffer.h" />
-    <ClInclude Include="include\DexMathConst.h" />
-    <ClInclude Include="include\DexMathFunction.h" />
-    <ClInclude Include="include\Dex3DMatrix.h" />
-    <ClInclude Include="include\DEXPlatform.h" />
-    <ClInclude Include="include\DexPoint.h" />
-    <ClInclude Include="include\DEXString.h" />
-    <ClInclude Include="include\DexVertexBuffer.h" />
-    <ClInclude Include="include\DexIndexedArray.h" />
-    <ClInclude Include="include\DexInputDevice.h" />
-    <ClInclude Include="include\DexInputStruct.h" />
-    <ClInclude Include="include\DexInputSystem.h" />
-    <ClInclude Include="include\DexLightComponent.h" />
-    <ClInclude Include="include\DexMath.h" />
-    <ClInclude Include="include\DexMeshStruct.h" />
-    <ClInclude Include="include\DexCoreObject.h" />
-    <ClInclude Include="include\DexPreCompletion.h" />
-    <ClInclude Include="include\DexRenderComponent.h" />
-    <ClInclude Include="include\DexRenderConnect.h" />
-    <ClInclude Include="include\DexRenderSystem.h" />
-    <ClInclude Include="include\DexRenderWindow.h" />
-    <ClInclude Include="include\DexScene.h" />
-    <ClInclude Include="include\DexSceneObject.h" />
-    <ClInclude Include="include\DexSerializer.h" />
-    <ClInclude Include="include\DexStream.h" />
-    <ClInclude Include="include\DexStringConverter.h" />
-    <ClInclude Include="include\DexSystem.h" />
-    <ClInclude Include="include\DexShaderStructures.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="src\Dex3DVector.cpp" />
-    <ClCompile Include="src\DexCameraComponent.cpp" />
-    <ClCompile Include="src\DEXCOL.cpp" />
-    <ClCompile Include="src\DexConfigFile.cpp" />
-    <ClCompile Include="src\DexCore.cpp" />
-    <ClCompile Include="src\DexCoreComponent.cpp" />
-    <ClCompile Include="src\DexCoreFile.cpp" />
-    <ClCompile Include="src\DexDynamicLibrary.cpp" />
-    <ClCompile Include="src\DexFileSystem.cpp" />
-    <ClCompile Include="src\DexFolder.cpp" />
-    <ClCompile Include="src\DexFile.cpp" />
-    <ClCompile Include="src\DexHardwareBufferData.cpp" />
-    <ClCompile Include="src\DexIndexBuffer.cpp" />
-    <ClCompile Include="src\Dex3DMatrix.cpp" />
-    <ClCompile Include="src\DexMathFunction.cpp" />
-    <ClCompile Include="src\DexPoint.cpp" />
-    <ClCompile Include="src\DEXString.cpp" />
-    <ClCompile Include="src\DexVertexBuffer.cpp" />
-    <ClCompile Include="src\DexInputDevice.cpp" />
-    <ClCompile Include="src\DexInputSystem.cpp" />
-    <ClCompile Include="src\DexLightComponent.cpp" />
-    <ClCompile Include="src\DexCoreObject.cpp" />
-    <ClCompile Include="src\DexPreCompletion.cpp">
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
-      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
-    </ClCompile>
-    <ClCompile Include="src\DexRenderComponent.cpp" />
-    <ClCompile Include="src\DexRenderConnect.cpp" />
-    <ClCompile Include="src\DexRenderSystem.cpp" />
-    <ClCompile Include="src\DexRenderWindow.cpp" />
-    <ClCompile Include="src\DexScene.cpp" />
-    <ClCompile Include="src\DexSceneObject.cpp" />
-    <ClCompile Include="src\DexSerializer.cpp" />
-    <ClCompile Include="src\DexStream.cpp" />
-    <ClCompile Include="src\DexStringConverter.cpp" />
-    <ClCompile Include="src\DexSystem.cpp" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
